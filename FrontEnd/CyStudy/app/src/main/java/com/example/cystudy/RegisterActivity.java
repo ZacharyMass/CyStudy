@@ -33,4 +33,10 @@ public class RegisterActivity extends AppCompatActivity {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
+
+    public void register(View view) {
+        // DO DATA VALIDATION, if good, login and navigate
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 }
