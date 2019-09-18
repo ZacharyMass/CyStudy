@@ -15,18 +15,28 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        String[] roles = {"Student", "Teacher", "Administrator"};
+
+        // Hide Action Bar
+        getSupportActionBar().hide();
 
         // Populate Role Spinner
+        String[] roles = {"Student", "Teacher", "Administrator"};
         setContentView(R.layout.activity_register);
         Spinner spin = (Spinner) findViewById(R.id.role_spinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, roles);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(adapter);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     }
 
     public void navigateToLogin(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    public void register(View view) {
+        // DO DATA VALIDATION, if good, login and navigate
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 }
