@@ -27,4 +27,9 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+    public void navigateToStudentStats(View view) {
+        Intent intent = new Intent(this, StudentStatsActivity.class);
+        startActivity(intent);
+    }
 }
