@@ -2,99 +2,32 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#C8102E"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#C8102E"
     tools:context=".RegisterActivity">
 
     <Button
-        android:text="SELECT PHOTO"
+        android:id="@+id/select_photo_button"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:id="@+id/select_photo_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="32dp"
         android:background="@drawable/rounded_select_photo_button"
+        android:text="SELECT PHOTO"
         android:textColor="@android:color/white"
-        />
-
-    <EditText
-        android:background="@drawable/rounded_edit_text"
-        android:inputType="textWebPassword"
-        android:ems="10"
-        android:id="@+id/password_confirm_register"
-        android:hint="@string/confirm_password_hint"
-        android:paddingStart="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/password_register"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="32dp"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginEnd="32dp"
-        android:layout_height="50dp"
-        android:layout_width="0dp"
-        android:layout_marginTop="8dp"
-        />
-
-    <EditText
-        android:id="@+id/email_register"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:hint="@string/email_hint_text"
-        android:background="@drawable/rounded_edit_text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:paddingLeft="16dp"
-        android:layout_height="50dp"
-        android:layout_width="0dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintTop_toBottomOf="@+id/select_photo_button"
-        />
-
-    <EditText
-        android:background="@drawable/rounded_edit_text"
-        android:inputType="textWebPassword"
-        android:ems="10"
-        android:id="@+id/password_register"
-        android:hint="@string/password_hint"
-        app:layout_constraintTop_toBottomOf="@+id/email_register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:paddingStart="16dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        android:layout_height="50dp"
-        android:layout_width="0dp"
-        />
-
-    <Spinner
-        android:id="@+id/role_spinner"
-        android:autofillHints="Role"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        android:padding="8dp"
-        android:layout_height="50dp"
-        android:layout_width="0dp"
-        android:background="@drawable/rounded_edit_text"
-        app:layout_constraintBottom_toTopOf="@+id/register_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password_confirm_register" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/register_button"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
         android:height="50dp"
         android:background="@drawable/rounded_button"
         android:text="Register"
@@ -102,7 +35,74 @@
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/role_spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/role_spinner"
+        android:onClick="register"
+        android:clickable="true"/>
+
+    <EditText
+        android:id="@+id/email_register"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/rounded_edit_text"
+        android:ems="10"
+        android:hint="@string/email_hint_text"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/select_photo_button" />
+
+    <EditText
+        android:id="@+id/password_register"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/rounded_edit_text"
+        android:ems="10"
+        android:hint="@string/password_hint"
+        android:inputType="textWebPassword"
+        android:paddingStart="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email_register" />
+
+    <EditText
+        android:id="@+id/password_confirm_register"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/rounded_edit_text"
+        android:ems="10"
+        android:hint="@string/confirm_password_hint"
+        android:inputType="textWebPassword"
+        android:paddingStart="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password_register" />
+
+    <Spinner
+        android:id="@+id/role_spinner"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:autofillHints="Role"
+        android:background="@drawable/rounded_edit_text"
+        android:dropDownWidth="wrap_content"
+
+        android:padding="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/register_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password_confirm_register"
         tools:layout_editor_absoluteY="476dp" />
 
     <TextView
