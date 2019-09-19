@@ -7,7 +7,7 @@
     android:background="#C8102E"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    tools:context=".LoginActivity">>
+    tools:context=".LoginActivity">
 
     <Button
         android:background="@drawable/rounded_button"
@@ -19,12 +19,12 @@
         android:layout_marginTop="16dp"
         android:layout_width="0dp"
         android:text="Login"
+        android:onClick="navigateToStudentStats"
         android:textAlignment="center"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password_login"
-        android:onClick="login"
         android:clickable="true"/>
 
     <EditText
