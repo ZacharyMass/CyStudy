@@ -1,18 +1,14 @@
 package com.example.cystudy;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.Constraints;
 
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 public class StudentStatsActivity extends AppCompatActivity {
 
