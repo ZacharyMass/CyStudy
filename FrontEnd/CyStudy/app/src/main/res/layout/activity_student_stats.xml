@@ -55,4 +55,35 @@
         app:layout_constraintStart_toEndOf="@+id/timeSpentOnClassesText"
         app:layout_constraintTop_toTopOf="@+id/timeSpentOnClassesText" />
 
+    <View
+        android:id="@+id/overallRed"
+        android:layout_width="750px"
+        android:layout_height="25dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="#C8102E"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeSpentOnClassesText" />
+
+    <View
+        android:id="@+id/overallGreen"
+        android:layout_width="100dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="32dp"
+        android:background="@android:color/holo_green_dark"
+        app:layout_constraintStart_toStartOf="@+id/overallRed"
+        app:layout_constraintTop_toBottomOf="@+id/timeSpentOnClassesText" />
+
+    <TextView
+        android:id="@+id/overallPercent"
+        android:layout_width="0dp"
+        android:layout_height="21dp"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/overallGreen"
+        app:layout_constraintEnd_toStartOf="@+id/overallGreen"
+        app:layout_constraintStart_toStartOf="@+id/timeSpentOnClassesText"
+        app:layout_constraintTop_toTopOf="@+id/overallGreen" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -39,9 +39,9 @@ public class LoginActivity extends AppCompatActivity {
         // Proceed after checking (if valid info)
         // The verification here will have to parse SQL database for username
         // If username found, will have to match password to it
-        if (!username.matches("") && !password.matches("")) {
+        // if (!username.matches("") && !password.matches("")) {
             Intent intent = new Intent(this, StudentStatsActivity.class);
             startActivity(intent);
-        }
+        // }
     }
 }
