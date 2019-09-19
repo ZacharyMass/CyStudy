@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 public class StudentStatsActivity extends AppCompatActivity {
 
     @Override
@@ -60,11 +62,18 @@ public class StudentStatsActivity extends AppCompatActivity {
                     TextView term1Percent = findViewById(R.id.term1Percent);
                     TextView term2Percent = findViewById(R.id.term2Percent);
                     TextView term3Percent = findViewById(R.id.term3Percent);
+                    View term1GreenBar = findViewById(R.id.term1green);
+                    View term2GreenBar = findViewById(R.id.term2green);
+                    View term3GreenBar = findViewById(R.id.term3green);
+                    TextView term1header = findViewById(R.id.term1header);
+                    TextView term2header = findViewById(R.id.term2header);
+                    TextView term3header = findViewById(R.id.term3header);
+
 
                     // Apply minutes variable to appropriate class value
                     if (selectedClass.matches("CPRE 310")) {
                         int CPRE_minutesSpent = 238;
-                        accuracy = 0;
+                        accuracy = 76;
                         term1 = "Rules of Inference";
                         term2 = "Proofs";
                         term3 = "Graphs";
@@ -106,14 +115,37 @@ public class StudentStatsActivity extends AppCompatActivity {
                     }
 
                     timeString.setText(time); // Set time spent studying overall text
+                    term1header.setText(term1);
+                    term2header.setText(term2);
+                    term3header.setText(term3);
 
                     if (accuracy == 0) { // Can reason that the 3 recommended terms are also 0
                         overallGreenBar.setVisibility(View.GONE);
-                        overallPercentText.setText(accuracy + "%");
+                        term1GreenBar.setVisibility(View.GONE);
+                        term2GreenBar.setVisibility(View.GONE);
+                        term3GreenBar.setVisibility(View.GONE);
+                        overallPercentText.setText("0%");
+                        term1Percent.setText("0%");
+                        term2Percent.setText("0%");
+                        term3Percent.setText("0%");
                     }
                     else {
+                        String overallPercentString = accuracy + "%";
+                        String term1PercentString = term1accuracy + "%";
+                        String term2PercentString = term2accuracy + "%";
+                        String term3PercentString = term3accuracy + "%";
+                        overallGreenBar.setVisibility(View.VISIBLE); // To account for it being invisible if 0 accuracy value
+                        term1GreenBar.setVisibility(View.VISIBLE);
+                        term2GreenBar.setVisibility(View.VISIBLE);
+                        term3GreenBar.setVisibility(View.VISIBLE);
                         overallGreenBar.getLayoutParams().width = (accuracy * 750) / 100;
-                        overallPercentText.setText(accuracy + "%"); // Set text in overall green bar
+                        term1GreenBar.getLayoutParams().width = (term1accuracy * 750) / 100;
+                        term2GreenBar.getLayoutParams().width = (term2accuracy * 750) / 100;
+                        term3GreenBar.getLayoutParams().width = (term3accuracy * 750) / 100;
+                        overallPercentText.setText(overallPercentString); // Set text in overall green bar
+                        term1Percent.setText(term1PercentString);
+                        term2Percent.setText(term2PercentString);
+                        term3Percent.setText(term3PercentString);
                     }
                 }
 
