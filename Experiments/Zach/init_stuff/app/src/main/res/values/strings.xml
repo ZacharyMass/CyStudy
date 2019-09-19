@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">CyLearn Experiment</string>
+    <string name="action_settings">Settings</string>
+    <string name="welcome_message">Welcome to Experiment0!</string>
+</resources>
