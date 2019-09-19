@@ -3,6 +3,7 @@ package com.example.cystudy;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.Constraints;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -42,37 +43,73 @@ public class StudentStatsActivity extends AppCompatActivity {
                     String selectedClass = classSpinner.getSelectedItem().toString(); // Figure out which class is selected
 
                     String time;
+                    String term1;
+                    String term2;
+                    String term3;
+                    int term1accuracy;
+                    int term2accuracy;
+                    int term3accuracy;
                     // Total time spent studying for classes (will be pulled from server/database)
                     int accuracy = 0; // Will be the overall percent correct in a class and will be pulled from server
-                    int overallGreenWidth = 0;
 
                     TextView timeString = findViewById(R.id.timeSpentValue); // Access empty time slot on page
                     View overallGreenBar = findViewById(R.id.overallGreen); // Access green percentage bar for overall accuracy
-                    View overallRedBar = findViewById(R.id.overallRed); // Access green percentage bar for overall accuracy
                     TextView overallPercentText = findViewById(R.id.overallPercent); // Access TextView for white percentage text on overall green bar
+                    TextView toStudyHeader = findViewById(R.id.termsToStudyHeader); // Access yellow text to divide page, this needs to be underlined
+                    toStudyHeader.setPaintFlags(toStudyHeader.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+                    TextView term1Percent = findViewById(R.id.term1Percent);
+                    TextView term2Percent = findViewById(R.id.term2Percent);
+                    TextView term3Percent = findViewById(R.id.term3Percent);
 
                     // Apply minutes variable to appropriate class value
                     if (selectedClass.matches("CPRE 310")) {
                         int CPRE_minutesSpent = 238;
-                        accuracy = 1;
+                        accuracy = 0;
+                        term1 = "Rules of Inference";
+                        term2 = "Proofs";
+                        term3 = "Graphs";
+                        term1accuracy = 21;
+                        term2accuracy = 18;
+                        term3accuracy = 29;
                         time = setTimeSpentStudying(CPRE_minutesSpent);
 
                     } else if (selectedClass.matches("STAT 330")) {
                         int STAT_minutesSpent = 149;
+                        accuracy = 75;
+                        term1 = "Conditional Probability";
+                        term2 = "Bayes' Rule";
+                        term3 = "Series vs. Parallelism";
+                        term1accuracy = 16;
+                        term2accuracy = 19;
+                        term3accuracy = 25;
                         time = setTimeSpentStudying(STAT_minutesSpent);
                     } else if (selectedClass.matches("COM S 309")) {
                         int COMS309_minutesSpent = 300;
+                        accuracy = 89;
+                        term1 = "Git Basics";
+                        term2 = "Android Studio";
+                        term3 = "Project Management";
+                        term1accuracy = 12;
+                        term2accuracy = 9;
+                        term3accuracy = 36;
                         time = setTimeSpentStudying(COMS309_minutesSpent);
                     } else {
                         int COMS321_minutesSpent = 101;
+                        accuracy = 92;
+                        term1 = "Processor Speeds";
+                        term2 = "Conversion of Units";
+                        term3 = "GPU Architecture";
+                        term1accuracy = 26;
+                        term2accuracy = 21;
+                        term3accuracy = 31;
                         time = setTimeSpentStudying(COMS321_minutesSpent);
                     }
 
                     timeString.setText(time); // Set time spent studying overall text
 
-                    if (accuracy == 0) {
+                    if (accuracy == 0) { // Can reason that the 3 recommended terms are also 0
                         overallGreenBar.setVisibility(View.GONE);
-                        // Need to create TextView in XML to display 0% when this occurs
+                        overallPercentText.setText(accuracy + "%");
                     }
                     else {
                         overallGreenBar.getLayoutParams().width = (accuracy * 750) / 100;

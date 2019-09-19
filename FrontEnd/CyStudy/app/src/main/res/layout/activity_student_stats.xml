@@ -61,7 +61,7 @@
         android:layout_height="25dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="8dp"
         android:background="#C8102E"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,10 +80,151 @@
         android:id="@+id/overallPercent"
         android:layout_width="0dp"
         android:layout_height="21dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="5dp"
+        android:text="Test"
         android:textColor="@android:color/white"
+        android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="@+id/overallGreen"
         app:layout_constraintEnd_toStartOf="@+id/overallGreen"
         app:layout_constraintStart_toStartOf="@+id/timeSpentOnClassesText"
         app:layout_constraintTop_toTopOf="@+id/overallGreen" />
+
+    <TextView
+        android:id="@+id/termsToStudyHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Recommended Terms to Study:"
+        android:textColor="#F1BE48"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/timeSpentOnClassesText"
+        app:layout_constraintTop_toBottomOf="@+id/overallRed" />
+
+    <TextView
+        android:id="@+id/term1header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        app:layout_constraintStart_toStartOf="@+id/termsToStudyHeader"
+        app:layout_constraintTop_toBottomOf="@+id/termsToStudyHeader" />
+
+    <TextView
+        android:id="@+id/term1Percent"
+        android:layout_width="0dp"
+        android:layout_height="21dp"
+        android:layout_marginEnd="5dp"
+        android:textColor="@android:color/white"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="@+id/term1green"
+        app:layout_constraintEnd_toStartOf="@+id/term1green"
+        app:layout_constraintStart_toStartOf="@+id/timeSpentOnClassesText"
+        app:layout_constraintTop_toTopOf="@+id/term1green" />
+
+    <View
+        android:id="@+id/term1red"
+        android:layout_width="750px"
+        android:layout_height="12dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="20dp"
+        android:background="#C8102E"
+        app:layout_constraintEnd_toEndOf="@+id/overallRed"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/overallRed"
+        app:layout_constraintTop_toBottomOf="@+id/term1header" />
+
+    <View
+        android:id="@+id/term1green"
+        android:layout_width="100dp"
+        android:layout_height="12dp"
+        android:background="@android:color/holo_green_dark"
+        app:layout_constraintBottom_toBottomOf="@+id/term1red"
+        app:layout_constraintStart_toStartOf="@+id/term1red"
+        app:layout_constraintTop_toTopOf="@+id/term1red" />
+
+    <TextView
+        android:id="@+id/term2header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        app:layout_constraintStart_toStartOf="@+id/term1header"
+        app:layout_constraintTop_toBottomOf="@+id/term1red" />
+
+    <TextView
+        android:id="@+id/term2Percent"
+        android:layout_width="0dp"
+        android:layout_height="21dp"
+        android:layout_marginEnd="5dp"
+        android:textColor="@android:color/white"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="@+id/term2green"
+        app:layout_constraintEnd_toStartOf="@+id/term2green"
+        app:layout_constraintStart_toStartOf="@+id/timeSpentOnClassesText"
+        app:layout_constraintTop_toTopOf="@+id/term2green" />
+
+    <View
+        android:id="@+id/term2red"
+        android:layout_width="750px"
+        android:layout_height="12dp"
+        android:layout_marginTop="20dp"
+        android:background="#C8102E"
+        app:layout_constraintEnd_toEndOf="@+id/term1red"
+        app:layout_constraintStart_toStartOf="@+id/term1red"
+        app:layout_constraintTop_toBottomOf="@+id/term2header" />
+
+    <View
+        android:id="@+id/term2green"
+        android:layout_width="100dp"
+        android:layout_height="12dp"
+        android:background="@android:color/holo_green_dark"
+        app:layout_constraintBottom_toBottomOf="@+id/term2red"
+        app:layout_constraintStart_toStartOf="@+id/term2red"
+        app:layout_constraintTop_toTopOf="@+id/term2red" />
+
+    <TextView
+        android:id="@+id/term3header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        app:layout_constraintStart_toStartOf="@+id/term2header"
+        app:layout_constraintTop_toBottomOf="@+id/term2red" />
+
+    <TextView
+        android:id="@+id/term3Percent"
+        android:layout_width="0dp"
+        android:layout_height="21dp"
+        android:layout_marginEnd="5dp"
+        android:textColor="@android:color/white"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="@+id/term3green"
+        app:layout_constraintEnd_toStartOf="@+id/term3green"
+        app:layout_constraintStart_toStartOf="@+id/timeSpentOnClassesText"
+        app:layout_constraintTop_toTopOf="@+id/term3green" />
+
+    <View
+        android:id="@+id/term3red"
+        android:layout_width="750px"
+        android:layout_height="12dp"
+        android:layout_marginTop="20dp"
+        android:background="#C8102E"
+        app:layout_constraintEnd_toEndOf="@+id/term2red"
+        app:layout_constraintStart_toStartOf="@+id/term2red"
+        app:layout_constraintTop_toBottomOf="@+id/term3header" />
+
+    <View
+        android:id="@+id/term3green"
+        android:layout_width="100dp"
+        android:layout_height="12dp"
+        android:background="@android:color/holo_green_dark"
+        app:layout_constraintBottom_toBottomOf="@+id/term3red"
+        app:layout_constraintStart_toStartOf="@+id/term3red"
+        app:layout_constraintTop_toTopOf="@+id/term3red" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
