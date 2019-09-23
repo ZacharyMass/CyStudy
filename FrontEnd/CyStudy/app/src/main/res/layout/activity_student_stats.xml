@@ -11,8 +11,8 @@
         android:id="@+id/pageTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
         android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:text="Student Statistics"
         android:textColor="#F1BE48"
@@ -225,5 +225,16 @@
         app:layout_constraintBottom_toBottomOf="@+id/term3red"
         app:layout_constraintStart_toStartOf="@+id/term3red"
         app:layout_constraintTop_toTopOf="@+id/term3red" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/menu_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/pageTitle"
+        app:layout_constraintEnd_toStartOf="@+id/pageTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pageTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
