@@ -1,9 +1,11 @@
-package com.example.cystudy;
+package com.example.cystudy.user;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Column;
 
 @Entity
 @Table(name="users")
@@ -53,7 +55,7 @@ public class User {
     return password;
   }
 
-  public void setRole(String password) {
+  public void setPassword(String password) {
     this.password = password;
   }
 }

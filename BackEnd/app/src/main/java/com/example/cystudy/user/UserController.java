@@ -1,5 +1,6 @@
-package com.example.cystudy;
+package com.example.cystudy.user;
 
+import com.example.cystudy.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(path="/demo")
-public class MainController {
+@RequestMapping(path="/user")
+public class UserController {
   @Autowired
   private UserRepository userRepository;
 
@@ -18,10 +19,9 @@ public class MainController {
   public @ResponseBody String addNewUser(@RequestParam String first_name,
                                          @RequestParam String last_name,
                                          @RequestParam String role,
-                                         @RequestParam String password,
+                                         @RequestParam String password
                                          ) {
     User n = new User();
-
     n.setFirstName(first_name);
     n.setLastName(last_name);
     n.setRole(role);
@@ -31,7 +31,7 @@ public class MainController {
     return "Saved";
   }
 
-  @GetMapping(path="/all")
+  @GetMapping(path="/list")
   public @ResponseBody Iterable<User> getAllUsers() {
     return userRepository.findAll();
   }
