@@ -161,7 +161,7 @@ public class StudentStatsActivity extends AppCompatActivity {
     }
 
     public void navigateToStudentHome(View view) {
-        Intent intent = new Intent(this, StudentHomeActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 }

@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.example.cystudy.ui.classes.ClassesFragment;
+import com.example.cystudy.ui.classes.StudentHomeFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main_activity);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, ClassesFragment.newInstance())
+                    .replace(R.id.container, StudentHomeFragment.newInstance())
                     .commitNow();
         }
     }

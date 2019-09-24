@@ -14,19 +14,19 @@ import android.view.ViewGroup;
 
 import com.example.cystudy.R;
 
-public class ClassesFragment extends Fragment {
+public class StudentHomeFragment extends Fragment {
 
     private ClassesViewModel mViewModel;
 
-    public static ClassesFragment newInstance() {
-        return new ClassesFragment();
+    public static StudentHomeFragment newInstance() {
+        return new StudentHomeFragment();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.classes_fragment, container, false);
+        return inflater.inflate(R.layout.student_home_fragment, container, false);
     }
 
     @Override
