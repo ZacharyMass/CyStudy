@@ -159,9 +159,4 @@ public class StudentStatsActivity extends AppCompatActivity {
         minutes = minutes - (hours * 60); // Get remainder of minutes
         return hours + "h" + " " + minutes + "m";
     }
-
-    public void navigateToStudentHome(View view) {
-        Intent intent = new Intent(this, StudentHomeActivity.class);
-        startActivity(intent);
-    }
 }
