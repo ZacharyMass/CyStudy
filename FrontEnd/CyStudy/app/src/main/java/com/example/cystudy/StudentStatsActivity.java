@@ -2,6 +2,7 @@ package com.example.cystudy;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
@@ -157,5 +158,10 @@ public class StudentStatsActivity extends AppCompatActivity {
         int hours = minutes / 60; // Get hours
         minutes = minutes - (hours * 60); // Get remainder of minutes
         return hours + "h" + " " + minutes + "m";
+    }
+
+    public void navigateToStudentHome(View view) {
+        Intent intent = new Intent(this, StudentHomeActivity.class);
+        startActivity(intent);
     }
 }
