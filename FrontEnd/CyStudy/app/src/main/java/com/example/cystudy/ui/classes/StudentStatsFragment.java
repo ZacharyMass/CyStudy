@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,11 +41,10 @@ public class StudentStatsFragment extends Fragment {
         Spinner spin = (Spinner) v.findViewById(R.id.classesDropdown);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getActivity(), android.R.layout.simple_spinner_item, classes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        Spinner classSpinner = v.findViewById(R.id.classesDropdown);
         String selectedClass = "";
-        if(classSpinner.getSelectedItem() != null) {
-            selectedClass = classSpinner.getSelectedItem().toString(); // Figure out which class is selected
+        if(spin.getSelectedItem() != null) {
+            Log.println(Log.ERROR, "Error", "Null spin.getSelectedItem()");
+            selectedClass = spin.getSelectedItem().toString(); // Figure out which class is selected
         }
 
         String time;
@@ -150,8 +150,7 @@ public class StudentStatsFragment extends Fragment {
             term3Percent.setText(term3PercentString);
         }
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_student_stats, container, false);
+        return v;
     }
 
     /**
