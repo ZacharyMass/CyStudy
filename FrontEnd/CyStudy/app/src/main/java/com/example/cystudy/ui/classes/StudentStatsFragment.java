@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -38,8 +37,8 @@ public class StudentStatsFragment extends Fragment {
         // Will be pulled from database
         View v = inflater.inflate(R.layout.fragment_student_stats, container, false);
         String[] classes = {"CPRE 310", "STAT 330", "COM S 309", "COM S 321"};
-        Spinner spin = (Spinner) v.findViewById(R.id.classesDropdown);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getActivity(), android.R.layout.simple_spinner_item, classes);
+        Spinner spin = v.findViewById(R.id.classesDropdown);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getContext(), android.R.layout.simple_spinner_item, classes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         String selectedClass = "";
         if(spin.getSelectedItem() != null) {

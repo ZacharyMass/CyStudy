@@ -16,27 +16,16 @@ import com.example.cystudy.R;
 
 public class StudentHomeFragment extends Fragment {
 
-    private ClassesViewModel mViewModel;
-
-    public static StudentHomeFragment newInstance() {
-        return new StudentHomeFragment();
-    }
-
-    @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
         //Bind button to navigate to StudentStatsFragment
-        Button button = inflater.inflate(R.layout.fragment_student_home, container, false).findViewById(R.id.yourStatsButton);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_studentHomeFragment_to_studentStatsFragment);
-            }
-        });
+        View v = inflater.inflate(R.layout.fragment_student_home, container, false);
+        Button button = v.findViewById(R.id.yourStatsButton);
+        button.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.studentStatsFragment, null));
 
-        return inflater.inflate(R.layout.fragment_student_home, container, false);
+        return v;
     }
 
 }
