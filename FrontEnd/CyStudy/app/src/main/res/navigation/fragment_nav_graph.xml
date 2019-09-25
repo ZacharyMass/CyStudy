@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_nav_graph"
+    app:startDestination="@id/studentStatsFragment">
+
+    <fragment
+        android:id="@+id/studentStatsFragment"
+        android:name="com.example.cystudy.ui.classes.StudentStatsFragment"
+        android:label="fragment_student_stats"
+        tools:layout="@layout/fragment_student_stats" />
+    <fragment
+        android:id="@+id/studentHomeFragment"
+        android:name="com.example.cystudy.ui.classes.StudentHomeFragment"
+        android:label="fragment_student_home"
+        tools:layout="@layout/fragment_student_home" >
+        <action
+            android:id="@+id/action_studentHomeFragment_to_studentStatsFragment"
+            app:destination="@id/studentStatsFragment" />
+    </fragment>
+</navigation>
