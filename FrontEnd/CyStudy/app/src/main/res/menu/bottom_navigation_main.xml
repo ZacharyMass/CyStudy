@@ -5,7 +5,7 @@
         android:id="@+id/action_stats"
         android:enabled="true"
         android:icon="@drawable/nav_home"
-        android:title="@string/text_home"
+        android:title="@string/text_stats"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/action_home"
