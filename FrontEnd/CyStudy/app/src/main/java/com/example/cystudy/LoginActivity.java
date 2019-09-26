@@ -10,22 +10,27 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.cystudy.ui.classes.StudentHomeFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.security.AccessController;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import static java.security.AccessController.getContext;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private String url = ""; // This will need to be filled in once server guys let us know
+    private String url = "https://google.com"; // This will need to be filled in once server guys let us know
 
     private EditText usernameSpace = findViewById(R.id.email_login);
     private EditText passwordSpace = findViewById(R.id.password_login);
@@ -64,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(MainActivity.this,response,Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),response,Toast.LENGTH_LONG).show();
                         parseData(response);
 
                     }
@@ -72,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(MainActivity.this,error.toString(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
                     }
                 }){
             @Override
@@ -99,11 +104,11 @@ public class LoginActivity extends AppCompatActivity {
                 for (int i = 0; i < dataArray.length(); i++) {
 
                     JSONObject dataobj = dataArray.getJSONObject(i);
-                    firstName = dataobj.getString("name");
-                    hobby = dataobj.getString("hobby");
+                    class1 = dataobj.getString("class1");
+                    class2 = dataobj.getString("class2");
                 }
 
-                Intent intent = new Intent(MainActivity.this,HobbyActivity.class);
+                Intent intent = new Intent(getApplicationContext(), StudentHomeFragment.class);
                 startActivity(intent);
             }
         } catch (JSONException e) {
