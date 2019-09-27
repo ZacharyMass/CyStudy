@@ -15,10 +15,10 @@
         android:title="@string/text_stats"
         app:showAsAction="ifRoom"/>
     <item
-        android:id="@+id/action_classes"
+        android:id="@+id/action_settings"
         android:enabled="true"
         android:icon="@drawable/nav_home"
-        android:title="@string/text_classes"
+        android:title="@string/text_settings"
         app:showAsAction="ifRoom"/>
 
 </menu>

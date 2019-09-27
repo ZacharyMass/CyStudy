@@ -35,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
                                 case R.id.action_home:
                                     navController.navigate(R.id.action_studentStatsFragment_to_studentHomeFragment);
                                     break;
-                                case R.id.action_classes:
+                                case R.id.action_settings:
+                                    navController.navigate(R.id.action_studentStatsFragment_to_settingsFragment);
                                     break;
                             }
                         }
@@ -44,7 +45,18 @@ public class MainActivity extends AppCompatActivity {
                                 case R.id.action_stats:
                                     navController.navigate(R.id.action_studentHomeFragment_to_studentStatsFragment);
                                     break;
-                                case R.id.action_classes:
+                                case R.id.action_settings:
+                                    navController.navigate(R.id.action_studentHomeFragment_to_settingsFragment);
+                                    break;
+                            }
+                        }
+                        else if (navController.getCurrentDestination().getId() == R.id.settingsFragment) {
+                            switch (menuItem.getItemId()) {
+                                case R.id.action_stats:
+                                    navController.navigate(R.id.action_settingsFragment_to_studentStatsFragment);
+                                    break;
+                                case R.id.action_home:
+                                    navController.navigate(R.id.action_settingsFragment_to_studentHomeFragment);
                                     break;
                             }
                         }
