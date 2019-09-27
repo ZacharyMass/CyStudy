@@ -9,7 +9,11 @@
         android:id="@+id/studentStatsFragment"
         android:name="com.example.cystudy.ui.classes.StudentStatsFragment"
         android:label="fragment_student_stats"
-        tools:layout="@layout/fragment_student_stats" />
+        tools:layout="@layout/fragment_student_stats" >
+        <action
+            android:id="@+id/action_studentStatsFragment_to_studentHomeFragment"
+            app:destination="@id/studentHomeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/studentHomeFragment"
         android:name="com.example.cystudy.ui.classes.StudentHomeFragment"
