@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -35,19 +36,17 @@ public class StudentHomeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_student_home, container, false);
         Button button = v.findViewById(R.id.yourStatsButton);
         button.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.studentStatsFragment, null));
-        // TextView classList = v.findViewById(R.id.classesText); // Will be replaced by class text
-
-        String url = "coms-309-jr-7.misc.iastate.edu:3306/cystudy/user/add";
+        final TextView classList = v.findViewById(R.id.classesText); // Will be replaced by class text
 
         RequestQueue queue = Volley.newRequestQueue(Objects.requireNonNull(getContext()));
 
-        url = "http://httpbin.org/post";
+        String url = "coms-309-jr-7.misc.iastate.edu:3306/cystudy/user/add";
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>()
                 {
                     @Override
                     public void onResponse(String response) {
-                        // response
+                        classList.setText("Test");
                         Log.d("Response", response);
                     }
                 },
@@ -55,7 +54,8 @@ public class StudentHomeFragment extends Fragment {
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        String response = "testResponse";
+                        String response = "Error Occured";
+                        classList.setText(response);
                         Log.d("Error.Response", response);
                     }
                 }
