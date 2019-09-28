@@ -19,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.cystudy.MainActivity;
 import com.example.cystudy.R;
 
 import java.util.HashMap;
@@ -37,8 +38,8 @@ public class StudentHomeFragment extends Fragment {
         button.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.studentStatsFragment, null));
         final TextView classList = v.findViewById(R.id.classesText); // Will be replaced by class text
 
-        RequestQueue queue = Volley.newRequestQueue(Objects.requireNonNull(getContext()));
-
+        // Establish Queue
+        RequestQueue queue = MainActivity.queue;
         String url = "coms-309-jr-7.misc.iastate.edu:3306/cystudy/user/add";
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>()
@@ -72,8 +73,6 @@ public class StudentHomeFragment extends Fragment {
             }
         };
         queue.add(postRequest);
-
-        getActivity();
 
         return v;
     }

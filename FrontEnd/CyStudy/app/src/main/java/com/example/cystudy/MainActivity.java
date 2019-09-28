@@ -14,8 +14,8 @@ import static androidx.navigation.ui.NavigationUI.setupWithNavController;
 
 public class MainActivity extends AppCompatActivity {
 
-    public RequestQueue queue;
-    public String url = "coms-309-jr-7.misc.iastate.edu";
+    public static RequestQueue queue;
+    public static String url = "coms-309-jr-7.misc.iastate.edu";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +27,6 @@ public class MainActivity extends AppCompatActivity {
 
         //Initiate RequestQueue
         queue = Volley.newRequestQueue(this);
-
-        //
 
         // Handle Navigation between fragments with Bottom Nav Bar
         final BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
