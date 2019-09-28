@@ -1,15 +1,14 @@
 package com.jr7.cystudy.controller;
 
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import com.jr7.cystudy.repository.UserRepository;
 import com.jr7.cystudy.model.User;
 import com.jr7.cystudy.service.*;
 
@@ -21,10 +20,23 @@ public class UserController {
 
     private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    @RequestMapping(method = RequestMethod.GET, path="/getusers")
+    @RequestMapping(method = RequestMethod.GET, path="/get-users")
     public List<User> getUsers(){
         logger.info("Entered UserController layer in method getUsers().");
         return UserService.getUsers();
+    }
+
+    @PostMapping(path="/add-user")
+    public @ResponseBody String createUser(@RequestParam String username,
+                                           @RequestParam String pass,
+                                           @RequestParam String role) {
+        User n = new User();
+        n.setUsername(username);
+        n.setPassword(pass);
+        n.setRole(role);
+        UserService.save(n);
+
+        return "Saved user.";
     }
 }
 
