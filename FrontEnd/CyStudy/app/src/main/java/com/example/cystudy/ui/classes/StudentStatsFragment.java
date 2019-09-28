@@ -1,5 +1,6 @@
 package com.example.cystudy.ui.classes;
 
+import android.app.DownloadManager;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,12 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.cystudy.R;
 
 /**
@@ -63,7 +70,6 @@ public class StudentStatsFragment extends Fragment {
                 // Total time spent studying for classes (will be pulled from server/database)
                 int accuracy = 0; // Will be the overall percent correct in a class and will be pulled from server
 
-                TextView timeString = v.findViewById(R.id.timeSpentValue); // Access empty time slot on page
                 View overallGreenBar = v.findViewById(R.id.overallGreen); // Access green percentage bar for overall accuracy
                 TextView overallPercentText = v.findViewById(R.id.overallPercent); // Access TextView for white percentage text on overall green bar
                 TextView toStudyHeader = v.findViewById(R.id.termsToStudyHeader); // Access yellow text to divide page, this needs to be underlined
@@ -121,6 +127,8 @@ public class StudentStatsFragment extends Fragment {
                     term3accuracy = 31;
                     time = setTimeSpentStudying(COMS321_minutesSpent);
                 }
+
+                final TextView timeString = v.findViewById(R.id.timeSpentValue); // Access empty time slot on page
 
                 timeString.setText(time); // Set time spent studying overall text
                 term1header.setText(term1);
