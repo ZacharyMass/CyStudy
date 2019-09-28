@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +23,8 @@ public class StudentHomeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_student_home, container, false);
         Button button = v.findViewById(R.id.yourStatsButton);
         button.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.studentStatsFragment, null));
+
+        getActivity();
 
         return v;
     }
