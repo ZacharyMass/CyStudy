@@ -1,6 +1,5 @@
 package com.jr7.cystudy.service;
 
-import java.util.HashSet;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +18,19 @@ public class UserService {
 
     public List<User> getUsers() {
         return UserRepository.findAll();
+    }
+
+    public User getUserByName(String username){
+        return UserRepository.getUserByUsername(username);
+    }
+
+    public String checkUserExists(String username){
+        User u = UserRepository.getUserByUsername(username);
+        if(u == null){
+            return "False";
+        } else{
+            return "True";
+        }
     }
 
     public void save(User user) {
