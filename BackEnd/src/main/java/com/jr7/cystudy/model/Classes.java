@@ -13,7 +13,7 @@ public class Classes {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="classId")
+    @Column(name="class_id")
     private long classId;
 
     @Column(name="name")
