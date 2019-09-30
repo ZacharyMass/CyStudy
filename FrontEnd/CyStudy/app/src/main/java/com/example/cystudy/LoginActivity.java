@@ -17,6 +17,8 @@ import com.android.volley.toolbox.Volley;
 
 public class LoginActivity extends AppCompatActivity {
 
+    public static String user = "Brad";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
