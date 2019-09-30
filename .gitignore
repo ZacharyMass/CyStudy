@@ -15,6 +15,7 @@ gen/
 out/
 release/
 target/
+META-INF/
 
 # Gradle files
 .gradle/
