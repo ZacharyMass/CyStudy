@@ -48,8 +48,7 @@ public class StudentHomeFragment extends Fragment {
 
         // classList.setText("Before method");
 
-        RequestQueue sampleQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
-
+        final RequestQueue sampleQueue = Volley.newRequestQueue(this.getContext());
 
         startRequest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,9 +73,8 @@ public class StudentHomeFragment extends Fragment {
                 });
 
                 Log.d("VOLLEY1", jsonObjReq.toString());
-                AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+                sampleQueue.add(jsonObjReq);
                 Log.d("VOLLEY2", jsonObjReq.toString());
-
             }
         });
 
