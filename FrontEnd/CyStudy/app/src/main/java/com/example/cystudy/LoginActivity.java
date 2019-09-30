@@ -30,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         String username = usernameSpace.getText().toString();
         String password = passwordSpace.getText().toString();
 
+
         // if (!username.matches("") && !password.matches("")) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
