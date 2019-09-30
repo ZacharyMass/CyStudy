@@ -6,7 +6,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,7 +49,29 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void register(View view) {
-        // DO DATA VALIDATION, if good, login and navigate
+
+        final EditText email = findViewById(R.id.email_register);
+        final EditText pass = findViewById(R.id.password_register);
+        final EditText passConf = findViewById(R.id.password_confirm_register);
+        final Spinner role = findViewById(R.id.role_spinner);
+
+        // DO DATA VALIDATION, if good, login and navigate, else Toast and return
+        if(pass.equals(null))
+        {
+            Toast.makeText(this, "Enter Password", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else if(!pass.getText().toString().equals(passConf.getText().toString()))
+        {
+            Log.d("Passwords don't match", "pass = "+pass.getText()+" passConf = "+passConf.getText());
+            Toast.makeText(this, "Passwords Do Not Match", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(email.equals(null))
+        {
+            Toast.makeText(this, "Enter Email", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         // Establish Queue
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -57,7 +81,7 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         Log.d("Response", response);
-                        Toast toast = Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT);
+                        Toast toast = Toast.makeText(getApplicationContext(), "User Created", Toast.LENGTH_SHORT);
                         toast.show();
                         Intent intent = new Intent(getBaseContext(), MainActivity.class);
                         startActivity(intent);
@@ -66,7 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        String response = "Connected, Error Occured";
+                        String response = "Error Occurred: " + error.getMessage();
                         Log.d("Error.Response", response);
                         Toast toast = Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG);
                         toast.show();
@@ -75,9 +99,9 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("username", "Brad");
-                params.put("password", "password123");
-                params.put("role", "student");
+                params.put("username", email.getText().toString());
+                params.put("password", pass.getText().toString());
+                params.put("role", role.getSelectedItem().toString());
 
                 return params;
             }
