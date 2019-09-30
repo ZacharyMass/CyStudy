@@ -42,27 +42,7 @@ public class StudentHomeFragment extends Fragment {
         button.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.studentStatsFragment, null));
         final TextView classList = v.findViewById(R.id.classesText); // Will be replaced by class text
 
-        Context mContext = getContext();
-
-        String url = "http://localhost:8080/get-users";
-
-        RequestQueue requestQueue = Volley.newRequestQueue(mContext);
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-
-            @Override
-            public void onResponse(JSONObject response) {
-                classList.setText(response.toString());
-            }
-        },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        classList.setText(error.toString());
-                    }
-                });
-
-        requestQueue.add(jsonObjectRequest);
+        RequestQueue queue = Volley.
 
         return v;
     }
