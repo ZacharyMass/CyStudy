@@ -1,6 +1,5 @@
 package com.example.cystudy.app;
 
-import com.example.cystudy.net_utils.LruBitmapCache;
 import android.app.Application;
 import android.text.TextUtils;
 
@@ -8,6 +7,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.example.cystudy.net_utils.LruBitmapCache;
 
 public class AppController extends Application {
 
@@ -24,7 +24,6 @@ public class AppController extends Application {
         super.onCreate();
         mInstance = this;
     }
-
     public static synchronized AppController getInstance() {
         return mInstance;
     }
@@ -33,7 +32,6 @@ public class AppController extends Application {
         if (mRequestQueue == null) {
             mRequestQueue = Volley.newRequestQueue(getApplicationContext());
         }
-
         return mRequestQueue;
     }
 
@@ -63,4 +61,3 @@ public class AppController extends Application {
         }
     }
 }
-
