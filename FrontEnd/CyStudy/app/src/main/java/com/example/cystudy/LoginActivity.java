@@ -48,16 +48,6 @@ public class LoginActivity extends AppCompatActivity {
         EditText passwordSpace = findViewById(R.id.password_login);
         final String username = usernameSpace.getText().toString();
         String password = passwordSpace.getText().toString();
-
-
-<<<<<<< HEAD
-        checkValidUsername(username);
-=======
-        // if (!username.matches("") && !password.matches("")) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        // }
->>>>>>> 959198f8234ece215b76c322bea546162a8e6d1c
     }
 
     private void checkValidUsername(final String username) {
