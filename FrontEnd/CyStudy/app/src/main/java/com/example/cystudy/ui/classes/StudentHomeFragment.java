@@ -14,12 +14,14 @@ import androidx.navigation.Navigation;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.example.cystudy.LoginActivity;
 import com.example.cystudy.R;
 
 public class StudentHomeFragment extends Fragment {
 
-    public static String url = "http://coms-309-jr-7.misc.iastate.edu:8080/get-users";
-    TextView classList;
+    String username = LoginActivity.user; // Username from LoginActivity is global here
+
+    String url = "http://coms-309-jr-7.misc.iastate.edu:8080/get-users-classes?username=" + username;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -29,8 +31,8 @@ public class StudentHomeFragment extends Fragment {
         final View v = inflater.inflate(R.layout.fragment_student_home, container, false);
         Button button = v.findViewById(R.id.yourStatsButton);
         button.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.studentStatsFragment, null));
-
-        final RequestQueue studentHomeQueue = Volley.newRequestQueue(this.getContext());
+        TextView studentName = v.findViewById(R.id.studentName);
+        studentName.setText("Username: " + username); // Just for reference to show correct user and communication from server
 
         return v;
     }

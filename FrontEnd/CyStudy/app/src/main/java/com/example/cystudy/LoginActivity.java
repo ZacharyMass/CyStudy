@@ -58,8 +58,6 @@ public class LoginActivity extends AppCompatActivity {
         URL += username; // Adds string to end
         RequestQueue loginQueue = Volley.newRequestQueue(this);
 
-        // URL = "http://coms-309-jr-7.misc.iastate.edu:8080/user-exists?username=brad";
-
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

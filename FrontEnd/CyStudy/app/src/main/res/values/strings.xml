@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">CyStudy</string>
     <string name="confirm_password_hint">Confirm Password</string>
-    <string name="email_hint_text">Email</string>
+    <string name="email_hint_text">Username</string>
     <string name="password_hint">Password</string>
 
     <string name="text_home">Home</string>
