@@ -1,16 +1,9 @@
 package com.jr7.cystudy.model;
 
-import com.jr7.cystudy.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
+@NamedQuery(name = "User.getUserByUsername", query = "SELECT u FROM User u WHERE u.username = ?1")
 @Table(name="users")
 public class User {
 

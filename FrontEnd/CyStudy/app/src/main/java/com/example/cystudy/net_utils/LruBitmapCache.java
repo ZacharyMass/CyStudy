@@ -1,5 +1,6 @@
 package com.example.cystudy.net_utils;
 
+<<<<<<< HEAD
 import android.graphics.Bitmap;
 import android.util.LruCache;
 
@@ -11,6 +12,18 @@ public class LruBitmapCache extends LruCache<String, Bitmap>
         final int maxMemory = (int) (Runtime.getRuntime().maxMemory()
                 / 1024);
         final int cacheSize = maxMemory / 8;
+=======
+import com.android.volley.toolbox.ImageLoader.ImageCache;
+
+import android.graphics.Bitmap;
+import android.util.LruCache;
+
+public class LruBitmapCache extends LruCache<String, Bitmap> implements ImageCache {
+    public static int getDefaultLruCacheSize() {
+        final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
+        final int cacheSize = maxMemory / 8;
+
+>>>>>>> 959198f8234ece215b76c322bea546162a8e6d1c
         return cacheSize;
     }
 
@@ -37,3 +50,7 @@ public class LruBitmapCache extends LruCache<String, Bitmap>
         put(url, bitmap);
     }
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 959198f8234ece215b76c322bea546162a8e6d1c
