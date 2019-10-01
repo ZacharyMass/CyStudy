@@ -18,7 +18,7 @@ public class UserController {
 
     private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    @RequestMapping(method = RequestMethod.GET, path="/get-users")
+    @GetMapping(path="/get-users")
     public List<User> getUsers(){
         logger.info("Entered UserController layer in method getUsers().");
         return UserService.getUsers();
