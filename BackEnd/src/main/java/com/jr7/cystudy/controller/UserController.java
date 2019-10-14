@@ -30,6 +30,19 @@ public class UserController {
         return UserService.getUserByName(username);
     }
 
+    @GetMapping(path="/get-role")
+    public @ResponseBody String getUserRole(@RequestParam String username) throws Exception{
+
+        if(UserService.checkUserExists(username).equalsIgnoreCase("True")){
+
+            User u = UserService.getUserRoleByName(username);
+            return u.getRole();
+        }
+        else{
+            throw new Exception("No user with username "+ username +" exists.");
+        }
+    }
+
     @GetMapping(path="/user-exists")
     public @ResponseBody String checkUserExists(@RequestParam String username){
         logger.info("Entered UserController layer in method checkUserExists().");

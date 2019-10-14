@@ -36,6 +36,10 @@ public class UserService {
         return UserRepository.getUserByUsername(username);
     }
 
+    public User getUserRoleByName(String username){
+        return UserRepository.getUserRoleByName(username);
+    }
+
     public String checkUserExists(String username){
         User u = UserRepository.getUserByUsername(username);
         if(u == null){
