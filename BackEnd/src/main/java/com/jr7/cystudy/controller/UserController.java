@@ -31,7 +31,7 @@ public class UserController {
     }
 
     @GetMapping(path="/get-role")
-    public @ResponseBody String getUserRole(@RequestParam String username) throws Exception{
+    public @ResponseBody String getUserRole(@RequestParam String username){
 
         if(UserService.checkUserExists(username).equalsIgnoreCase("True")){
 
@@ -39,7 +39,7 @@ public class UserController {
             return u.getRole();
         }
         else{
-            throw new Exception("No user with username "+ username +" exists.");
+            return "No user with username "+ username +" exists.";
         }
     }
 
