@@ -18,9 +18,6 @@ public class UserService {
     private UserRepository UserRepository;
 
     @Autowired
-    private UserDetailsService userDetailsService;
-
-    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Bean
@@ -34,10 +31,6 @@ public class UserService {
 
     public User getUserByName(String username){
         return UserRepository.getUserByUsername(username);
-    }
-
-    public User getUserRoleByName(String username){
-        return UserRepository.getUserRoleByName(username);
     }
 
     public String checkUserExists(String username){
@@ -59,13 +52,5 @@ public class UserService {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setRole(user.getRole());
         UserRepository.save(user);
-    }
-
-    @Bean
-    public DaoAuthenticationProvider authProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService);
-        authProvider.setPasswordEncoder(passwordEncoder());
-        return authProvider;
     }
 }

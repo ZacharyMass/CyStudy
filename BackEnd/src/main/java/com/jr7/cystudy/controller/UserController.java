@@ -35,7 +35,7 @@ public class UserController {
 
         if(UserService.checkUserExists(username).equalsIgnoreCase("True")){
 
-            User u = UserService.getUserRoleByName(username);
+            User u = UserService.getUserByName(username);
             return u.getRole();
         }
         else{
