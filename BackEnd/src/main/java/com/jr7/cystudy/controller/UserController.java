@@ -39,7 +39,7 @@ public class UserController {
     @PostMapping(path="/add-user")
     public @ResponseBody String createUser(@RequestParam String username,
                                            @RequestParam String pass,
-                                           @RequestParam String role) {
+                                           @RequestParam String role) throws Exception{
         User n = new User();
         n.setUsername(username);
         n.setPassword(pass);
