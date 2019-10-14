@@ -11,7 +11,7 @@ maven-build:
     - shell
   script:
     - cd BackEnd
-    - mvn package -B
+    - mvn clean install
 
 # test stage
 maven-test:
