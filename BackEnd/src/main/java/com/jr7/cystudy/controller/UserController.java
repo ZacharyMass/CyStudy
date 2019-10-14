@@ -31,7 +31,7 @@ public class UserController {
     }
 
     @GetMapping(path="/get-role-by-name")
-    public @ResponseBody String getUserRole(@RequestParam String username){
+    public String getUserRole(@RequestParam String username){
 
         if(UserService.checkUserExists(username).equalsIgnoreCase("True")){
 
