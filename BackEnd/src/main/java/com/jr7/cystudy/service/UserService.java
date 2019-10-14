@@ -1,15 +1,13 @@
 package com.jr7.cystudy.service;
 
-import java.util.List;
+import com.jr7.cystudy.model.User;
+import com.jr7.cystudy.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.jr7.cystudy.model.User;
-import com.jr7.cystudy.repository.UserRepository;
+import java.util.List;
 
 @Service
 public class UserService {
