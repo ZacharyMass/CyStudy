@@ -30,7 +30,7 @@ public class UserController {
         return UserService.getUserByName(username);
     }
 
-    @GetMapping(path="/get-role")
+    @GetMapping(path="/get-role-by-name")
     public @ResponseBody String getUserRole(@RequestParam String username){
 
         if(UserService.checkUserExists(username).equalsIgnoreCase("True")){
@@ -53,13 +53,19 @@ public class UserController {
     public @ResponseBody String createUser(@RequestParam String username,
                                            @RequestParam String pass,
                                            @RequestParam String role) throws Exception{
-        User n = new User();
-        n.setUsername(username);
-        n.setPassword(pass);
-        n.setRole(role);
-        UserService.save(n);
 
-        return "Saved user.";
+        if(UserService.checkUserExists(username).equalsIgnoreCase("False")){
+            User n = new User();
+            n.setUsername(username);
+            n.setPassword(pass);
+            n.setRole(role);
+            UserService.save(n);
+
+            return "Saved user.";
+        }
+        else{
+            return "User with username " +username+ " already exists. Please choose a new username";
+        }
     }
 }
 
