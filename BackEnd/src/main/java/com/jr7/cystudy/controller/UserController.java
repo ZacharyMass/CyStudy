@@ -30,7 +30,7 @@ public class UserController {
         return UserService.getUserByName(username);
     }
 
-    @GetMapping(path="/get-role-by-name")
+    @GetMapping(path="/get-role")
     public String getUserRole(@RequestParam String username){
 
         if(UserService.checkUserExists(username).equalsIgnoreCase("True")){
