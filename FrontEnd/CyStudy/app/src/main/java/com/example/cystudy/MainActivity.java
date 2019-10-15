@@ -1,21 +1,27 @@
 package com.example.cystudy;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.Objects;
+
 import static androidx.navigation.ui.NavigationUI.setupWithNavController;
 
 public class MainActivity extends AppCompatActivity {
-
-    public static RequestQueue queue;
-    public static String url = "coms-309-jr-7.misc.iastate.edu";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +30,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Hide action bar
         getSupportActionBar().hide();
-
-        //Initiate RequestQueue
-        queue = Volley.newRequestQueue(this);
 
         // Handle Navigation between fragments with Bottom Nav Bar
         final BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
