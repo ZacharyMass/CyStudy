@@ -18,6 +18,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.cystudy.ui.classes.StudentHomeFragment;
+import com.example.cystudy.ui.classes.TeacherHomeFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -64,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (response.matches("True")) {
                     user = username; // Initialize global variable
+                    // conditionalNavigation(user); // Uncomment once server is fixed
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                 }
@@ -76,5 +79,40 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         loginQueue.add(stringRequest);
+    }
+
+    private void conditionalNavigation(final String userToCheck) {
+        String URL = "http://coms-309-jr-7.misc.iastate.edu:8080/get-role-by-name?username=";
+        URL += userToCheck;
+        RequestQueue getRoleQueue = Volley.newRequestQueue(this);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("Login Response", response); // For testing
+
+                String userRole = response; // Now can go through set of if-statements to navigate user to correct spot
+
+                if (userRole.matches("student")) {
+                    Intent intent = new Intent(getApplicationContext(), StudentHomeFragment.class);
+                    startActivity(intent);
+                }
+                else if (userRole.matches("teacher")) {
+                    Intent intent = new Intent(getApplicationContext(), TeacherHomeFragment.class);
+                    startActivity(intent);
+                }
+                else {
+                    Log.d("Returned Role", "Role was neither student nor teacher");
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Login Error:", Objects.requireNonNull(error.getMessage())); // For testing
+            }
+        });
+
+        getRoleQueue.add(stringRequest);
     }
 }

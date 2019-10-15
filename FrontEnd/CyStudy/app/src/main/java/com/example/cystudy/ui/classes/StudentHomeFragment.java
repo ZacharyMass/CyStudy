@@ -36,8 +36,6 @@ public class StudentHomeFragment extends Fragment {
 
         //Bind button to navigate to StudentStatsFragment
         final View v = inflater.inflate(R.layout.fragment_student_home, container, false);
-        Button button = v.findViewById(R.id.yourStatsButton);
-        button.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.studentStatsFragment, null));
         TextView studentName = v.findViewById(R.id.studentName);
         studentName.setText("Username: " + username); // Just for reference to show correct user and communication from server
         final Button class1 = v.findViewById(R.id.class1button);
