@@ -29,6 +29,7 @@ import java.util.Objects;
 public class LoginActivity extends AppCompatActivity {
 
     public static String user; // Will be initialized fully if response from server is "true"
+    public static String role; // Will be initialized fully once user confirmed to be valid
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

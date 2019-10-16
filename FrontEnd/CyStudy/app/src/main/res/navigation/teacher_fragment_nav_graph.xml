@@ -11,10 +11,10 @@
         android:label="fragment_teacher_home"
         tools:layout="@layout/fragment_teacher_home" >
         <action
-            android:id="@+id/action_teacherHomeFragment_to_teacherStatsFragment2"
+            android:id="@+id/action_teacherHomeFragment_to_teacherStatsFragment"
             app:destination="@id/teacherStatsFragment" />
         <action
-            android:id="@+id/action_teacherHomeFragment_to_teacherSettingsFragment2"
+            android:id="@+id/action_teacherHomeFragment_to_teacherSettingsFragment"
             app:destination="@id/teacherSettingsFragment" />
     </fragment>
     <fragment
@@ -23,10 +23,10 @@
         android:label="fragment_teacher_stats"
         tools:layout="@layout/fragment_teacher_stats" >
         <action
-            android:id="@+id/action_teacherStatsFragment_to_teacherSettingsFragment2"
+            android:id="@+id/action_teacherStatsFragment_to_teacherSettingsFragment"
             app:destination="@id/teacherSettingsFragment" />
         <action
-            android:id="@+id/action_teacherStatsFragment_to_teacherHomeFragment2"
+            android:id="@+id/action_teacherStatsFragment_to_teacherHomeFragment"
             app:destination="@id/teacherHomeFragment" />
     </fragment>
     <fragment
@@ -35,10 +35,10 @@
         android:label="fragment_teacher_settings"
         tools:layout="@layout/fragment_teacher_settings" >
         <action
-            android:id="@+id/action_teacherSettingsFragment_to_teacherStatsFragment2"
+            android:id="@+id/action_teacherSettingsFragment_to_teacherStatsFragment"
             app:destination="@id/teacherStatsFragment" />
         <action
-            android:id="@+id/action_teacherSettingsFragment_to_teacherHomeFragment2"
+            android:id="@+id/action_teacherSettingsFragment_to_teacherHomeFragment"
             app:destination="@id/teacherHomeFragment" />
     </fragment>
 </navigation>
