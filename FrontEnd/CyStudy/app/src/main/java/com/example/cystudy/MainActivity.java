@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Handle Navigation between fragments with Bottom Nav Bar
         final BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
-        final NavController navController = Navigation.findNavController(this, R.id.fragment);
+        final NavController navController = Navigation.findNavController(this, R.id.studentFragment);
         setupWithNavController(bottomNavigationView, navController);
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {

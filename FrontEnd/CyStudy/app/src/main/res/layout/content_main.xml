@@ -11,11 +11,11 @@
 
 
     <fragment
-        android:id="@+id/fragment"
+        android:id="@+id/studentFragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/fragment_nav_graph" />
+        app:navGraph="@navigation/teacher_fragment_nav_graph" />
 
 </FrameLayout>
