@@ -57,7 +57,7 @@ public class StudentHomeFragment extends Fragment {
             @Override
             public void onResponse(String response) {
                 populateButtonText(response, class1, class2, class3, class4);
-                Log.d("Response", response);
+                Log.d("Classes Response", response);
             }
         }, new Response.ErrorListener() {
             @Override
