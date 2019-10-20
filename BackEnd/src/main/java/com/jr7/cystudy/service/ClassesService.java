@@ -18,7 +18,6 @@ public class ClassesService {
     }
 
     public void save(Classes c) {
-        c.setClassName(c.getClassName());
         ClassesRepository.save(c);
     }
 
