@@ -9,5 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 @Transactional
 public interface UserRepository extends JpaRepository<User, String>{
 
-    User   getUserByUsername(String username);
+    User getUserByUsername(String username);
 }
