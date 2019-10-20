@@ -22,25 +22,22 @@ public class UserClassService {
 
         StringBuilder classes = new StringBuilder();
         List<UserClass> uc = UserClassRepository.getUsersClasses(username);
-        for (UserClass userClass : uc) {
-            classes.append(userClass.getClassName());
-            classes.append(", ");
+        for(int i = 0; i < uc.size(); i++){
+            classes.append(uc.get(i).getClassName());
+            if(i+1 < uc.size()) classes.append(", ");
         }
         return classes.toString();
     }
 
-//    public String checkUserInClass(String username){
-//        UserClass u = UserClassRepository.getUsersClasses(username);
-//        if(u == null){
-//            return "False";
-//        } else{
-//            return "True";
-//        }
-//    }
+    public boolean checkUserInClass(String username, String className){
+        List<UserClass> list = UserClassRepository.getUsersClasses(username);
+        for(UserClass uc : list){
+            if(uc.getClassName().equalsIgnoreCase(className)) return true;
+        }
+        return false;
+    }
 
     public void save(UserClass uc) {
-        uc.setUsername(uc.getUsername());
-        uc.setClassName(uc.getClassName());
         UserClassRepository.save(uc);
     }
 }
