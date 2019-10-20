@@ -27,11 +27,16 @@ public class ClassesController {
 
     @PostMapping(path="/add-class")
     public @ResponseBody String createClasses(@RequestParam String className) {
-        Classes c = new Classes();
-        c.setClassName(className);
-        ClassesService.save(c);
 
-        return "Added new class.";
+        if(ClassesService.checkClassExists(className)) return "Class already exists";
+
+        else{
+            Classes c = new Classes();
+            c.setClassName(className);
+            ClassesService.save(c);
+
+            return "Added new class.";
+        }
     }
 
     @PostMapping(path="/class-exists", produces="application/json", consumes="application/json")
