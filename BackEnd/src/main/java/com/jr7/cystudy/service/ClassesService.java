@@ -21,4 +21,9 @@ public class ClassesService {
         c.setClassName(c.getClassName());
         ClassesRepository.save(c);
     }
+
+    public boolean checkClassExists(String className){
+        Classes c = ClassesRepository.getClassByClassName(className);
+        return c != null;
+    }
 }
