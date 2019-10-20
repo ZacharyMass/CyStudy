@@ -38,7 +38,10 @@ public class UserClassController {
         if(!ClassesService.checkClassExists(uC.getClassName())){
             return "Class does not exist";
         }
-        // TODO add user to class
+        if(UserClassService.checkUserInClass(uC.getUsername(), uC.getClassName())){
+            return "User " + uC.getUsername() + " is already in " + uC.getClassName();
+        }
+        UserClassService.save(uC);
         return uC.getUsername() +" added to "+uC.getClassName();
     }
 }
