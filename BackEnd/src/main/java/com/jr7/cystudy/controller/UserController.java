@@ -64,7 +64,7 @@ public class UserController {
             return "Saved user.";
         }
         else{
-            return "User with username " +username+ " already exists. Please choose a new username";
+            return "User with username " + username + " already exists. Please choose a new username";
         }
     }
 }
