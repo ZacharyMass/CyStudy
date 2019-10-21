@@ -46,59 +46,15 @@ public class MainActivity extends AppCompatActivity {
         final BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
         final NavController navController = Navigation.findNavController(this, R.id.conditionalNavigation);
         setupWithNavController(bottomNavigationView, navController);
-        bottomNavigationView.setOnNavigationItemSelectedListener(
-                new BottomNavigationView.OnNavigationItemSelectedListener() {
 
-                    /**
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                        if (navController.getCurrentDestination().getId() == R.id.studentStatsFragment) {
-                            switch (menuItem.getItemId()) {
-                                case R.id.action_home:
-                                    navController.navigate(R.id.action_studentStatsFragment_to_studentHomeFragment);
-                                    break;
-                                case R.id.action_settings:
-                                    navController.navigate(R.id.action_studentStatsFragment_to_settingsFragment);
-                                    break;
-                            }
-                        } else if (navController.getCurrentDestination().getId() == R.id.studentHomeFragment) {
-                            switch (menuItem.getItemId()) {
-                                case R.id.action_stats:
-                                    navController.navigate(R.id.action_studentHomeFragment_to_studentStatsFragment);
-                                    break;
-                                case R.id.action_settings:
-                                    navController.navigate(R.id.action_studentHomeFragment_to_settingsFragment);
-                                    break;
-                            }
-                        } else if (navController.getCurrentDestination().getId() == R.id.settingsFragment) {
-                            switch (menuItem.getItemId()) {
-                                case R.id.action_stats:
-                                    navController.navigate(R.id.action_settingsFragment_to_studentStatsFragment);
-                                    break;
-                                case R.id.action_home:
-                                    navController.navigate(R.id.action_settingsFragment_to_studentHomeFragment);
-                                    break;
-                            }
-                        }
-                        return true;
-                    }
-                    **/
-
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                        if (navController.getCurrentDestination().getId() == R.id.blankConditionalNavFragment) {
-                            if (userRole.matches("student")) {
-                                navController.navigate(R.id.action_blankConditionalNavFragment_to_studentHomeFragment);
-                            }
-                            else { // userRole.matches("teacher")
-                                navController.navigate(R.id.action_blankConditionalNavFragment_to_teacherHomeFragment);
-                            }
-                        }
-
-                        return true;
-                    }
-                }
-        );
+        if (navController.getCurrentDestination().getId() == R.id.blankConditionalNavFragment) {
+            if (userRole.matches("student")) {
+                navController.navigate(R.id.action_blankConditionalNavFragment_to_studentHomeFragment);
+            }
+            else { // userRole.matches("teacher")
+                navController.navigate(R.id.action_blankConditionalNavFragment_to_teacherHomeFragment);
+            }
+        }
     }
 
 }
