@@ -21,10 +21,72 @@
         android:id="@+id/studentHomeFragment"
         android:name="com.example.cystudy.ui.classes.StudentHomeFragment"
         android:label="fragment_student_home"
-        tools:layout="@layout/fragment_student_home" />
+        tools:layout="@layout/fragment_student_home" >
+        <action
+            android:id="@+id/action_studentHomeFragment_to_studentStatsFragment"
+            app:destination="@id/studentStatsFragment" />
+        <action
+            android:id="@+id/action_studentHomeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/teacherHomeFragment"
         android:name="com.example.cystudy.ui.classes.TeacherHomeFragment"
         android:label="fragment_teacher_home"
-        tools:layout="@layout/fragment_teacher_home" />
+        tools:layout="@layout/fragment_teacher_home" >
+        <action
+            android:id="@+id/action_teacherHomeFragment_to_teacherStatsFragment"
+            app:destination="@id/teacherStatsFragment" />
+        <action
+            android:id="@+id/action_teacherHomeFragment_to_teacherSettingsFragment"
+            app:destination="@id/teacherSettingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/studentStatsFragment"
+        android:name="com.example.cystudy.ui.classes.StudentStatsFragment"
+        android:label="fragment_student_stats"
+        tools:layout="@layout/fragment_student_stats" >
+        <action
+            android:id="@+id/action_studentStatsFragment_to_studentHomeFragment"
+            app:destination="@id/studentHomeFragment" />
+        <action
+            android:id="@+id/action_studentStatsFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.cystudy.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_studentStatsFragment"
+            app:destination="@id/studentStatsFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_studentHomeFragment"
+            app:destination="@id/studentHomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/teacherStatsFragment"
+        android:name="com.example.cystudy.ui.classes.TeacherStatsFragment"
+        android:label="fragment_teacher_stats"
+        tools:layout="@layout/fragment_teacher_stats" >
+        <action
+            android:id="@+id/action_teacherStatsFragment_to_teacherSettingsFragment"
+            app:destination="@id/teacherSettingsFragment" />
+        <action
+            android:id="@+id/action_teacherStatsFragment_to_teacherHomeFragment"
+            app:destination="@id/teacherHomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/teacherSettingsFragment"
+        android:name="com.example.cystudy.ui.classes.TeacherSettingsFragment"
+        android:label="fragment_teacher_settings"
+        tools:layout="@layout/fragment_teacher_settings" >
+        <action
+            android:id="@+id/action_teacherSettingsFragment_to_teacherStatsFragment"
+            app:destination="@id/teacherStatsFragment" />
+        <action
+            android:id="@+id/action_teacherSettingsFragment_to_teacherHomeFragment"
+            app:destination="@id/teacherHomeFragment" />
+    </fragment>
 </navigation>
