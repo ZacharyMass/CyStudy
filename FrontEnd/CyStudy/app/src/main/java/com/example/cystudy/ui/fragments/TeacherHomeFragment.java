@@ -1,4 +1,4 @@
-package com.example.cystudy.ui.classes;
+package com.example.cystudy.ui.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;

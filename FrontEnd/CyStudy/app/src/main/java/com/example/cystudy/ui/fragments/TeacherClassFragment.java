@@ -1,4 +1,4 @@
-package com.example.cystudy.ui.classes;
+package com.example.cystudy.ui.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +14,7 @@ import androidx.navigation.NavController;
 
 import com.example.cystudy.MainActivity;
 import com.example.cystudy.R;
+import com.example.cystudy.ui.classes.TeacherHomeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import static androidx.navigation.ui.NavigationUI.setupWithNavController;
