@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @NamedQuery(name = "Terms.getTermsByClassName", query = "SELECT t FROM Terms t WHERE t.className = ?1")
+@NamedQuery(name = "Terms.deleteCard", query = "DELETE FROM Terms t WHERE t.term = ?1 AND t.answer = ?2")
 @Table(name="terms")
 public class Terms {
 
