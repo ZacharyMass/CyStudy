@@ -132,5 +132,18 @@
         android:id="@+id/teacherFlashcardFragment"
         android:name="com.example.cystudy.ui.classes.TeacherFlashcardFragment"
         android:label="fragment_teacher_flashcards"
-        tools:layout="@layout/fragment_teacher_flashcards" />
+        tools:layout="@layout/fragment_teacher_flashcards" >
+        <action
+            android:id="@+id/action_teacherFlashcardFragment_to_addFlashcardFragment"
+            app:destination="@id/addFlashcardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addFlashcardFragment"
+        android:name="com.example.cystudy.ui.classes.AddFlashcardFragment"
+        android:label="fragment_add_flashcard"
+        tools:layout="@layout/fragment_add_flashcard" >
+        <action
+            android:id="@+id/action_addFlashcardFragment_to_teacherFlashcardFragment"
+            app:destination="@id/teacherFlashcardFragment" />
+    </fragment>
 </navigation>

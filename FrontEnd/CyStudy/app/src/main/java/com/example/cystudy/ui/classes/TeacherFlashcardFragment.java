@@ -33,7 +33,7 @@ public class TeacherFlashcardFragment extends Fragment {
                 BottomNavigationView bottomNavView = MainActivity.bottomNavigationView;
                 NavController navController = MainActivity.navController;
                 setupWithNavController(bottomNavView, navController);
-                navController.navigate(R.id.action_teacherClassFragment_to_teacherSetsFragment);
+                navController.navigate(R.id.action_teacherFlashcardFragment_to_addFlashcardFragment);
             }
         });
 
