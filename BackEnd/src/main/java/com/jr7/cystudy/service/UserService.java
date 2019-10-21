@@ -5,6 +5,7 @@ import com.jr7.cystudy.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,10 +17,10 @@ public class UserService {
     private UserRepository UserRepository;
 
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final PasswordEncoder passwordEncoder = passwordEncoder();
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
@@ -38,13 +39,20 @@ public class UserService {
 
     public void save(User user) throws Exception{
 
+        User u = new User();
         if(getUserByName(user.getUsername()) != null){
             throw new Exception("The username " + user.getUsername() + " is already being used.");
         }
 
-        user.setUsername(user.getUsername());
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRole(user.getRole());
-        UserRepository.save(user);
+        u.setUsername(user.getUsername());
+        u.setPassword(passwordEncoder.encode(user.getPassword()));
+        u.setRole(user.getRole());
+        UserRepository.save(u);
+    }
+
+    public boolean login(User u){
+
+        User realInfo = getUserByName(u.getUsername());
+        return passwordEncoder.matches(u.getPassword(), realInfo.getPassword());
     }
 }

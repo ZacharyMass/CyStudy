@@ -33,7 +33,7 @@ public class UserController {
     @GetMapping(path="/get-role")
     public String getUserRole(@RequestParam String username){
 
-        if(UserService.checkUserExists(username).equalsIgnoreCase("True")){
+        if(UserService.checkUserExists(username)){
 
             User u = UserService.getUserByName(username);
             return u.getRole();
@@ -44,28 +44,29 @@ public class UserController {
     }
 
     @GetMapping(path="/user-exists")
-    public @ResponseBody String checkUserExists(@RequestParam String username){
+    public @ResponseBody boolean checkUserExists(@RequestParam String username){
         logger.info("Entered UserController layer in method checkUserExists().");
         return UserService.checkUserExists(username);
     }
 
-    @PostMapping(path="/add-user")
-    public @ResponseBody String createUser(@RequestParam String username,
-                                           @RequestParam String pass,
-                                           @RequestParam String role) throws Exception{
+    @PostMapping(path="/add-user", produces="application/json", consumes="application/json")
+    public @ResponseBody String createUser(@RequestBody User u) throws Exception{
 
-        if(UserService.checkUserExists(username).equalsIgnoreCase("False")){
-            User n = new User();
-            n.setUsername(username);
-            n.setPassword(pass);
-            n.setRole(role);
-            UserService.save(n);
-
+        if(!UserService.checkUserExists(u.getUsername())){
+            UserService.save(u);
             return "Saved user.";
         }
         else{
-            return "User with username " + username + " already exists. Please choose a new username";
+            return "User with username " + u.getUsername() + " already exists. Please choose a new username";
         }
+    }
+
+    @PostMapping(path="/login", produces="application/json", consumes="application/json")
+    public @ResponseBody String login(@RequestBody User u){
+        if(!UserService.checkUserExists(u.getUsername())){
+            return "No user with that username is registered.";
+        }
+        return (UserService.login(u)) ? "correct password for username" : "incorrect password for username" ;
     }
 }
 
