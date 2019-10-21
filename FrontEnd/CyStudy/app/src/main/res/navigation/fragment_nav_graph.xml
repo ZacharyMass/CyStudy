@@ -96,5 +96,41 @@
         android:id="@+id/teacherClassFragment"
         android:name="com.example.cystudy.ui.classes.TeacherClassFragment"
         android:label="fragment_teacher_class"
-        tools:layout="@layout/fragment_teacher_class" />
+        tools:layout="@layout/fragment_teacher_class" >
+        <action
+            android:id="@+id/action_teacherClassFragment_to_teacherHomeFragment"
+            app:destination="@id/teacherHomeFragment" />
+        <action
+            android:id="@+id/action_teacherClassFragment_to_teacherStatsFragment"
+            app:destination="@id/teacherStatsFragment" />
+        <action
+            android:id="@+id/action_teacherClassFragment_to_teacherSettingsFragment"
+            app:destination="@id/teacherSettingsFragment" />
+        <action
+            android:id="@+id/action_teacherClassFragment_to_teacherSetsFragment"
+            app:destination="@id/teacherSetsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/teacherSetsFragment"
+        android:name="com.example.cystudy.ui.classes.TeacherSetsFragment"
+        android:label="fragment_teacher_sets"
+        tools:layout="@layout/fragment_teacher_sets" >
+        <action
+            android:id="@+id/action_teacherSetsFragment_to_teacherSettingsFragment"
+            app:destination="@id/teacherSettingsFragment" />
+        <action
+            android:id="@+id/action_teacherSetsFragment_to_teacherStatsFragment"
+            app:destination="@id/teacherStatsFragment" />
+        <action
+            android:id="@+id/action_teacherSetsFragment_to_teacherHomeFragment"
+            app:destination="@id/teacherHomeFragment" />
+        <action
+            android:id="@+id/action_teacherSetsFragment_to_teacherFlashcardFragment"
+            app:destination="@id/teacherFlashcardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/teacherFlashcardFragment"
+        android:name="com.example.cystudy.ui.classes.TeacherFlashcardFragment"
+        android:label="fragment_teacher_flashcards"
+        tools:layout="@layout/fragment_teacher_flashcards" />
 </navigation>

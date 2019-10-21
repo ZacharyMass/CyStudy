@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
                                     break;
                                 case R.id.action_settings:
                                     navController.navigate(R.id.action_teacherHomeFragment_to_teacherSettingsFragment);
+                                    break;
                             }
                         } else if (navController.getCurrentDestination().getId() == R.id.teacherStatsFragment) {
                             switch (menuItem.getItemId()) {
@@ -104,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                                     break;
                                 case R.id.action_settings:
                                     navController.navigate(R.id.action_teacherStatsFragment_to_teacherSettingsFragment);
+                                    break;
                             }
                         } else if (navController.getCurrentDestination().getId() == R.id.teacherSettingsFragment) {
                             switch (menuItem.getItemId()) {
@@ -112,6 +114,31 @@ public class MainActivity extends AppCompatActivity {
                                     break;
                                 case R.id.action_home:
                                     navController.navigate(R.id.action_teacherSettingsFragment_to_teacherHomeFragment);
+                                    break;
+                            }
+                        } else if (navController.getCurrentDestination().getId() == R.id.teacherClassFragment) {
+                            switch (menuItem.getItemId()) {
+                                case R.id.action_stats:
+                                    navController.navigate(R.id.action_teacherClassFragment_to_teacherStatsFragment);
+                                    break;
+                                case R.id.action_home:
+                                    navController.navigate(R.id.action_teacherClassFragment_to_teacherHomeFragment);
+                                    break;
+                                case R.id.action_settings:
+                                    navController.navigate(R.id.action_teacherClassFragment_to_teacherSettingsFragment);
+                                    break;
+                            }
+                        } else if (navController.getCurrentDestination().getId() == R.id.teacherSetsFragment) {
+                            switch (menuItem.getItemId()) {
+                                case R.id.action_stats:
+                                    navController.navigate(R.id.action_teacherSetsFragment_to_teacherStatsFragment);
+                                    break;
+                                case R.id.action_home:
+                                    navController.navigate(R.id.action_teacherSetsFragment_to_teacherHomeFragment);
+                                    break;
+                                case R.id.action_settings:
+                                    navController.navigate(R.id.action_teacherSetsFragment_to_teacherSettingsFragment);
+                                    break;
                             }
                         }
 

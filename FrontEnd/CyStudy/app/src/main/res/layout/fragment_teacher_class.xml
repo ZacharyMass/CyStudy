@@ -80,7 +80,7 @@
         android:background="#E0E0E0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.40"
+        app:layout_constraintHeight_percent="0.30"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/teacherSendAnnouncement" />
@@ -89,7 +89,7 @@
         android:id="@+id/teacherHomeStatsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="30dp"
         android:text="Overall Class Performance"
         android:textSize="20dp"
         android:textColor="#C8102E"

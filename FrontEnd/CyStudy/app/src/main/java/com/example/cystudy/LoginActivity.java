@@ -63,9 +63,11 @@ public class LoginActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d("Login Response", response); // For testing
+                String stringResponse = response + "";
 
-                if (response.matches("True")) {
+                Log.d("Login Response", stringResponse);
+
+                if (stringResponse.matches("true")) {
                     user = username; // Initialize global variable
                     getRole(user);
                     // Intent intent = new Intent(getApplicationContext(), MainActivity.class);
