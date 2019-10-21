@@ -15,5 +15,5 @@ public interface TermsRepository extends JpaRepository<Terms, String>{
   List<Terms>  getTermsByClassName(String className);
 
   @Modifying
-  void deleteCard(String term, String answer);
+  void deleteCard(String term, String answer, String className);
 }

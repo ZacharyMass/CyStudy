@@ -69,6 +69,6 @@ public class TermsController {
 
   @PostMapping(path="/delete-card", produces="application/json", consumes="application/json")
   public @ResponseBody String deleteCard(@RequestBody Terms t){
-    return TermsService.deleteCard(t.getTerm(), t.getAnswer());
+    return TermsService.deleteCard(t.getTerm(), t.getAnswer(), t.getClassName());
   }
 }
