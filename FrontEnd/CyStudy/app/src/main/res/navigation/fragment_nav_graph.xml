@@ -3,46 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_nav_graph"
-    app:startDestination="@id/studentHomeFragment">
+    app:startDestination="@id/blankConditionalNavFragment">
 
     <fragment
-        android:id="@+id/studentStatsFragment"
-        android:name="com.example.cystudy.ui.classes.StudentStatsFragment"
-        android:label="fragment_student_stats"
-        tools:layout="@layout/fragment_student_stats" >
+        android:id="@+id/blankConditionalNavFragment"
+        android:name="com.example.cystudy.ui.classes.BlankConditionalNavFragment"
+        android:label="fragment_blank_to_navigate"
+        tools:layout="@layout/fragment_blank_to_navigate" >
         <action
-            android:id="@+id/action_studentStatsFragment_to_studentHomeFragment"
+            android:id="@+id/action_blankConditionalNavFragment_to_studentHomeFragment"
             app:destination="@id/studentHomeFragment" />
         <action
-            android:id="@+id/action_studentStatsFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            android:id="@+id/action_blankConditionalNavFragment_to_teacherHomeFragment"
+            app:destination="@id/teacherHomeFragment" />
     </fragment>
     <fragment
         android:id="@+id/studentHomeFragment"
         android:name="com.example.cystudy.ui.classes.StudentHomeFragment"
         android:label="fragment_student_home"
-        tools:layout="@layout/fragment_student_home" >
-        <action
-            android:id="@+id/action_studentHomeFragment_to_studentStatsFragment"
-            app:destination="@id/studentStatsFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
-        <action
-            android:id="@+id/action_studentHomeFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_student_home" />
     <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.example.cystudy.SettingsFragment"
-        android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" >
-        <action
-            android:id="@+id/action_settingsFragment_to_studentStatsFragment"
-            app:destination="@id/studentStatsFragment" />
-        <action
-            android:id="@+id/action_settingsFragment_to_studentHomeFragment"
-            app:destination="@id/studentHomeFragment" />
-    </fragment>
+        android:id="@+id/teacherHomeFragment"
+        android:name="com.example.cystudy.ui.classes.TeacherHomeFragment"
+        android:label="fragment_teacher_home"
+        tools:layout="@layout/fragment_teacher_home" />
 </navigation>

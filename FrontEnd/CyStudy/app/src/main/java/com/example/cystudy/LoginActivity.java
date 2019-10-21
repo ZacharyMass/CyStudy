@@ -29,7 +29,7 @@ import java.util.Objects;
 public class LoginActivity extends AppCompatActivity {
 
     public static String user; // Will be initialized fully if response from server is "true"
-    public static String role; // Will be initialized fully once user confirmed to be valid
+    public static String role; // Will be initialized after valid user confirmed
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +67,9 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (response.matches("True")) {
                     user = username; // Initialize global variable
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
+                    getRole(user);
+                    // Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    // startActivity(intent);
                 }
             }
         }, new Response.ErrorListener() {
@@ -79,5 +80,28 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         loginQueue.add(stringRequest);
+    }
+
+    private void getRole(String username) {
+        String URL = "http://coms-309-jr-7.misc.iastate.edu:8080/get-role?username=";
+        URL += LoginActivity.user; // This is the user that logged in and now needs conditional navigation
+        RequestQueue roleQueue = Volley.newRequestQueue(this);
+
+        StringRequest roleRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("Role Response", response); // For testing
+                role = response;
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Role Request Error", Objects.requireNonNull(error.getMessage())); // For testing
+            }
+        });
+
+        roleQueue.add(roleRequest);
     }
 }
