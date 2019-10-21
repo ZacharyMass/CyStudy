@@ -3,6 +3,7 @@ package com.jr7.cystudy.model;
 import javax.persistence.*;
 
 @Entity
+@NamedQuery(name = "Terms.getTermsByClassName", query = "SELECT t FROM Terms t WHERE t.className = ?1")
 @Table(name="terms")
 public class Terms {
 
@@ -25,6 +26,8 @@ public class Terms {
 
   @Column(name="time")
   private double timeSpent;
+
+  Terms(){}
 
   Terms(String className, String topic, String term, String answer){
     this.className = className;
