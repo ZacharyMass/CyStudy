@@ -31,13 +31,9 @@ public class UserService {
         return UserRepository.getUserByUsername(username);
     }
 
-    public String checkUserExists(String username){
+    public boolean checkUserExists(String username){
         User u = UserRepository.getUserByUsername(username);
-        if(u == null){
-            return "False";
-        } else{
-            return "True";
-        }
+        return u != null;
     }
 
     public void save(User user) throws Exception{
