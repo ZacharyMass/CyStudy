@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_teacherHomeFragment_to_teacherSettingsFragment"
             app:destination="@id/teacherSettingsFragment" />
+        <action
+            android:id="@+id/action_teacherHomeFragment_to_teacherClassFragment"
+            app:destination="@id/teacherClassFragment" />
     </fragment>
     <fragment
         android:id="@+id/studentStatsFragment"
@@ -89,4 +92,9 @@
             android:id="@+id/action_teacherSettingsFragment_to_teacherHomeFragment"
             app:destination="@id/teacherHomeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/teacherClassFragment"
+        android:name="com.example.cystudy.ui.classes.TeacherClassFragment"
+        android:label="fragment_teacher_class"
+        tools:layout="@layout/fragment_teacher_class" />
 </navigation>

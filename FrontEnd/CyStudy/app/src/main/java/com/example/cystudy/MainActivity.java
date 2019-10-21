@@ -31,6 +31,8 @@ import static androidx.navigation.ui.NavigationUI.setupWithNavController;
 public class MainActivity extends AppCompatActivity {
 
     public static String userRole = LoginActivity.role; // Will be initialized via a String Request to server
+    public static BottomNavigationView bottomNavigationView;
+    public static NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         // Handle Navigation between fragments with Bottom Nav Bar
-        final BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
-        final NavController navController = Navigation.findNavController(this, R.id.conditionalNavigation);
+        bottomNavigationView = findViewById(R.id.navigation);
+        navController = Navigation.findNavController(this, R.id.conditionalNavigation);
         setupWithNavController(bottomNavigationView, navController);
 
         if (navController.getCurrentDestination().getId() == R.id.blankConditionalNavFragment) {
