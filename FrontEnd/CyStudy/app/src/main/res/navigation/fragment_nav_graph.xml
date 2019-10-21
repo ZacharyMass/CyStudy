@@ -5,11 +5,17 @@
     android:id="@+id/fragment_nav_graph"
     app:startDestination="@id/blankConditionalNavFragment">
 
-    <fragment
+    <<<<<<< HEAD
         android:id="@+id/blankConditionalNavFragment"
         android:name="com.example.cystudy.ui.classes.BlankConditionalNavFragment"
         android:label="fragment_blank_to_navigate"
         tools:layout="@layout/fragment_blank_to_navigate" >
+=======
+        android:id="@+id/studentStatsFragment"
+        android:name="com.example.cystudy.ui.fragments.StudentStatsFragment"
+        android:label="fragment_student_stats"
+        tools:layout="@layout/fragment_student_stats" >
+>>>>>>> 057f25abdd0aade27cfede6b20aa90a482f75809
         <action
             android:id="@+id/action_blankConditionalNavFragment_to_studentHomeFragment"
             app:destination="@id/studentHomeFragment" />
@@ -19,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/studentHomeFragment"
-        android:name="com.example.cystudy.ui.classes.StudentHomeFragment"
+        android:name="com.example.cystudy.ui.fragments.StudentHomeFragment"
         android:label="fragment_student_home"
         tools:layout="@layout/fragment_student_home" >
         <action
@@ -28,6 +34,9 @@
         <action
             android:id="@+id/action_studentHomeFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_studentHomeFragment_to_classFragment"
+            app:destination="@id/classFragment" />
     </fragment>
     <fragment
         android:id="@+id/teacherHomeFragment"
@@ -58,7 +67,7 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.cystudy.SettingsFragment"
+        android:name="com.example.cystudy.ui.fragments.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" >
         <action

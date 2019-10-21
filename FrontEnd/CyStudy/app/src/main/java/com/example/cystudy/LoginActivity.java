@@ -47,15 +47,23 @@ public class LoginActivity extends AppCompatActivity {
 
     public void login(View view) {
         // Data validation (check if not empty) and get string from EditText values
-        EditText usernameSpace = findViewById(R.id.email_login);
-        EditText passwordSpace = findViewById(R.id.password_login);
-        final String username = usernameSpace.getText().toString();
-        String password = passwordSpace.getText().toString();
+        EditText email = findViewById(R.id.email_login);
+        EditText pass = findViewById(R.id.password_login);
+        final String username = email.getText().toString();
+        String password = pass.getText().toString();
 
-        checkValidUsername(username);
-    }
+        // DO DATA VALIDATION, if good, login and navigate, else Toast and return
+        if(email.getText().length() == 0)
+        {
+            Toast.makeText(this, "Enter Email", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(pass.getText().length() == 0)
+        {
+            Toast.makeText(this, "Enter Password", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-    private void checkValidUsername(final String username) {
         String URL = "http://coms-309-jr-7.misc.iastate.edu:8080/user-exists?username=";
         URL += username; // Adds string to end
         RequestQueue loginQueue = Volley.newRequestQueue(this);
@@ -77,7 +85,11 @@ public class LoginActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("Login Error:", Objects.requireNonNull(error.getMessage())); // For testing
+                // Show Error
+                String response = "Error Occurred: " + error.getMessage();
+                Log.d("Error.Response", response);
+                Toast toast = Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG);
+                toast.show();
             }
         });
 

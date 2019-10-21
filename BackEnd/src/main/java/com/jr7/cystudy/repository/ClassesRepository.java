@@ -8,4 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 @Repository
 @Transactional
 public interface ClassesRepository extends JpaRepository<Classes, String>{
+
+  Classes getClassByClassName(String name);
 }

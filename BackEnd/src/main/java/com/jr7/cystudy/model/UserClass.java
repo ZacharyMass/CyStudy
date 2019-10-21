@@ -4,8 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @NamedQuery(name = "UserClass.getUsersClasses",
-            query =
-            "SELECT uc FROM UserClass uc WHERE uc.username = ?1")
+            query = "SELECT uc FROM UserClass uc WHERE uc.username = ?1")
 @Table(name="usr_class")
 public class UserClass {
 

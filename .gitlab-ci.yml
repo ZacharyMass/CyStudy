@@ -11,7 +11,7 @@ maven-build:
     - shell
   script:
     - cd BackEnd
-    - mvn package -B
+    - mvn clean install
 
 # test stage
 maven-test:
@@ -34,5 +34,6 @@ autoDeploy:
     - cd BackEnd
     - mvn package
     - sudo mv target/*.jar /target/web-demo.jar
-    - sudo systemctl stop systemd-web-demo
-    - sudo systemctl start systemd-web-demo
+    - sudo systemctl stop system-web-demo
+    - sudo systemctl daemon-reload
+    - sudo systemctl start system-web-demo
