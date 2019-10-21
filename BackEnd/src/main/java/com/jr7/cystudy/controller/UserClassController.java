@@ -16,6 +16,12 @@ public class UserClassController {
     @Autowired
     private  UserClassService UserClassService;
 
+    @Autowired
+    private UserService UserService;
+
+    @Autowired
+    private ClassesService ClassesService;
+
     private final Logger logger = LoggerFactory.getLogger(ClassesController.class);
 
     @RequestMapping(method = RequestMethod.GET, path="/get-users-classes")
@@ -24,13 +30,19 @@ public class UserClassController {
         return UserClassService.getUsersClasses(username);
     }
 
-//    @PostMapping(path="/add-class")
-//    public @ResponseBody String createClasses(@RequestParam String className) {
-//        Classes c = new Classes();
-//        c.setClassName(className);
-//        ClassesService.save(c);
-//
-//        return "Added new class.";
-//    }
+    @PostMapping(path="/add-to-class")
+    public @ResponseBody String addUserToClass(@RequestBody UserClass uC){
+        if(UserService.checkUserExists(uC.getUsername()).equalsIgnoreCase("False")){
+            return "User is not registered.";
+        }
+        if(!ClassesService.checkClassExists(uC.getClassName())){
+            return "Class does not exist";
+        }
+        if(UserClassService.checkUserInClass(uC.getUsername(), uC.getClassName())){
+            return "User " + uC.getUsername() + " is already in " + uC.getClassName();
+        }
+        UserClassService.save(uC);
+        return uC.getUsername() +" added to "+uC.getClassName();
+    }
 }
 

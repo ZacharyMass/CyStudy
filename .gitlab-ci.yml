@@ -1,0 +1,39 @@
+## Pipeline stages
+stages:
+  - mavenbuild
+  - maventest
+  - autodeploy
+
+# build stage
+maven-build:
+  stage: mavenbuild
+  tags:
+    - shell
+  script:
+    - cd BackEnd
+    - mvn clean install
+
+# test stage
+maven-test:
+  stage: maventest
+  tags:
+    - shell
+  script:
+    - cd BackEnd
+    - mvn test
+  artifacts:
+    paths:
+      - BackEnd/target/*.jar
+
+# autodeploy stage
+autoDeploy:
+  stage: autodeploy
+  tags:
+    - shell
+  script:
+    - cd BackEnd
+    - mvn package
+    - sudo mv target/*.jar /target/web-demo.jar
+    - sudo systemctl stop system-web-demo
+    - sudo systemctl daemon-reload
+    - sudo systemctl start system-web-demo

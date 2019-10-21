@@ -30,6 +30,19 @@ public class UserController {
         return UserService.getUserByName(username);
     }
 
+    @GetMapping(path="/get-role")
+    public String getUserRole(@RequestParam String username){
+
+        if(UserService.checkUserExists(username).equalsIgnoreCase("True")){
+
+            User u = UserService.getUserByName(username);
+            return u.getRole();
+        }
+        else{
+            return "No user with username "+ username +" exists.";
+        }
+    }
+
     @GetMapping(path="/user-exists")
     public @ResponseBody String checkUserExists(@RequestParam String username){
         logger.info("Entered UserController layer in method checkUserExists().");
@@ -39,14 +52,20 @@ public class UserController {
     @PostMapping(path="/add-user")
     public @ResponseBody String createUser(@RequestParam String username,
                                            @RequestParam String pass,
-                                           @RequestParam String role) {
-        User n = new User();
-        n.setUsername(username);
-        n.setPassword(pass);
-        n.setRole(role);
-        UserService.save(n);
+                                           @RequestParam String role) throws Exception{
 
-        return "Saved user.";
+        if(UserService.checkUserExists(username).equalsIgnoreCase("False")){
+            User n = new User();
+            n.setUsername(username);
+            n.setPassword(pass);
+            n.setRole(role);
+            UserService.save(n);
+
+            return "Saved user.";
+        }
+        else{
+            return "User with username " + username + " already exists. Please choose a new username";
+        }
     }
 }
 

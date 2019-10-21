@@ -1,13 +1,9 @@
 package com.jr7.cystudy.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
+@NamedQuery(name = "Classes.getClassByName", query = "SELECT c FROM Classes c WHERE c.className = ?1")
 @Table(name="classes")
 public class Classes {
 
