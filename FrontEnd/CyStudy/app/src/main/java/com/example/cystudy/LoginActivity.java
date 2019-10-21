@@ -79,7 +79,11 @@ public class LoginActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("Login Error:", Objects.requireNonNull(error.getMessage())); // For testing
+                // Show Error
+                String response = "Error Occurred: " + error.getMessage();
+                Log.d("Error.Response", response);
+                Toast toast = Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG);
+                toast.show();
             }
         });
 

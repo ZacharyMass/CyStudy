@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/studentStatsFragment"
-        android:name="com.example.cystudy.ui.classes.StudentStatsFragment"
+        android:name="com.example.cystudy.ui.fragments.StudentStatsFragment"
         android:label="fragment_student_stats"
         tools:layout="@layout/fragment_student_stats" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/studentHomeFragment"
-        android:name="com.example.cystudy.ui.classes.StudentHomeFragment"
+        android:name="com.example.cystudy.ui.fragments.StudentHomeFragment"
         android:label="fragment_student_home"
         tools:layout="@layout/fragment_student_home" >
         <action
@@ -38,7 +38,7 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.cystudy.SettingsFragment"
+        android:name="com.example.cystudy.ui.fragments.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" >
         <action
@@ -50,7 +50,7 @@
     </fragment>
     <fragment
         android:id="@+id/classFragment"
-        android:name="com.example.cystudy.ClassFragment"
+        android:name="com.example.cystudy.ui.fragments.ClassFragment"
         android:label="fragment_class"
         tools:layout="@layout/fragment_class" />
 </navigation>
