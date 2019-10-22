@@ -12,8 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.cystudy.ui.fragments.TeacherClassFragment;
-
 import java.util.ArrayList;
 
 import static com.example.cystudy.ui.fragments.TeacherClassFragment.className;

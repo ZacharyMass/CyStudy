@@ -16,8 +16,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    dataBinding {
-        enabled = true
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
     }
 }
 
@@ -44,7 +45,11 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment:$nav_version"
     implementation "androidx.navigation:navigation-ui:$nav_version"
 
-    // Groupie
-    implementation "com.xwray:groupie:2.7.0"
-    implementation 'com.xwray:groupie-databinding:2.7.0'
+    //Mockito and JUnit for Unit Testing
+    androidTestImplementation 'junit:junit:4.12'
+    androidTestImplementation 'org.mockito:mockito-android:2.+'
+    androidTestImplementation 'org.mockito:mockito-core:2.+'
+
+    //Fragment Scenario
+    debugImplementation 'androidx.fragment:fragment-testing:1.1.0'
 }

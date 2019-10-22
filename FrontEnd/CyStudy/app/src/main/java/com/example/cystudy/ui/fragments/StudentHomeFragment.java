@@ -10,6 +10,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,6 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.cystudy.LoginActivity;
+import com.example.cystudy.MainActivity;
 import com.example.cystudy.R;
 import com.example.cystudy.RecyclerViewAdapter;
 
@@ -27,9 +30,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class StudentHomeFragment extends Fragment {
-
-    String username = LoginActivity.user; // Username from LoginActivity is global here
-    String url = "http://coms-309-jr-7.misc.iastate.edu:8080/get-users-classes?username=" + username;
 
     ArrayList<String> classesL = new ArrayList<>();
 
@@ -54,10 +54,13 @@ public class StudentHomeFragment extends Fragment {
 
     // Make string request to populate the text in the buttons and work with formatting string into usable form
     public void pullClasses() {
+        String url = "http://coms-309-jr-7.misc.iastate.edu:8080/get-users-classes?username=" + LoginActivity.user;
+
         RequestQueue studentHomeQueue = Volley.newRequestQueue(Objects.requireNonNull(getContext()));
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                Log.d("Response", response);
                 String[] classes = response.split(",");
 
                 for (int i = 0; i < classes.length; i++)
@@ -75,4 +78,11 @@ public class StudentHomeFragment extends Fragment {
 
         studentHomeQueue.add(stringRequest);
     }
+
+    public void navigateToStats(View view)
+    {
+        NavController navController = Navigation.findNavController(getActivity(), R.id.conditionalNavigation);
+        navController.navigate(R.id.action_studentHomeFragment_to_studentStatsFragment);
+    }
+
 }
