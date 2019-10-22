@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -22,28 +24,33 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.cystudy.MainActivity;
 import com.example.cystudy.R;
+import com.example.cystudy.RecyclerViewAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Objects;
+
 import static androidx.navigation.ui.NavigationUI.setupWithNavController;
 
 public class TeacherFlashcardFragment extends Fragment {
 
-    public static String URL = "http://coms-309-jr-7.misc.iastate.edu:8080/get-terms-by-class?className=COMS309";
+    public static String URL = "http://coms-309-jr-7.misc.iastate.edu:8080/get-terms-by-class?className=";
+    ArrayList<String> flashcardsL = new ArrayList<>();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        // URL += TeacherHomeFragment.class1name;
+        URL += TeacherClassFragment.className;
 
         final View v = inflater.inflate(R.layout.fragment_teacher_flashcards, container, false);
 
         Button addFlashcardBtn = v.findViewById(R.id.floatingAddFlashcardButton);
-        final TextView flashToFill = v.findViewById(R.id.flashcard);
 
         addFlashcardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,10 +62,21 @@ public class TeacherFlashcardFragment extends Fragment {
             }
         });
 
-        flashToFill.setText("");
+        pullFlashcards();
 
+        // Initialize Recycler
+        RecyclerView r = v.findViewById(R.id.teacher_flashcards_recycler_view);
+        RecyclerViewAdapter a = new RecyclerViewAdapter(this.getContext(), flashcardsL);
+        Log.d("Current context", this.getContext().toString());
+        r.setAdapter(a);
+        r.setLayoutManager(new LinearLayoutManager(this.getContext()));
+
+        return v;
+    }
+
+    public void pullFlashcards() {
         // JSONArray Request
-        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(getContext()));
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
@@ -84,9 +102,9 @@ public class TeacherFlashcardFragment extends Fragment {
                                 String answer = flashcard.getString("answer");
                                 String timeSpent = flashcard.getString("timeSpent");
 
-                                // Display the formatted json data in text view
-                                flashToFill.append(term + ": " + answer);
-                                flashToFill.append("\n\n");
+                                // Add terms in desired format to array
+                                flashcardsL.add(term + ": " + answer);
+                                Log.d("Flashcard", flashcardsL.get(i));
                             }
                         }catch (JSONException e){
                             e.printStackTrace();
@@ -102,7 +120,5 @@ public class TeacherFlashcardFragment extends Fragment {
         );
 
         requestQueue.add(jsonArrayRequest);
-
-        return v;
     }
 }

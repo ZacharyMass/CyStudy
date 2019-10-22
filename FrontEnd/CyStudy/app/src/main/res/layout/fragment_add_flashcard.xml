@@ -21,7 +21,7 @@
         app:layout_constraintWidth_percent="0.8" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/enterDefinitionBox"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent="0.8"
         android:layout_height="wrap_content"
