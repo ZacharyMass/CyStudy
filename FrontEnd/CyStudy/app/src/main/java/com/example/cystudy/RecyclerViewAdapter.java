@@ -52,8 +52,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     Navigation.findNavController(view).navigate(R.id.action_studentHomeFragment_to_classFragment);
                 }
                 else {
-                    int position = viewHolder.getAdapterPosition();
-                    className = classesList.get(position);
+                    // int position = viewHolder.getAdapterPosition();
+                    className = classesList.get(0);
                     Log.d("Class Name", className);
                     Navigation.findNavController(view).navigate(R.id.action_teacherHomeFragment_to_teacherClassFragment);
                 }
@@ -79,6 +79,5 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             classNameTextView = itemView.findViewById(R.id.class_name_text_view);
             parentLayout = itemView.findViewById(R.id.item_layout);
         }
-
     }
 }

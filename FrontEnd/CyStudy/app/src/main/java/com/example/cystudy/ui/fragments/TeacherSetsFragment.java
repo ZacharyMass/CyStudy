@@ -1,51 +1,78 @@
 package com.example.cystudy.ui.fragments;
 
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.cystudy.MainActivity;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.cystudy.R;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.cystudy.RecyclerViewAdapter;
+import com.example.cystudy.SetsRecyclerViewAdapter;
 
 import java.util.ArrayList;
-
-import static androidx.navigation.ui.NavigationUI.setupWithNavController;
+import java.util.Objects;
 
 public class TeacherSetsFragment extends Fragment {
+
+    public static String URL = "http://coms-309-jr-7.misc.iastate.edu:8080/get-class-topics?className=";
+
+    ArrayList<String> topicsL = new ArrayList<>();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
+        URL += TeacherClassFragment.className; // Should be COMS309 currently for testing purposes
+
         final View v = inflater.inflate(R.layout.fragment_teacher_sets, container, false);
 
-        // Adding a button programmatically will be good here
+        pullTopicsForClass();
 
-        Button set1button = v.findViewById(R.id.sampleSet1Name);
+        // Initialize Recycler
+        RecyclerView r = v.findViewById(R.id.teacher_sets_recycler_view);
+        RecyclerViewAdapter a = new RecyclerViewAdapter(Objects.requireNonNull(this.getContext()), topicsL);
+        Log.d("Current context", this.getContext().toString());
+        r.setAdapter(a);
+        r.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        set1button.setOnClickListener(new View.OnClickListener() {
+        return v;
+    }
+
+    private void pullTopicsForClass() {
+        RequestQueue topicsByClassQueue = Volley.newRequestQueue(Objects.requireNonNull(getContext()));
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
-            public void onClick(View v) {
-                BottomNavigationView bottomNavView = MainActivity.bottomNavigationView;
-                NavController navController = MainActivity.navController;
-                setupWithNavController(bottomNavView, navController);
-                navController.navigate(R.id.action_teacherSetsFragment_to_teacherFlashcardFragment);
+            public void onResponse(String response) {
+                String[] topics = response.split(",");
+
+                for (int i = 0; i < topics.length; i++)
+                {
+                    topicsL.add(topics[i]);
+                    Log.d("Topic", topics[i]);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.d("Error", error.getMessage());
             }
         });
 
-        return v;
+        topicsByClassQueue.add(stringRequest);
     }
 }
