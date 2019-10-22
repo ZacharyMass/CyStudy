@@ -64,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 String stringResponse = response + "";
+                stringResponse = stringResponse.toLowerCase();
 
                 Log.d("Login Response", stringResponse);
 
