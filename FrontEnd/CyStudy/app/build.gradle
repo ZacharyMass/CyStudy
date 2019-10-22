@@ -16,6 +16,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
 }
 
 dependencies {
@@ -42,6 +46,9 @@ dependencies {
     implementation "androidx.navigation:navigation-ui:$nav_version"
 
     //Mockito and JUnit for Unit Testing
-    testImplementation 'junit:junit:4.12'
-    testImplementation 'org.mockito:mockito-core:1.10.19'
+    androidTestImplementation 'junit:junit:4.12'
+    androidTestImplementation 'org.mockito:mockito-core:1.10.19'
+
+    //Fragment Scenario
+    debugImplementation 'androidx.fragment:fragment-testing:1.1.0'
 }

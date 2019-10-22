@@ -32,9 +32,10 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().hide();
     }
 
-    public void navigateToRegister(View view) {
+    public boolean navigateToRegister(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
+        return true;
     }
 
     public void login(View view) {
@@ -55,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Enter Password", Toast.LENGTH_SHORT).show();
             return;
         }
-
         String URL = "http://coms-309-jr-7.misc.iastate.edu:8080/user-exists?username=";
         URL += username; // Adds string to end
         RequestQueue loginQueue = Volley.newRequestQueue(this);
@@ -87,6 +87,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         loginQueue.add(stringRequest);
+
     }
 
     private void getRole(String username) {
