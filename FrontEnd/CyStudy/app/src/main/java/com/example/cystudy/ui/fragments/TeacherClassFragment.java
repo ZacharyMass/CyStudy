@@ -31,7 +31,7 @@ public class TeacherClassFragment extends Fragment {
         TextView pageTitle = v.findViewById(R.id.teacherClassPageTitle);
         pageTitle.setText(className + " Home");
 
-        Button viewSetsButton = v.findViewById(R.id.teacherViewSets);
+        Button viewSetsButton = v.findViewById(R.id.teacherViewFlashcards);
 
         viewSetsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,7 +39,7 @@ public class TeacherClassFragment extends Fragment {
                 BottomNavigationView bottomNavView = MainActivity.bottomNavigationView;
                 NavController navController = MainActivity.navController;
                 setupWithNavController(bottomNavView, navController);
-                navController.navigate(R.id.action_teacherClassFragment_to_teacherSetsFragment);
+                navController.navigate(R.id.action_teacherClassFragment_to_teacherFlashcardFragment);
             }
         });
 
