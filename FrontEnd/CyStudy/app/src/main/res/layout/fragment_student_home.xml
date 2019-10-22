@@ -13,8 +13,4 @@
         tools:context=".ui.fragments.StudentHomeFragment">
 
     </androidx.recyclerview.widget.RecyclerView>
-<<<<<<< HEAD
 </LinearLayout>
-=======
-</layout>
->>>>>>> c805a3b9df8f84277c4b2a06e525a62efb85e647
