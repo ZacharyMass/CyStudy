@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 Log.d("Login Response", stringResponse);
 
-                if (stringResponse.matches("true")) {
+                if (stringResponse.matches("True")) {
                     user = username; // Initialize global variable
                     getRole(user);
                     // Intent intent = new Intent(getApplicationContext(), MainActivity.class);
