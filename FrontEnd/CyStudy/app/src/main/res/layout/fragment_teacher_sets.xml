@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/teacherSetsLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/sampleSet1Name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/darker_gray"
+        android:text="Set 1 Name" />
+
+    <Button
+        android:id="@+id/sampleSet2Name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/darker_gray"
+        android:text="Set 2 Name" />
+
+    <Button
+        android:id="@+id/floatingAddSetButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="450dp"
+        android:background="@drawable/plus_circle"
+        style="?android:attr/borderlessButtonStyle"
+        android:backgroundTint="#C8210E" />
+
+</LinearLayout>
