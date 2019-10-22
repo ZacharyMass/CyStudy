@@ -10,6 +10,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -76,4 +78,11 @@ public class StudentHomeFragment extends Fragment {
 
         studentHomeQueue.add(stringRequest);
     }
+
+    public void navigateToStats(View view)
+    {
+        NavController navController = Navigation.findNavController(getActivity(), R.id.conditionalNavigation);
+        navController.navigate(R.id.action_studentHomeFragment_to_studentStatsFragment);
+    }
+
 }

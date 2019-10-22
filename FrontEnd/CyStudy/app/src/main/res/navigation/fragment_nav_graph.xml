@@ -42,6 +42,9 @@
         <action
             android:id="@+id/action_settingsFragment_to_studentHomeFragment"
             app:destination="@id/studentHomeFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_loginActivity"
+            app:destination="@id/loginActivity" />
     </fragment>
     <fragment
         android:id="@+id/classFragment"
@@ -156,4 +159,9 @@
             android:id="@+id/action_studentHomeFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
     </fragment>
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.example.cystudy.LoginActivity"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
 </navigation>

@@ -47,7 +47,8 @@ dependencies {
 
     //Mockito and JUnit for Unit Testing
     androidTestImplementation 'junit:junit:4.12'
-    androidTestImplementation 'org.mockito:mockito-core:1.10.19'
+    androidTestImplementation 'org.mockito:mockito-android:2.+'
+    androidTestImplementation 'org.mockito:mockito-core:2.+'
 
     //Fragment Scenario
     debugImplementation 'androidx.fragment:fragment-testing:1.1.0'
