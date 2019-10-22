@@ -20,6 +20,8 @@ import static androidx.navigation.ui.NavigationUI.setupWithNavController;
 
 public class TeacherClassFragment extends Fragment {
 
+    public static String className;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -27,7 +29,7 @@ public class TeacherClassFragment extends Fragment {
         final View v = inflater.inflate(R.layout.fragment_teacher_class, container, false);
 
         TextView pageTitle = v.findViewById(R.id.teacherClassPageTitle);
-        pageTitle.setText(TeacherHomeFragment.class1name + " Home");
+        pageTitle.setText(className + " Home");
 
         Button viewSetsButton = v.findViewById(R.id.teacherViewSets);
 

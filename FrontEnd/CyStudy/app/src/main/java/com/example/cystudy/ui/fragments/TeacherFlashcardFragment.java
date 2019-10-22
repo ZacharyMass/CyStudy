@@ -28,17 +28,20 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URL;
+import java.util.Objects;
+
 import static androidx.navigation.ui.NavigationUI.setupWithNavController;
 
 public class TeacherFlashcardFragment extends Fragment {
 
-    public static String URL = "http://coms-309-jr-7.misc.iastate.edu:8080/get-terms-by-class?className=COMS309";
+    public static String URL = "http://coms-309-jr-7.misc.iastate.edu:8080/get-terms-by-class?className=";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        // URL += TeacherHomeFragment.class1name;
+        // URL += TeacherHomeFragment.someClassName;
 
         final View v = inflater.inflate(R.layout.fragment_teacher_flashcards, container, false);
 
@@ -58,7 +61,7 @@ public class TeacherFlashcardFragment extends Fragment {
         flashToFill.setText("");
 
         // JSONArray Request
-        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(getContext()));
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,

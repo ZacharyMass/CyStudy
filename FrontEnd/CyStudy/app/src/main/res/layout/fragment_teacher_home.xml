@@ -30,54 +30,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pageTitle" />
 
-    <!-- Dummy buttons below (will be fixed with RecyclerView) -->
 
-    <Button
-        android:id="@+id/teacherClass1Button"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="56dp"
-        android:background="#C8210E"
-        android:text="Class 1"
-        android:textColor="@android:color/white"
-        android:textSize="20dp"
-        app:layout_constraintHeight_percent="0.15"
-        app:layout_constraintStart_toStartOf="parent"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/teacher_classes_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="120dp"
+        android:scrollbars="vertical"
         app:layout_constraintTop_toBottomOf="@+id/pageTitle"
-        app:layout_constraintWidth_percent="0.40" />
+        tools:context=".ui.fragments.TeacherHomeFragment">
 
-    <Button
-        android:id="@+id/teacherClass2Button"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="24dp"
-        android:background="@android:color/holo_blue_dark"
-        android:text="Class 2"
-        android:textColor="@android:color/white"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.15"
-        app:layout_constraintStart_toEndOf="@+id/teacherClass1Button"
-        app:layout_constraintTop_toBottomOf="@+id/pageTitle"
-        app:layout_constraintWidth_percent="0.40" />
+    </androidx.recyclerview.widget.RecyclerView>
 
-    <Button
-        android:id="@+id/teacherClass3Button"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="34dp"
-        android:background="@android:color/holo_green_dark"
-        android:text="Class 3"
-        android:textColor="@android:color/white"
-        android:textSize="20dp"
-        app:layout_constraintHeight_percent="0.15"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/teacherClass1Button"
-        app:layout_constraintWidth_percent="0.40" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
