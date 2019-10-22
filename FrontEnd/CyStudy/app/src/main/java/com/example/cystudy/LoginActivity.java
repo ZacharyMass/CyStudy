@@ -64,10 +64,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 String stringResponse = response + "";
+                stringResponse = stringResponse.toLowerCase();
 
                 Log.d("Login Response", stringResponse);
 
-                if (stringResponse.matches("True")) {
+                if (stringResponse.matches("true")) {
                     user = username; // Initialize global variable
                     getRole(user);
                     // Intent intent = new Intent(getApplicationContext(), MainActivity.class);
