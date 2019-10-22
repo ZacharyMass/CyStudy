@@ -2,7 +2,6 @@ package com.jr7.cystudy.controller;
 
 import java.util.List;
 
-import com.jr7.cystudy.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

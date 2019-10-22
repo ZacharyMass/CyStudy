@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/flashcard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Flashcards here" />
+
+    <Button
+        android:id="@+id/floatingAddFlashcardButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="450dp"
+        android:background="@drawable/plus_circle"
+        style="?android:attr/borderlessButtonStyle"
+        android:backgroundTint="#C8210E" />
+
+</LinearLayout>

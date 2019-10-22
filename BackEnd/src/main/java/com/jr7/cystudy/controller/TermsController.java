@@ -66,4 +66,9 @@ public class TermsController {
   public @ResponseBody ArrayList<String> getClassTopics(@RequestParam String className){
     return TermsService.getTopics(className);
   }
+
+  @PostMapping(path="/delete-card", produces="application/json", consumes="application/json")
+  public @ResponseBody String deleteCard(@RequestBody Terms t){
+    return TermsService.deleteCard(t.getTerm(), t.getAnswer(), t.getClassName());
+  }
 }

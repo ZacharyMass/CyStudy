@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,18 +13,15 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
     public static String user; // Will be initialized fully if response from server is "true"
+    public static String role; // Will be initialized after valid user confirmed
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,13 +63,14 @@ public class LoginActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d("Login Response", response); // For testing
                 String stringResponse = response + "";
+                Log.d("Login Response", stringResponse);
 
                 if (stringResponse.matches("true")) {
                     user = username; // Initialize global variable
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
+                    getRole(user);
+                    // Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    // startActivity(intent);
                 }
             }
         }, new Response.ErrorListener() {
@@ -89,5 +85,28 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         loginQueue.add(stringRequest);
+    }
+
+    private void getRole(String username) {
+        String URL = "http://coms-309-jr-7.misc.iastate.edu:8080/get-role?username=";
+        URL += LoginActivity.user; // This is the user that logged in and now needs conditional navigation
+        RequestQueue roleQueue = Volley.newRequestQueue(this);
+
+        StringRequest roleRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("Role Response", response); // For testing
+                role = response;
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Role Request Error", Objects.requireNonNull(error.getMessage())); // For testing
+            }
+        });
+
+        roleQueue.add(roleRequest);
     }
 }

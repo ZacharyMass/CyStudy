@@ -1,7 +1,5 @@
 package com.jr7.cystudy.controller;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +22,7 @@ public class UserClassController {
 
     private final Logger logger = LoggerFactory.getLogger(ClassesController.class);
 
-    @RequestMapping(method = RequestMethod.GET, path="/get-users-classes")
+    @GetMapping(path="/get-users-classes")
     public String getUsersClasses(@RequestParam String username){
         logger.info("Entered UserClassController layer in method getUsersClasses().");
         return UserClassService.getUsersClasses(username);
@@ -32,7 +30,7 @@ public class UserClassController {
 
     @PostMapping(path="/add-to-class")
     public @ResponseBody String addUserToClass(@RequestBody UserClass uC){
-        if(UserService.checkUserExists(uC.getUsername()).equalsIgnoreCase("False")){
+        if(!UserService.checkUserExists(uC.getUsername())){
             return "User is not registered.";
         }
         if(!ClassesService.checkClassExists(uC.getClassName())){

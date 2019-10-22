@@ -38,4 +38,9 @@ public class TermsService {
     }
     return topics;
   }
+
+  public String deleteCard(String term, String answer, String className){
+    TermsRepository.deleteCard(term, answer, className);
+    return "If card existed, or multiple of card existed, it/they are now deleted.";
+  }
 }
