@@ -16,11 +16,15 @@ public class MainActivity extends AppCompatActivity {
 
     public static RequestQueue queue;
     public static String url = "coms-309-jr-7.misc.iastate.edu";
+    public static String user = LoginActivity.user;
+    public static String currentClass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        user = LoginActivity.user;
 
         // Hide action bar
         getSupportActionBar().hide();

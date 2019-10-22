@@ -69,8 +69,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Log.d("Login Response", response); // For testing
+                String stringResponse = response + "";
 
-                if (response.matches("True")) {
+                if (stringResponse.matches("true")) {
                     user = username; // Initialize global variable
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
