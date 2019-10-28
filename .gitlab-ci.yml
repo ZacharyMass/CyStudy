@@ -3,6 +3,7 @@ stages:
   - mavenbuild
   - maventest
   - autodeploy
+  - android-build
 
 # build stage
 maven-build:
@@ -37,3 +38,32 @@ autoDeploy:
     - sudo systemctl stop system-web-demo
     - sudo systemctl daemon-reload
     - sudo systemctl start system-web-demo
+
+# frontend android build
+android-build:
+  image: javiersantos/android-ci:latest
+  stage: android-build
+  before_script:
+    - export GRADLE_USER_HOME=`pwd`/.gradle
+    - chmod +x ./FrontEnd/CyStudy/gradlew
+  tags:
+    - android
+  script:
+    - cd FrontEnd/CyStudy/
+    - ./gradlew assemble
+  artifacts:
+    paths:
+      - FrontEnd/CyStudy/app/build/outputs/
+
+# Android unit tests
+# frontend-unit-tests:
+#   image: javiersantos/android-ci:latest
+#   stage: frontend-unit-tests
+#   before_script:
+#     - export GRADLE_USER_HOME=`pwd`/.gradle
+#     - chmod +x ./Frontend/CyStudy/gradlew
+#   tags:
+#     - android
+#   script:
+#     - cd FrontEnd/CyStudy/
+#     - ./gradlew assemble
