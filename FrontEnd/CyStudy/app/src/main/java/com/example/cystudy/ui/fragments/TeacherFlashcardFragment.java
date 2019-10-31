@@ -41,6 +41,7 @@ public class TeacherFlashcardFragment extends Fragment {
 
     public static String URL = "http://coms-309-jr-7.misc.iastate.edu:8080/get-terms-by-class?className=";
     ArrayList<String> flashcardsL = new ArrayList<>();
+    private View v;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -48,7 +49,7 @@ public class TeacherFlashcardFragment extends Fragment {
 
         URL += TeacherClassFragment.className;
 
-        final View v = inflater.inflate(R.layout.fragment_teacher_flashcards, container, false);
+        v = inflater.inflate(R.layout.fragment_teacher_flashcards, container, false);
 
         Button addFlashcardBtn = v.findViewById(R.id.floatingAddFlashcardButton);
 
@@ -63,13 +64,6 @@ public class TeacherFlashcardFragment extends Fragment {
         });
 
         pullFlashcards();
-
-        // Initialize Recycler
-        RecyclerView r = v.findViewById(R.id.teacher_flashcards_recycler_view);
-        RecyclerViewAdapter a = new RecyclerViewAdapter(this.getContext(), flashcardsL);
-        Log.d("Current context", this.getContext().toString());
-        r.setAdapter(a);
-        r.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         return v;
     }
@@ -109,6 +103,13 @@ public class TeacherFlashcardFragment extends Fragment {
                         }catch (JSONException e){
                             e.printStackTrace();
                         }
+
+                        // Initialize Recycler
+                        RecyclerView r = v.findViewById(R.id.teacher_flashcards_recycler_view);
+                        RecyclerViewAdapter a = new RecyclerViewAdapter(getContext(), flashcardsL);
+                        Log.d("Current context", getContext().toString());
+                        r.setAdapter(a);
+                        r.setLayoutManager(new LinearLayoutManager(getContext()));
                     }
                 },
                 new Response.ErrorListener(){

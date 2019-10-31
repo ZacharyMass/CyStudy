@@ -31,6 +31,10 @@ import java.util.Objects;
 
 public class StudentHomeFragment extends Fragment {
 
+    String username = LoginActivity.user; // Username from LoginActivity is global here
+    String url = "http://coms-309-jr-7.misc.iastate.edu:8080/get-users-classes?username=" + username;
+    private View v;
+
     ArrayList<String> classesL = new ArrayList<>();
 
     @Override
@@ -43,16 +47,10 @@ public class StudentHomeFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         //Inflate view
-        View v = inflater.inflate(R.layout.fragment_student_home, container, false);
+        v = inflater.inflate(R.layout.fragment_student_home, container, false);
 
         //Pull list of classes from server
         pullClasses();
-
-        // Initialize Recycler
-        RecyclerView r = v.findViewById(R.id.classes_recycler_view);
-        RecyclerViewAdapter a = new RecyclerViewAdapter(this.getContext(), classesL);
-        r.setAdapter(a);
-        r.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         return v;
     }
@@ -72,6 +70,13 @@ public class StudentHomeFragment extends Fragment {
                 {
                     classesL.add(classes[i]);
                 }
+
+                // Initialize Recycler
+                RecyclerView r = v.findViewById(R.id.classes_recycler_view);
+                RecyclerViewAdapter a = new RecyclerViewAdapter(getContext(), classesL);
+                r.setAdapter(a);
+                r.setLayoutManager(new LinearLayoutManager(getContext()));
+
             }
         }, new Response.ErrorListener() {
             @Override

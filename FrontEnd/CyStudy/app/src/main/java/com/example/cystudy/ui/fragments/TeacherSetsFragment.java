@@ -32,22 +32,17 @@ public class TeacherSetsFragment extends Fragment {
 
     ArrayList<String> topicsL = new ArrayList<>();
 
+    private View v;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
         URL += TeacherClassFragment.className; // Should be COMS309 currently for testing purposes
 
-        final View v = inflater.inflate(R.layout.fragment_teacher_sets, container, false);
+        v = inflater.inflate(R.layout.fragment_teacher_sets, container, false);
 
         pullTopicsForClass();
-
-        // Initialize Recycler
-        RecyclerView r = v.findViewById(R.id.teacher_sets_recycler_view);
-        RecyclerViewAdapter a = new RecyclerViewAdapter(Objects.requireNonNull(this.getContext()), topicsL);
-        Log.d("Current context", this.getContext().toString());
-        r.setAdapter(a);
-        r.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         return v;
     }
@@ -64,6 +59,14 @@ public class TeacherSetsFragment extends Fragment {
                     topicsL.add(topics[i]);
                     Log.d("Topic", topics[i]);
                 }
+
+                // Initialize Recycler
+                RecyclerView r = v.findViewById(R.id.teacher_sets_recycler_view);
+                RecyclerViewAdapter a = new RecyclerViewAdapter(Objects.requireNonNull(getContext()), topicsL);
+                Log.d("Current context", getContext().toString());
+                r.setAdapter(a);
+                r.setLayoutManager(new LinearLayoutManager(getContext()));
+
             }
         }, new Response.ErrorListener() {
             @Override
