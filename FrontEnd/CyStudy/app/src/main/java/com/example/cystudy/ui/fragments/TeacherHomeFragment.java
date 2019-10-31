@@ -32,6 +32,7 @@ public class TeacherHomeFragment extends Fragment {
 
     String username = LoginActivity.user; // Username from LoginActivity is global here
     String url = "http://coms-309-jr-7.misc.iastate.edu:8080/get-users-classes?username=" + username;
+    private View v;
 
     ArrayList<String> classesL = new ArrayList<>();
 
@@ -39,17 +40,10 @@ public class TeacherHomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        final View v = inflater.inflate(R.layout.fragment_teacher_home, container, false);
+        v = inflater.inflate(R.layout.fragment_teacher_home, container, false);
 
         //Pull list of classes from server
         pullClasses();
-
-        // Initialize Recycler
-        RecyclerView r = v.findViewById(R.id.teacher_classes_recycler_view);
-        RecyclerViewAdapter a = new RecyclerViewAdapter(this.getContext(), classesL);
-        Log.d("Current context", this.getContext().toString());
-        r.setAdapter(a);
-        r.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         return v;
     }
@@ -66,6 +60,14 @@ public class TeacherHomeFragment extends Fragment {
                 {
                     classesL.add(classes[i]);
                 }
+
+                // Convert data to RecyclerView
+                RecyclerView r = v.findViewById(R.id.teacher_classes_recycler_view);
+                RecyclerViewAdapter a = new RecyclerViewAdapter(getContext(), classesL);
+                Log.d("Current context", getContext().toString());
+                r.setAdapter(a);
+                r.setLayoutManager(new LinearLayoutManager(getContext()));
+
             }
         }, new Response.ErrorListener() {
             @Override
