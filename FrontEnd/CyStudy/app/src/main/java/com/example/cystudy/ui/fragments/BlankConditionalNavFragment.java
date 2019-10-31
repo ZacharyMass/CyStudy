@@ -16,9 +16,6 @@ public class BlankConditionalNavFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
-        final View v = inflater.inflate(R.layout.fragment_blank_to_navigate, container, false);
-
-        return v;
+        return null;
     }
 }
