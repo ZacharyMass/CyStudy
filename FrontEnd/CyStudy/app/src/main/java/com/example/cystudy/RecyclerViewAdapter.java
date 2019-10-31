@@ -53,7 +53,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 }
                 else {
                     // int position = viewHolder.getAdapterPosition();
-                    className = classesList.get(0);
+                    className = classesList.get(0); // Hardcoded this just to show something on next page
                     Log.d("Class Name", className);
                     Navigation.findNavController(view).navigate(R.id.action_teacherHomeFragment_to_teacherClassFragment);
                 }
