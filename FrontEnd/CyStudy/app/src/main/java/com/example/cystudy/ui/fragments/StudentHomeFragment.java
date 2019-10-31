@@ -34,6 +34,11 @@ public class StudentHomeFragment extends Fragment {
     ArrayList<String> classesL = new ArrayList<>();
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
