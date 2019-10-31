@@ -107,6 +107,9 @@
         <action
             android:id="@+id/action_teacherClassFragment_to_teacherSetsFragment"
             app:destination="@id/teacherSetsFragment" />
+        <action
+            android:id="@+id/action_teacherClassFragment_to_teacherFlashcardFragment"
+            app:destination="@id/teacherFlashcardFragment" />
     </fragment>
     <fragment
         android:id="@+id/teacherSetsFragment"

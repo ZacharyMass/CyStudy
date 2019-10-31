@@ -1,6 +1,7 @@
 package com.example.cystudy;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +13,16 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cystudy.ui.fragments.ClassFragment;
+import com.example.cystudy.ui.fragments.TeacherClassFragment;
 
 import java.util.ArrayList;
 
+import static com.example.cystudy.ui.fragments.TeacherClassFragment.className;
+
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     private static final String TAG = "RecyclerViewAdapter";
+
+    private static ViewHolder viewHolder;
 
     ArrayList<String> classesList;
     private Context mContext;
@@ -25,6 +31,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     {
         classesList = classNames;
         mContext = context;
+        Log.d("mContext", mContext.toString());
     }
 
     @NonNull
@@ -37,11 +44,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Log.d("In OnBindViewHolder", "true");
         holder.classNameTextView.setText(classesList.get(position));
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                Navigation.findNavController(view).navigate(R.id.action_studentHomeFragment_to_classFragment);
+                if (LoginActivity.role.matches("student")) {
+                    Navigation.findNavController(view).navigate(R.id.action_studentHomeFragment_to_classFragment);
+                }
+                else {
+                    // int position = viewHolder.getAdapterPosition();
+                    className = classesList.get(0);
+                    Log.d("Class Name", className);
+                    Navigation.findNavController(view).navigate(R.id.action_teacherHomeFragment_to_teacherClassFragment);
+                }
             }
         });
     }
@@ -51,7 +67,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return classesList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder
+    public static class ViewHolder extends RecyclerView.ViewHolder
     {
         TextView classNameTextView;
         LinearLayout parentLayout;
@@ -64,7 +80,5 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             classNameTextView = itemView.findViewById(R.id.class_name_text_view);
             parentLayout = itemView.findViewById(R.id.item_layout);
         }
-
     }
-
 }

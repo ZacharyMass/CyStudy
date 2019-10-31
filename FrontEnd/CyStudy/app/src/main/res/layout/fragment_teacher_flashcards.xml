@@ -3,20 +3,21 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/flashcard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Flashcards here" />
-
     <Button
         android:id="@+id/floatingAddFlashcardButton"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginLeft="300dp"
-        android:layout_marginTop="450dp"
         android:background="@drawable/plus_circle"
-        style="?android:attr/borderlessButtonStyle"
-        android:backgroundTint="#C8210E" />
+        android:backgroundTint="#C8210E"
+        android:layout_gravity="right"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+
+        android:id="@+id/teacher_flashcards_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical" >
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>
