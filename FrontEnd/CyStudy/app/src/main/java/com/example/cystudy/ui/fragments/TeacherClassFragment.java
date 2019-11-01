@@ -18,10 +18,21 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import static androidx.navigation.ui.NavigationUI.setupWithNavController;
 
+/**
+ * This is the homepage for a certain class that the teacher is responsible for. It has three buttons to do certain tasks
+ * @author Brad Gannon
+ */
 public class TeacherClassFragment extends Fragment {
 
     public static String className;
 
+    /**
+     * Initializes the buttons and sets up some navigation on creation of the fragment
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return v the current View object
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
