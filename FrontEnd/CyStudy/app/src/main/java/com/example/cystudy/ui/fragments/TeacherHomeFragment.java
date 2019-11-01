@@ -21,7 +21,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.cystudy.LoginActivity;
 import com.example.cystudy.R;
-import com.example.cystudy.RecyclerViewAdapter;
+import com.example.cystudy.RecyclerViewAdapaters.RecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.Objects;

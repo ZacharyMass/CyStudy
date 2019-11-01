@@ -5,13 +5,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,23 +18,18 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.cystudy.MainActivity;
 import com.example.cystudy.R;
-import com.example.cystudy.RecyclerViewAdapter;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.cystudy.RecyclerViewAdapaters.RecyclerViewAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
-
-import static androidx.navigation.ui.NavigationUI.setupWithNavController;
 
 public class TeacherFlashcardFragment extends Fragment {
 
@@ -51,6 +44,9 @@ public class TeacherFlashcardFragment extends Fragment {
         URL += TeacherClassFragment.className;
 
         v = inflater.inflate(R.layout.fragment_teacher_flashcards, container, false);
+
+        TextView className = v.findViewById(R.id.teacherClassNameTitle);
+        className.setText(TeacherClassFragment.className);
 
         FloatingActionButton fab = v.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -80,9 +76,9 @@ public class TeacherFlashcardFragment extends Fragment {
                         //mTextView.setText(response.toString());
 
                         // Process the JSON
-                        try{
+                        try {
                             // Loop through the array elements
-                            for(int i=0;i<response.length();i++){
+                            for (int i = 0; i < response.length(); i++) {
                                 // Get current json object
                                 JSONObject flashcard = response.getJSONObject(i);
 
@@ -97,7 +93,7 @@ public class TeacherFlashcardFragment extends Fragment {
                                 flashcardsL.add(term + ": " + answer);
                                 Log.d("Flashcard", flashcardsL.get(i));
                             }
-                        }catch (JSONException e){
+                        } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
@@ -109,9 +105,9 @@ public class TeacherFlashcardFragment extends Fragment {
                         r.setLayoutManager(new LinearLayoutManager(getContext()));
                     }
                 },
-                new Response.ErrorListener(){
+                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error){
+                    public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
                     }
                 }

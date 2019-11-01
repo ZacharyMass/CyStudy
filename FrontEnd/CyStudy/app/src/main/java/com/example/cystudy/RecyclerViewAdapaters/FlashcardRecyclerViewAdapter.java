@@ -1,4 +1,4 @@
-package com.example.cystudy;
+package com.example.cystudy.RecyclerViewAdapaters;
 
 import android.content.Context;
 import android.util.Log;
@@ -12,11 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cystudy.LoginActivity;
+import com.example.cystudy.R;
+
 import java.util.ArrayList;
 
 import static com.example.cystudy.ui.fragments.TeacherClassFragment.className;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+public class FlashcardRecyclerViewAdapter extends RecyclerView.Adapter<FlashcardRecyclerViewAdapter.ViewHolder> {
     private static final String TAG = "RecyclerViewAdapter";
 
     private static ViewHolder viewHolder;
@@ -24,7 +27,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     ArrayList<String> classesList;
     private Context mContext;
 
-    public RecyclerViewAdapter(Context context, ArrayList<String> classNames)
+    public FlashcardRecyclerViewAdapter(Context context, ArrayList<String> classNames)
     {
         classesList = classNames;
         mContext = context;

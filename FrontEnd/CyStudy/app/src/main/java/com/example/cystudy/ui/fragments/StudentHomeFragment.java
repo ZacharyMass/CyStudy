@@ -10,8 +10,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,9 +20,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.cystudy.LoginActivity;
-import com.example.cystudy.MainActivity;
 import com.example.cystudy.R;
-import com.example.cystudy.RecyclerViewAdapter;
+import com.example.cystudy.RecyclerViewAdapaters.RecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -88,11 +85,4 @@ public class StudentHomeFragment extends Fragment {
 
         studentHomeQueue.add(stringRequest);
     }
-
-    public void navigateToStats(View view)
-    {
-        NavController navController = Navigation.findNavController(getActivity(), R.id.conditionalNavigation);
-        navController.navigate(R.id.action_studentHomeFragment_to_studentStatsFragment);
-    }
-
 }

@@ -28,7 +28,20 @@
             android:id="@+id/classFragment"
             android:name="com.example.cystudy.ui.fragments.ClassFragment"
             android:label="fragment_class"
-            tools:layout="@layout/fragment_class" />
+            tools:layout="@layout/fragment_class" >
+            <action
+                android:id="@+id/action_classFragment_to_gameFragment"
+                app:destination="@id/gameFragment" />
+            <action
+                android:id="@+id/action_classFragment_to_studentStatsFragment"
+                app:destination="@id/studentStatsFragment" />
+            <action
+                android:id="@+id/action_classFragment_to_studentHomeFragment"
+                app:destination="@id/studentHomeFragment" />
+            <action
+                android:id="@+id/action_classFragment_to_settingsFragment"
+                app:destination="@id/settingsFragment" />
+        </fragment>
         <fragment
             android:id="@+id/studentHomeFragment"
             android:name="com.example.cystudy.ui.fragments.StudentHomeFragment"
@@ -73,6 +86,21 @@
             <action
                 android:id="@+id/action_settingsFragment_to_loginActivity"
                 app:destination="@id/loginActivity" />
+        </fragment>
+        <fragment
+            android:id="@+id/gameFragment"
+            android:name="com.example.cystudy.ui.fragments.GameFragment"
+            android:label="fragment_game"
+            tools:layout="@layout/fragment_game" >
+            <action
+                android:id="@+id/action_gameFragment_to_studentHomeFragment"
+                app:destination="@id/studentHomeFragment" />
+            <action
+                android:id="@+id/action_gameFragment_to_studentStatsFragment"
+                app:destination="@id/studentStatsFragment" />
+            <action
+                android:id="@+id/action_gameFragment_to_settingsFragment"
+                app:destination="@id/settingsFragment" />
         </fragment>
     </navigation>
     <navigation

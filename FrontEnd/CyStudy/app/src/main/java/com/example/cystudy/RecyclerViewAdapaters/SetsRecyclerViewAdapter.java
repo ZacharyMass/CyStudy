@@ -1,16 +1,17 @@
-package com.example.cystudy;
+package com.example.cystudy.RecyclerViewAdapaters;
 
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.cystudy.R;
+import com.example.cystudy.RecyclerViewAdapaters.RecyclerViewAdapter;
 
 import java.util.ArrayList;
 
