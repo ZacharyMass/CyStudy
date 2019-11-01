@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -45,6 +46,9 @@ public class ClassFragment extends Fragment {
 
         //Inflate view
         View v = inflater.inflate(R.layout.fragment_class, container, false);
+
+        TextView t = v.findViewById(R.id.classNameTitle);
+        t.setText(MainActivity.currentClass);
 
         //Pull list of classes from server
         pullSets();

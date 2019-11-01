@@ -26,6 +26,7 @@ import com.example.cystudy.MainActivity;
 import com.example.cystudy.R;
 import com.example.cystudy.RecyclerViewAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,15 +52,11 @@ public class TeacherFlashcardFragment extends Fragment {
 
         v = inflater.inflate(R.layout.fragment_teacher_flashcards, container, false);
 
-        Button addFlashcardBtn = v.findViewById(R.id.floatingAddFlashcardButton);
-
-        addFlashcardBtn.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fab = v.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                BottomNavigationView bottomNavView = MainActivity.bottomNavigationView;
-                NavController navController = MainActivity.navController;
-                setupWithNavController(bottomNavView, navController);
-                navController.navigate(R.id.action_teacherFlashcardFragment_to_addFlashcardFragment);
+            public void onClick(View view) {
+                MainActivity.navController.navigate(R.id.action_teacherFlashcardFragment_to_addFlashcardFragment);
             }
         });
 
