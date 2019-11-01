@@ -17,7 +17,7 @@ import com.example.cystudy.R;
 
 import java.util.ArrayList;
 
-import static com.example.cystudy.ui.fragments.TeacherClassFragment.className;
+import static com.example.cystudy.ui.fragments.TeacherFragments.TeacherClassFragment.className;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     private static final String TAG = "RecyclerViewAdapter";

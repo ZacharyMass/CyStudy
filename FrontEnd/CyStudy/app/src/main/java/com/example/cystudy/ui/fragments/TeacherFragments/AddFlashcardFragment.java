@@ -1,4 +1,4 @@
-package com.example.cystudy.ui.fragments;
+package com.example.cystudy.ui.fragments.TeacherFragments;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -14,22 +14,20 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.cystudy.MainActivity;
 import com.example.cystudy.R;
+import com.example.cystudy.ui.fragments.TeacherFragments.TeacherClassFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Map;
 import java.util.Objects;
 
 import static androidx.navigation.ui.NavigationUI.setupWithNavController;

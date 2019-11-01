@@ -1,4 +1,4 @@
-package com.example.cystudy.ui.fragments;
+package com.example.cystudy.ui.fragments.StudentFragments;
 
 import android.graphics.Paint;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.example.cystudy.ui.fragments;
+package com.example.cystudy.ui.fragments.TeacherFragments;
 
 import android.os.Bundle;
 import android.util.Log;

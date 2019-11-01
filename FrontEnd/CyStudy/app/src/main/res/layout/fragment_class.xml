@@ -43,7 +43,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/studentClassNameTitle"
-        tools:context=".ui.fragments.ClassFragment">
+        tools:context=".ui.fragments.StudentFragments.StudentFlashcardsFragment">
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical"
-            tools:context=".ui.fragments.StudentHomeFragment" />
+            tools:context=".ui.fragments.StudentFragments.StudentHomeFragment" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

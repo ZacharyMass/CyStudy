@@ -1,15 +1,17 @@
-package com.example.cystudy.ui.fragments;
+package com.example.cystudy.ui.fragments.StudentFragments;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,7 +24,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.cystudy.MainActivity;
 import com.example.cystudy.R;
 import com.example.cystudy.RecyclerViewAdapaters.RecyclerViewAdapter;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,36 +33,54 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class TeacherFlashcardFragment extends Fragment {
+import static androidx.navigation.ui.NavigationUI.setupWithNavController;
+
+
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class StudentFlashcardsFragment extends Fragment {
 
     public static String URL = "http://coms-309-jr-7.misc.iastate.edu:8080/get-terms-by-class?className=";
     ArrayList<String> flashcardsL = new ArrayList<>();
     private View v;
 
+
+    public StudentFlashcardsFragment() {
+        // Required empty public constructor
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        URL += TeacherClassFragment.className;
+        //Inflate view
+        v = inflater.inflate(R.layout.fragment_class, container, false);
 
-        v = inflater.inflate(R.layout.fragment_teacher_flashcards, container, false);
-
-        TextView className = v.findViewById(R.id.teacherClassNameTitle);
-        className.setText(TeacherClassFragment.className);
-
-        FloatingActionButton fab = v.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        Button b = v.findViewById(R.id.GameButton);
+        b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.navController.navigate(R.id.action_teacherFlashcardFragment_to_addFlashcardFragment);
+                BottomNavigationView bottomNavView = MainActivity.bottomNavigationView;
+                NavController navController = MainActivity.navController;
+                setupWithNavController(bottomNavView, navController);
+                navController.navigate(R.id.action_classFragment_to_gameFragment);
             }
-        });
+        }
+        );
 
+        URL += MainActivity.currentClass;
+
+        TextView t = v.findViewById(R.id.studentClassNameTitle);
+        t.setText(MainActivity.currentClass);
+
+        //Pull list of classes from server
         pullFlashcards();
 
         return v;
     }
 
+    // Make string request to populate the text in the buttons and work with formatting string into usable form
     public void pullFlashcards() {
         // JSONArray Request
         RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(getContext()));
@@ -98,7 +118,7 @@ public class TeacherFlashcardFragment extends Fragment {
                         }
 
                         // Initialize Recycler
-                        RecyclerView r = v.findViewById(R.id.teacher_flashcards_recycler_view);
+                        RecyclerView r = v.findViewById(R.id.student_flashcards_recycler_view);
                         RecyclerViewAdapter a = new RecyclerViewAdapter(getContext(), flashcardsL);
                         Log.d("Current context", getContext().toString());
                         r.setAdapter(a);

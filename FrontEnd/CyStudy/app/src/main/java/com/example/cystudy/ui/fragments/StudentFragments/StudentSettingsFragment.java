@@ -1,4 +1,4 @@
-package com.example.cystudy.ui.fragments;
+package com.example.cystudy.ui.fragments.StudentFragments;
 
 
 import android.content.Intent;
@@ -22,10 +22,10 @@ import static com.example.cystudy.MainActivity.navController;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SettingsFragment extends Fragment {
+public class StudentSettingsFragment extends Fragment {
 
 
-    public SettingsFragment() {
+    public StudentSettingsFragment() {
         // Required empty public constructor
     }
 

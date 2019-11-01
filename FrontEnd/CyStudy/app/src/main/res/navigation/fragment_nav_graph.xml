@@ -26,7 +26,7 @@
         app:startDestination="@id/studentHomeFragment">
         <fragment
             android:id="@+id/classFragment"
-            android:name="com.example.cystudy.ui.fragments.ClassFragment"
+            android:name="com.example.cystudy.ui.fragments.StudentFragments.StudentFlashcardsFragment"
             android:label="fragment_class"
             tools:layout="@layout/fragment_class" >
             <action
@@ -44,7 +44,7 @@
         </fragment>
         <fragment
             android:id="@+id/studentHomeFragment"
-            android:name="com.example.cystudy.ui.fragments.StudentHomeFragment"
+            android:name="com.example.cystudy.ui.fragments.StudentFragments.StudentHomeFragment"
             android:label="fragment_student_home"
             tools:layout="@layout/fragment_student_home">
             <action
@@ -59,7 +59,7 @@
         </fragment>
         <fragment
             android:id="@+id/studentStatsFragment"
-            android:name="com.example.cystudy.ui.fragments.StudentStatsFragment"
+            android:name="com.example.cystudy.ui.fragments.StudentFragments.StudentStatsFragment"
             android:label="fragment_student_stats"
             tools:layout="@layout/fragment_student_stats">
             <action
@@ -71,7 +71,7 @@
         </fragment>
         <fragment
             android:id="@+id/settingsFragment"
-            android:name="com.example.cystudy.ui.fragments.SettingsFragment"
+            android:name="com.example.cystudy.ui.fragments.StudentFragments.StudentSettingsFragment"
             android:label="fragment_settings"
             tools:layout="@layout/fragment_settings">
             <action
@@ -89,7 +89,7 @@
         </fragment>
         <fragment
             android:id="@+id/gameFragment"
-            android:name="com.example.cystudy.ui.fragments.GameFragment"
+            android:name="com.example.cystudy.ui.fragments.StudentFragments.StudentGameFragment"
             android:label="fragment_game"
             tools:layout="@layout/fragment_game" >
             <action
@@ -108,7 +108,7 @@
         app:startDestination="@id/teacherHomeFragment">
         <fragment
             android:id="@+id/teacherStatsFragment"
-            android:name="com.example.cystudy.ui.fragments.TeacherStatsFragment"
+            android:name="com.example.cystudy.ui.fragments.TeacherFragments.TeacherStatsFragment"
             android:label="fragment_teacher_stats"
             tools:layout="@layout/fragment_teacher_stats">
             <action
@@ -120,7 +120,7 @@
         </fragment>
         <fragment
             android:id="@+id/teacherHomeFragment"
-            android:name="com.example.cystudy.ui.fragments.TeacherHomeFragment"
+            android:name="com.example.cystudy.ui.fragments.TeacherFragments.TeacherHomeFragment"
             android:label="fragment_teacher_home"
             tools:layout="@layout/fragment_teacher_home">
             <action
@@ -135,7 +135,7 @@
         </fragment>
         <fragment
             android:id="@+id/teacherClassFragment"
-            android:name="com.example.cystudy.ui.fragments.TeacherClassFragment"
+            android:name="com.example.cystudy.ui.fragments.TeacherFragments.TeacherClassFragment"
             android:label="fragment_teacher_class"
             tools:layout="@layout/fragment_teacher_class">
             <action
@@ -156,7 +156,7 @@
         </fragment>
         <fragment
             android:id="@+id/teacherSettingsFragment"
-            android:name="com.example.cystudy.ui.fragments.TeacherSettingsFragment"
+            android:name="com.example.cystudy.ui.fragments.TeacherFragments.TeacherSettingsFragment"
             android:label="fragment_teacher_settings"
             tools:layout="@layout/fragment_teacher_settings">
             <action
@@ -168,7 +168,7 @@
         </fragment>
         <fragment
             android:id="@+id/teacherFlashcardFragment"
-            android:name="com.example.cystudy.ui.fragments.TeacherFlashcardFragment"
+            android:name="com.example.cystudy.ui.fragments.TeacherFragments.TeacherFlashcardFragment"
             android:label="fragment_teacher_flashcards"
             tools:layout="@layout/fragment_teacher_flashcards">
             <action
@@ -177,7 +177,7 @@
         </fragment>
         <fragment
             android:id="@+id/addFlashcardFragment"
-            android:name="com.example.cystudy.ui.fragments.AddFlashcardFragment"
+            android:name="com.example.cystudy.ui.fragments.TeacherFragments.AddFlashcardFragment"
             android:label="fragment_add_flashcard"
             tools:layout="@layout/fragment_add_flashcard">
             <action
@@ -186,7 +186,7 @@
         </fragment>
         <fragment
             android:id="@+id/teacherSetsFragment"
-            android:name="com.example.cystudy.ui.fragments.TeacherSetsFragment"
+            android:name="com.example.cystudy.ui.fragments.TeacherFragments.TeacherSetsFragment"
             android:label="fragment_teacher_sets"
             tools:layout="@layout/fragment_teacher_sets">
             <action
