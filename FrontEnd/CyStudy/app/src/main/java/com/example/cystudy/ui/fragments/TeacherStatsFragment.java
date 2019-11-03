@@ -13,6 +13,10 @@ import androidx.fragment.app.Fragment;
 
 import com.example.cystudy.R;
 
+/**
+ * This class will be fully implemented at a later date
+ * @author Brad Gannon
+ */
 public class TeacherStatsFragment extends Fragment {
 
     @Override
