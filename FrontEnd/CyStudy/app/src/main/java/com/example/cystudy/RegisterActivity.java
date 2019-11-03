@@ -18,8 +18,16 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Register page for users not currently in database
+ * @author Zach Mass
+ */
 public class RegisterActivity extends AppCompatActivity {
 
+    /**
+     * Populate role spinner on creation of page
+     * @param savedInstanceState Bundle object
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,11 +46,19 @@ public class RegisterActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     }
 
+    /**
+     * Navigates back to login page on click
+     * @param view View object
+     */
     public void navigateToLogin(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Takes in text fields filled in by user, verifies some Strings, makes request to server to create user
+     * @param view View object
+     */
     public void register(View view) {
         // Define Views
         final EditText email = findViewById(R.id.email_register);

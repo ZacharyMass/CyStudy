@@ -26,6 +26,10 @@ import com.example.cystudy.RecyclerViewAdapter;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * Homepage for a student user. Displays the classes they are enrolled in.
+ * @author Zach Mass
+ */
 public class StudentHomeFragment extends Fragment {
 
     String username = LoginActivity.user; // Username from LoginActivity is global here
@@ -34,6 +38,13 @@ public class StudentHomeFragment extends Fragment {
 
     ArrayList<String> classesL = new ArrayList<>();
 
+    /**
+     * Sets View object to appropriate XML document, calls pull request from server
+     * @param inflater LayoutInflater object
+     * @param container ViewGroup object
+     * @param savedInstanceState Bundle object
+     * @return v the current View object
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -47,7 +58,9 @@ public class StudentHomeFragment extends Fragment {
         return v;
     }
 
-    // Make string request to populate the text in the buttons and work with formatting string into usable form
+    /**
+     * Pulls classes via stringRequest, formats the text appropriately. Organizes into RecyclerView.
+     */
     public void pullClasses() {
         RequestQueue studentHomeQueue = Volley.newRequestQueue(Objects.requireNonNull(getContext()));
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
