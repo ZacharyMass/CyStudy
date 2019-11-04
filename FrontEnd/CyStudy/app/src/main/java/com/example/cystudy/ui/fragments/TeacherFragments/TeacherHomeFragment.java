@@ -28,6 +28,10 @@ import java.util.Objects;
 
 import static androidx.navigation.ui.NavigationUI.setupWithNavController;
 
+/**
+ * This is the first page that the teacher user will see upon logging in. Displays a list of their classes as buttons
+ * @author Brad Gannon
+ */
 public class TeacherHomeFragment extends Fragment {
 
     String username = LoginActivity.user; // Username from LoginActivity is global here
@@ -36,6 +40,13 @@ public class TeacherHomeFragment extends Fragment {
 
     ArrayList<String> classesL = new ArrayList<>();
 
+    /**
+     * Initializes current View object, calls a GET request to pull list of classes for teacher user from DB
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return v the current View object
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -48,7 +59,9 @@ public class TeacherHomeFragment extends Fragment {
         return v;
     }
 
-    // Make string request to populate the text in the buttons and work with formatting string into usable form
+    /**
+     * StringRequest to DB to get current list of classes for teacher, some quick String operations to convert to usable form
+     */
     public void pullClasses() {
         RequestQueue teacherHomeQueue = Volley.newRequestQueue(Objects.requireNonNull(getContext()));
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {

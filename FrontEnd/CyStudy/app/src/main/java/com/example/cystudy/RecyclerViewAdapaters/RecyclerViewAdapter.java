@@ -19,6 +19,10 @@ import java.util.ArrayList;
 
 import static com.example.cystudy.ui.fragments.TeacherFragments.TeacherClassFragment.className;
 
+/**
+ * Generic RecyclerViewAdapter, used with many fragments in this app
+ * @author Zach Mass
+ */
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     private static final String TAG = "RecyclerViewAdapter";
 
@@ -27,6 +31,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     ArrayList<String> classesList;
     private Context mContext;
 
+    /**
+     * Constructor
+     * @param context Context object
+     * @param classNames ArrayList<String> sent from fragment
+     */
     public RecyclerViewAdapter(Context context, ArrayList<String> classNames)
     {
         classesList = classNames;
@@ -34,6 +43,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         Log.d("mContext", mContext.toString());
     }
 
+    /**
+     * Links to XML file
+     * @param parent ViewGroup object (non-null)
+     * @param viewType int
+     * @return viewHolder
+     */
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -42,6 +57,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return vh;
     }
 
+    /**
+     * Populates text of buttons
+     * @param holder ViewHolder
+     * @param position position in ArrayList
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d("In OnBindViewHolder", "true");
@@ -62,6 +82,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         });
     }
 
+    /**
+     * Gets size of ArrayList
+     * @return size of ArrayList
+     */
     @Override
     public int getItemCount() {
         return classesList.size();

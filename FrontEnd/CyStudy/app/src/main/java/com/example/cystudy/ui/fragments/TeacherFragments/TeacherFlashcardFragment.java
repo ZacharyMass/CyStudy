@@ -31,12 +31,25 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static androidx.navigation.ui.NavigationUI.setupWithNavController;
+
+/**
+ * This page shows the entire list of flashcards for a given class (for the teacher user)
+ * @author Brad Gannon
+ */
 public class TeacherFlashcardFragment extends Fragment {
 
     public static String URL = "http://coms-309-jr-7.misc.iastate.edu:8080/get-terms-by-class?className=";
     ArrayList<String> flashcardsL = new ArrayList<>();
     private View v;
 
+    /**
+     * Initializes buttons, navigation bar on bottom
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return v the current View object
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -61,6 +74,9 @@ public class TeacherFlashcardFragment extends Fragment {
         return v;
     }
 
+    /**
+     * Simple JSON Array Request to pull flashcard data from DB, organize into usable form
+     */
     public void pullFlashcards() {
         // JSONArray Request
         RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(getContext()));

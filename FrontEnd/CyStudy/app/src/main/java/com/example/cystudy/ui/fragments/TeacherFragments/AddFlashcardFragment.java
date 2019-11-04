@@ -32,6 +32,10 @@ import java.util.Objects;
 
 import static androidx.navigation.ui.NavigationUI.setupWithNavController;
 
+/**
+ * This fragment allows the teacher to add a flashcard to a given class
+ * @author Brad Gannon
+ */
 public class AddFlashcardFragment extends Fragment {
 
     Button discard;
@@ -41,6 +45,13 @@ public class AddFlashcardFragment extends Fragment {
 
     public static String URL = "http://coms-309-jr-7.misc.iastate.edu:8080/add-card";
 
+    /**
+     * Initializes several objects on the page when created (text entries, buttons, etc.)
+     * @param inflater LayoutInflater
+     * @param container ViewGroup
+     * @param savedInstanceState Bundle
+     * @return v, the View based on fragment_add_flashcard XML
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -53,31 +64,33 @@ public class AddFlashcardFragment extends Fragment {
         definition = v.findViewById(R.id.enterDefinitionBox);
 
         discard.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Notifies the user that edits were discarded, clears screen
+             * @param v the current View object
+             */
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "Discarded!", Toast.LENGTH_SHORT).show();
-                BottomNavigationView bottomNavView = MainActivity.bottomNavigationView;
-                NavController navController = MainActivity.navController;
-                setupWithNavController(bottomNavView, navController);
-                navController.navigate(R.id.action_addFlashcardFragment_to_teacherFlashcardFragment);
             }
         });
 
         create.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Calls a POST request to send data of created flashcard to server and DB to create
+             * @param v the current View object
+             */
             @Override
             public void onClick(View v) {
                 createFlashcard();
-                Toast.makeText(getContext(), "Added!", Toast.LENGTH_SHORT).show();
-                BottomNavigationView bottomNavView = MainActivity.bottomNavigationView;
-                NavController navController = MainActivity.navController;
-                setupWithNavController(bottomNavView, navController);
-                navController.navigate(R.id.action_addFlashcardFragment_to_teacherFlashcardFragment);
             }
         });
 
         return v;
     }
 
+    /**
+     * Simple JSON POST request to create flashcard in DB
+     */
     private void createFlashcard() {
 
         try {

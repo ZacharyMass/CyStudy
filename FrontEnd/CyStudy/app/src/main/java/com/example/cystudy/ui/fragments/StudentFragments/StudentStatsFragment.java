@@ -15,12 +15,8 @@ import androidx.fragment.app.Fragment;
 import com.example.cystudy.R;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link StudentStatsFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link StudentStatsFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * This class will be fully implemented after Demo 4.
+ * @author Zach Mass
  */
 public class StudentStatsFragment extends Fragment {
 

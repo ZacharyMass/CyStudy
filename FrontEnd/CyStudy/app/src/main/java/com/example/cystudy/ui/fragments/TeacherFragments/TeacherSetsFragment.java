@@ -25,6 +25,10 @@ import com.example.cystudy.RecyclerViewAdapaters.RecyclerViewAdapter;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * This class is currently unused. Will be implemented at a later date.
+ * @author Brad Gannon
+ */
 public class TeacherSetsFragment extends Fragment {
 
     public static String URL = "http://coms-309-jr-7.misc.iastate.edu:8080/get-class-topics?className=";
