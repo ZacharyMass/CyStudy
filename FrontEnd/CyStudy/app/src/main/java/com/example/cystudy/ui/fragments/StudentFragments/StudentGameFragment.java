@@ -40,7 +40,7 @@ public class StudentGameFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_game, container, false);
 
         Draft[] drafts = {new Draft_6455()};
-        String w = "http://coms-309-jr-7.misc.iastate.edu:8080/websocket/username=zach";
+        String w = "http://coms-309-jr-7.misc.iastate.edu:8080/websocket/username=" + MainActivity.user;
 
         try {
             Log.d("Socket:", "Trying socket");
