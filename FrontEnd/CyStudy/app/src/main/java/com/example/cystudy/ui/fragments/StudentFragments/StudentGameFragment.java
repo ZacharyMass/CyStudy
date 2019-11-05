@@ -1,6 +1,7 @@
 package com.example.cystudy.ui.fragments.StudentFragments;
 
 import android.os.Bundle;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.cystudy.MainActivity;
 import com.example.cystudy.R;
 
 import org.java_websocket.client.WebSocketClient;
@@ -38,7 +40,7 @@ public class StudentGameFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_game, container, false);
 
         Draft[] drafts = {new Draft_6455()};
-        String w = "ws://10.26.13.93:8080/websocket/";
+        String w = "http://coms-309-jr-7.misc.iastate.edu:8080/websocket/username=zach";
 
         try {
             Log.d("Socket:", "Trying socket");
@@ -70,6 +72,19 @@ public class StudentGameFragment extends Fragment {
             e.printStackTrace();
         }
         cc.connect();
+
+        // Set Click Listener
+        TextView t = v.findViewById(R.id.term);
+        t.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    cc.send(MainActivity.user + " clicked the button");
+                } catch (Exception e) {
+                    Log.d("ExceptionSendMessage:", e.getMessage().toString());
+                }
+            }
+        });
 
         return v;
     }
