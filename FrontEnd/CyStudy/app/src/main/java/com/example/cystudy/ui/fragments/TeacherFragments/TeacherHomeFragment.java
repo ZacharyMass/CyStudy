@@ -1,4 +1,4 @@
-package com.example.cystudy.ui.fragments;
+package com.example.cystudy.ui.fragments.TeacherFragments;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -21,7 +21,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.cystudy.LoginActivity;
 import com.example.cystudy.R;
-import com.example.cystudy.RecyclerViewAdapter;
+import com.example.cystudy.RecyclerViewAdapaters.RecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.Objects;

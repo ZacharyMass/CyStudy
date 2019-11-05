@@ -1,4 +1,4 @@
-package com.example.cystudy.ui.fragments;
+package com.example.cystudy.ui.fragments.StudentFragments;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -20,68 +20,67 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.cystudy.MainActivity;
 import com.example.cystudy.R;
-import com.example.cystudy.RecyclerViewAdapter;
+import com.example.cystudy.RecyclerViewAdapaters.RecyclerViewAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
 
 import static androidx.navigation.ui.NavigationUI.setupWithNavController;
 
+
 /**
- * This page shows the entire list of flashcards for a given class (for the teacher user)
- * @author Brad Gannon
+ * A simple {@link Fragment} subclass.
  */
-public class TeacherFlashcardFragment extends Fragment {
+public class StudentFlashcardsFragment extends Fragment {
 
     public static String URL = "http://coms-309-jr-7.misc.iastate.edu:8080/get-terms-by-class?className=";
     ArrayList<String> flashcardsL = new ArrayList<>();
     private View v;
 
-    /**
-     * Initializes buttons, navigation bar on bottom
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return v the current View object
-     */
+
+    public StudentFlashcardsFragment() {
+        // Required empty public constructor
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        URL += TeacherClassFragment.className;
+        //Inflate view
+        v = inflater.inflate(R.layout.fragment_class, container, false);
 
-        v = inflater.inflate(R.layout.fragment_teacher_flashcards, container, false);
-
-        Button addFlashcardBtn = v.findViewById(R.id.floatingAddFlashcardButton);
-
-        addFlashcardBtn.setOnClickListener(new View.OnClickListener() {
+        Button b = v.findViewById(R.id.GameButton);
+        b.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 BottomNavigationView bottomNavView = MainActivity.bottomNavigationView;
                 NavController navController = MainActivity.navController;
                 setupWithNavController(bottomNavView, navController);
-                navController.navigate(R.id.action_teacherFlashcardFragment_to_addFlashcardFragment);
+                navController.navigate(R.id.action_classFragment_to_gameFragment);
             }
-        });
+        }
+        );
 
+        URL += MainActivity.currentClass;
+
+        TextView t = v.findViewById(R.id.studentClassNameTitle);
+        t.setText(MainActivity.currentClass);
+
+        //Pull list of classes from server
         pullFlashcards();
 
         return v;
     }
 
-    /**
-     * Simple JSON Array Request to pull flashcard data from DB, organize into usable form
-     */
+    // Make string request to populate the text in the buttons and work with formatting string into usable form
     public void pullFlashcards() {
         // JSONArray Request
         RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(getContext()));
@@ -97,9 +96,9 @@ public class TeacherFlashcardFragment extends Fragment {
                         //mTextView.setText(response.toString());
 
                         // Process the JSON
-                        try{
+                        try {
                             // Loop through the array elements
-                            for(int i=0;i<response.length();i++){
+                            for (int i = 0; i < response.length(); i++) {
                                 // Get current json object
                                 JSONObject flashcard = response.getJSONObject(i);
 
@@ -114,21 +113,21 @@ public class TeacherFlashcardFragment extends Fragment {
                                 flashcardsL.add(term + ": " + answer);
                                 Log.d("Flashcard", flashcardsL.get(i));
                             }
-                        }catch (JSONException e){
+                        } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
                         // Initialize Recycler
-                        RecyclerView r = v.findViewById(R.id.teacher_flashcards_recycler_view);
+                        RecyclerView r = v.findViewById(R.id.student_flashcards_recycler_view);
                         RecyclerViewAdapter a = new RecyclerViewAdapter(getContext(), flashcardsL);
                         Log.d("Current context", getContext().toString());
                         r.setAdapter(a);
                         r.setLayoutManager(new LinearLayoutManager(getContext()));
                     }
                 },
-                new Response.ErrorListener(){
+                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error){
+                    public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
                     }
                 }

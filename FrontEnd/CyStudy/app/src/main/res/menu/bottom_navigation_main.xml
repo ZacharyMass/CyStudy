@@ -11,13 +11,13 @@
     <item
         android:id="@+id/action_stats"
         android:enabled="true"
-        android:icon="@drawable/nav_home"
+        android:icon="@drawable/stats"
         android:title="@string/text_stats"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/action_settings"
         android:enabled="true"
-        android:icon="@drawable/nav_home"
+        android:icon="@drawable/settings"
         android:title="@string/text_settings"
         app:showAsAction="ifRoom"/>
 

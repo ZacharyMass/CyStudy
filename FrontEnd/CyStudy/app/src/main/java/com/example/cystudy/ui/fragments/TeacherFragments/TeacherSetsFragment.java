@@ -1,4 +1,4 @@
-package com.example.cystudy.ui.fragments;
+package com.example.cystudy.ui.fragments.TeacherFragments;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -19,50 +19,54 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.cystudy.LoginActivity;
 import com.example.cystudy.R;
-import com.example.cystudy.RecyclerViewAdapter;
+import com.example.cystudy.RecyclerViewAdapaters.RecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class StudentHomeFragment extends Fragment {
+/**
+ * This class is currently unused. Will be implemented at a later date.
+ * @author Brad Gannon
+ */
+public class TeacherSetsFragment extends Fragment {
 
-    String username = LoginActivity.user; // Username from LoginActivity is global here
-    String url = "http://coms-309-jr-7.misc.iastate.edu:8080/get-users-classes?username=" + username;
+    public static String URL = "http://coms-309-jr-7.misc.iastate.edu:8080/get-class-topics?className=";
+
+    ArrayList<String> topicsL = new ArrayList<>();
+
     private View v;
-
-    ArrayList<String> classesL = new ArrayList<>();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        //Inflate view
-        v = inflater.inflate(R.layout.fragment_student_home, container, false);
+        URL += TeacherClassFragment.className; // Should be COMS309 currently for testing purposes
 
-        //Pull list of classes from server
-        pullClasses();
+        v = inflater.inflate(R.layout.fragment_teacher_sets, container, false);
+
+        pullTopicsForClass();
 
         return v;
     }
 
-    // Make string request to populate the text in the buttons and work with formatting string into usable form
-    public void pullClasses() {
-        RequestQueue studentHomeQueue = Volley.newRequestQueue(Objects.requireNonNull(getContext()));
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+    private void pullTopicsForClass() {
+        RequestQueue topicsByClassQueue = Volley.newRequestQueue(Objects.requireNonNull(getContext()));
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                String[] classes = response.split(",");
+                String[] topics = response.split(",");
 
-                for (int i = 0; i < classes.length; i++)
+                for (int i = 0; i < topics.length; i++)
                 {
-                    classesL.add(classes[i]);
+                    topicsL.add(topics[i]);
+                    Log.d("Topic", topics[i]);
                 }
 
                 // Initialize Recycler
-                RecyclerView r = v.findViewById(R.id.classes_recycler_view);
-                RecyclerViewAdapter a = new RecyclerViewAdapter(getContext(), classesL);
+                RecyclerView r = v.findViewById(R.id.teacher_sets_recycler_view);
+                RecyclerViewAdapter a = new RecyclerViewAdapter(Objects.requireNonNull(getContext()), topicsL);
+                Log.d("Current context", getContext().toString());
                 r.setAdapter(a);
                 r.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -75,6 +79,6 @@ public class StudentHomeFragment extends Fragment {
             }
         });
 
-        studentHomeQueue.add(stringRequest);
+        topicsByClassQueue.add(stringRequest);
     }
 }

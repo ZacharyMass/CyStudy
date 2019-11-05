@@ -18,11 +18,19 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.Objects;
 
+/**
+ * Login page for every user. Contains two text entry fields (username, password), as well as link to 'Register' page
+ * @author Zach Mass
+ */
 public class LoginActivity extends AppCompatActivity {
 
     public static String user; // Will be initialized fully if response from server is "true"
     public static String role; // Will be initialized after valid user confirmed
 
+    /**
+     * Links view to appropriate XML file, hides the action bar.
+     * @param savedInstanceState Bundle object
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,11 +40,20 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().hide();
     }
 
-    public void navigateToRegister(View view) {
+    /**
+     * Moves to Register activity
+     * @param view the current View object
+     */
+    public boolean navigateToRegister(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
+        return true;
     }
 
+    /**
+     * Makes stringRequest to server to verify existence of username and validate password
+     * @param view the current View object
+     */
     public void login(View view) {
         // Data validation (check if not empty) and get string from EditText values
         EditText email = findViewById(R.id.email_login);
@@ -55,7 +72,6 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Enter Password", Toast.LENGTH_SHORT).show();
             return;
         }
-
         String URL = "http://coms-309-jr-7.misc.iastate.edu:8080/user-exists?username=";
         URL += username; // Adds string to end
         RequestQueue loginQueue = Volley.newRequestQueue(this);
@@ -87,8 +103,13 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         loginQueue.add(stringRequest);
+
     }
 
+    /**
+     * Gets role of user via stringRequest, which is used in conditional navigation
+     * @param username the username of current user
+     */
     private void getRole(String username) {
         String URL = "http://coms-309-jr-7.misc.iastate.edu:8080/get-role?username=";
         URL += LoginActivity.user; // This is the user that logged in and now needs conditional navigation
