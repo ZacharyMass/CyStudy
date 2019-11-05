@@ -13,15 +13,23 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import static androidx.navigation.ui.NavigationUI.setupWithNavController;
 
+/**
+ * Basis for all conditional navigation in app. Directs user to appropriate set of fragments to navigate within.
+ * @author Zach Mass
+ */
 public class MainActivity extends AppCompatActivity {
 
     public static String url = "coms-309-jr-7.misc.iastate.edu";
     public static String user = LoginActivity.user;
-    public static String currentClass;
+    public static String currentClass = "COMS309";
     public static String userRole = LoginActivity.role; // Will be initialized via a String Request to server
     public static BottomNavigationView bottomNavigationView;
     public static NavController navController;
 
+    /**
+     * Initializes bottom navigation bar, directs user to appropriate set of pages based on user role.
+     * @param savedInstanceState Bundle object
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

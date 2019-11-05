@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
-        tools:context=".ui.fragments.TeacherSetsFragment" >
+        tools:context=".ui.fragments.TeacherFragments.TeacherSetsFragment" >
 
     </androidx.recyclerview.widget.RecyclerView>
 

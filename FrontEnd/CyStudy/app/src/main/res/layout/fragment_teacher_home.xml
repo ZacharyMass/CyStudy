@@ -38,7 +38,7 @@
         android:layout_marginTop="120dp"
         android:scrollbars="vertical"
         app:layout_constraintTop_toBottomOf="@+id/pageTitle"
-        tools:context=".ui.fragments.TeacherHomeFragment">
+        tools:context=".ui.fragments.TeacherFragments.TeacherHomeFragment">
 
     </androidx.recyclerview.widget.RecyclerView>
 
