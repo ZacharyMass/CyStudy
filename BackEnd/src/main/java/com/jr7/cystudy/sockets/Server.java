@@ -1,6 +1,7 @@
 package com.jr7.cystudy.sockets;
 
-import com.jr7.cystudy.sockets.Config;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.*;
@@ -9,8 +10,6 @@ import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @ServerEndpoint("/websocket/{username}")
 @Component
@@ -35,7 +34,7 @@ public class Server {
     usernameSessionMap.put(username, session);
 
 
-    String message="User:" + username + " has Joined the Game";
+    String message="User: " + username + " has Joined the Game";
     start = System.currentTimeMillis();
     broadcast(message);
 
@@ -62,8 +61,7 @@ public class Server {
     logger.info("Entered into Message: Got Message:"+message);
     String username = sessionUsernameMap.get(session);
 
-    broadcast(username + ": " + message);
-
+    broadcast(message);
   }
 
   // TODO
@@ -80,7 +78,7 @@ public class Server {
     sessionUsernameMap.remove(session);
     usernameSessionMap.remove(username);
 
-    String message= username + " disconnected";
+    String message= timeElapsed + " seconds taken";
     broadcast(message);
   }
 
