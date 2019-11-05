@@ -1,7 +1,6 @@
 package com.jr7.cystudy.sockets;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.jr7.cystudy.sockets.Config;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.*;
@@ -10,6 +9,8 @@ import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @ServerEndpoint("/websocket/{username}")
 @Component
@@ -18,7 +19,6 @@ public class Server {
   // Store all socket session and their corresponding username.
   private static Map<Session, String> sessionUsernameMap = new HashMap<>();
   private static Map<String, Session> usernameSessionMap = new HashMap<>();
-  private long start;
 
   private final Logger logger = LoggerFactory.getLogger(Server.class);
 
@@ -33,9 +33,7 @@ public class Server {
     sessionUsernameMap.put(session, username);
     usernameSessionMap.put(username, session);
 
-
-    String message="User: " + username + " has Joined the Game";
-    start = System.currentTimeMillis();
+    String message="User:" + username + " has Joined the Game";
     broadcast(message);
 
   }
@@ -61,7 +59,8 @@ public class Server {
     logger.info("Entered into Message: Got Message:"+message);
     String username = sessionUsernameMap.get(session);
 
-    broadcast(message);
+    broadcast(username + ": " + message);
+
   }
 
   // TODO
@@ -70,15 +69,11 @@ public class Server {
     // WebSocket connection closes
     logger.info("Entered into Close");
 
-    long stop = System.currentTimeMillis();
-    long timeElapsed = stop - start;
-    timeElapsed /= 1000F;
-
     String username = sessionUsernameMap.get(session);
     sessionUsernameMap.remove(session);
     usernameSessionMap.remove(username);
 
-    String message= timeElapsed + " seconds taken";
+    String message= username + " disconnected";
     broadcast(message);
   }
 
