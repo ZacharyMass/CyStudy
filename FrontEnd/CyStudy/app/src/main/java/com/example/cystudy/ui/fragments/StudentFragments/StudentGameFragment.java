@@ -23,6 +23,7 @@ import org.java_websocket.handshake.ServerHandshake;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Objects;
 
 public class StudentGameFragment extends Fragment {
 
@@ -38,9 +39,10 @@ public class StudentGameFragment extends Fragment {
 
         //Inflate view
         View v = inflater.inflate(R.layout.fragment_game, container, false);
+        TextView t = v.findViewById(R.id.term);
 
         Draft[] drafts = {new Draft_6455()};
-        String w = "http://coms-309-jr-7.misc.iastate.edu:8080/websocket/username=" + MainActivity.user;
+        String w = "http://coms-309-jr-7.misc.iastate.edu:8080/websocket/username";
 
         try {
             Log.d("Socket:", "Trying socket");
@@ -48,8 +50,7 @@ public class StudentGameFragment extends Fragment {
                 @Override
                 public void onMessage(String message) {
                     Log.d("", "run() returned: " + message);
-                    Toast t = Toast.makeText(getContext(), message, Toast.LENGTH_LONG);
-                    t.show();
+                    t.setText(message);
                 }
 
                 @Override
@@ -74,14 +75,13 @@ public class StudentGameFragment extends Fragment {
         cc.connect();
 
         // Set Click Listener
-        TextView t = v.findViewById(R.id.term);
         t.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
                     cc.send(MainActivity.user + " clicked the button");
                 } catch (Exception e) {
-                    Log.d("ExceptionSendMessage:", e.getMessage().toString());
+                    Log.d("ExceptionSendMessage:", Objects.requireNonNull(e.getMessage()));
                 }
             }
         });
