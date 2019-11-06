@@ -1,6 +1,8 @@
 package com.example.cystudy.ui.fragments.StudentFragments;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -40,10 +42,20 @@ public class StudentGameFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
         //Inflate view
         final View v = inflater.inflate(R.layout.fragment_game, container, false);
         final TextView t = v.findViewById(R.id.term);
+        final TextView timeText = v.findViewById(R.id.timer);
+
+        // Initialize timer here
+        final CountDownTimer timer = new CountDownTimer(30000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                timeText.setText(millisUntilFinished / 1000 + "");
+            }
+            public void onFinish() {
+                timeText.setText("Done!");
+            }
+        };
 
         Draft[] drafts = {new Draft_6455()};
         String w = "http://coms-309-jr-7.misc.iastate.edu:8080/websocket/username";
@@ -74,6 +86,7 @@ public class StudentGameFragment extends Fragment {
                         player2 = msgArray[1];
                         Log.d("Player 2", player2);
                         player2Text.setText(player2);
+                        timer.start(); // Start timer once both players are entered
                     } else if (!player1.equals("") && !player2.equals("")) { // player1 and player2 have been assigned, can update ProgressBar now
                         String[] msgArray = message.split(" ");
                         String userClick = msgArray[1];
