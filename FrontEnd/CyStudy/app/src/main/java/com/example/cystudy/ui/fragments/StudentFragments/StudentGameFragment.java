@@ -1,5 +1,6 @@
 package com.example.cystudy.ui.fragments.StudentFragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -45,6 +46,10 @@ public class StudentGameFragment extends Fragment {
         //Inflate view
         final View v = inflater.inflate(R.layout.fragment_game, container, false);
         final TextView t = v.findViewById(R.id.term);
+        t.setBackgroundColor(Color.GRAY);
+
+        t.setText("Click to enter game!"); // Temporary placeholder here
+
         final TextView timeText = v.findViewById(R.id.timer);
 
         // Initialize timer here
@@ -53,7 +58,25 @@ public class StudentGameFragment extends Fragment {
                 timeText.setText(millisUntilFinished / 1000 + "");
             }
             public void onFinish() {
-                timeText.setText("Done!");
+                timeText.setText("You suck!");
+            }
+        };
+
+        // Waiting timer to buffer a few seconds once both players join
+        final CountDownTimer buffer = new CountDownTimer(3000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                t.setClickable(false);
+                t.setBackgroundColor(Color.GRAY);
+                t.setText("Wait...");
+            }
+
+            @Override
+            public void onFinish() {
+                t.setText("Begin!");
+                t.setClickable(true);
+                t.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                timer.start();
             }
         };
 
@@ -66,7 +89,7 @@ public class StudentGameFragment extends Fragment {
                 @Override
                 public void onMessage(String message) {
                     Log.d("", "run() returned: " + message);
-                    t.setText(message);
+                    // t.setText(message);
 
                     /**
                      * This is temporary until Zach G. can have time to edit what gets sent back
@@ -81,20 +104,33 @@ public class StudentGameFragment extends Fragment {
                         player1 = msgArray[1];
                         Log.d("Player 1", player1);
                         player1Text.setText(player1);
+                        t.setText("Player 2 Click to Join!");
                     } else if (player2.equals("") && !message.substring(5, 13).matches("username")) {
                         String[] msgArray = message.split(" ");
                         player2 = msgArray[1];
                         Log.d("Player 2", player2);
                         player2Text.setText(player2);
-                        timer.start(); // Start timer once both players are entered
+                        buffer.start(); // Start timer once both players are entered
                     } else if (!player1.equals("") && !player2.equals("")) { // player1 and player2 have been assigned, can update ProgressBar now
                         String[] msgArray = message.split(" ");
                         String userClick = msgArray[1];
 
                         if (userClick.matches(player1)) {
+                            t.setText(player1 + " clicked!");
                             player1Progress.incrementProgressBy(20);
-                        } else {
+                            if (player1Progress.getProgress() == 100) { // Full progress bar
+                                timer.cancel(); // Stop timer
+                                timeText.setText(player1 + " Wins!");
+                                t.setClickable(false); // Disable the term TextView from being clicked again
+                            }
+                        } else if (userClick.matches(player2)) {
+                            t.setText(player2 + " clicked!");
                             player2Progress.incrementProgressBy(20);
+                            if (player2Progress.getProgress() == 100) { // Full progress bar
+                                timer.cancel(); // Stop timer
+                                timeText.setText((player2 + " Wins!"));
+                                t.setClickable(false); // Disable the term TextView from being clicked again
+                            }
                         }
                     }
                 }
