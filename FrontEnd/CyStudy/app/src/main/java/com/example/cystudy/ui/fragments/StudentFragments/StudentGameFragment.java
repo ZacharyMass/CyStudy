@@ -81,7 +81,7 @@ public class StudentGameFragment extends Fragment {
                 try {
                     cc.send(MainActivity.user + " clicked the button");
                 } catch (Exception e) {
-                    Log.d("ExceptionSendMessage:", Objects.requireNonNull(e.getMessage()));
+                    Log.d("ExceptionSendMessage:", e.getMessage());
                 }
             }
         });
