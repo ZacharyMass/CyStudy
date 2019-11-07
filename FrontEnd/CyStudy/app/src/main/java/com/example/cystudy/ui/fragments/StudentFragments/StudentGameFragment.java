@@ -81,7 +81,8 @@ public class StudentGameFragment extends Fragment {
         };
 
         Draft[] drafts = {new Draft_6455()};
-        String w = "http://coms-309-jr-7.misc.iastate.edu:8080/websocket/username";
+        String w = "http://coms-309-jr-7.misc.iastate.edu:8080/websocket/";
+        w += MainActivity.user;
 
         try {
             Log.d("Socket:", "Trying socket");
@@ -99,13 +100,13 @@ public class StudentGameFragment extends Fragment {
                     ProgressBar player1Progress = v.findViewById(R.id.userProgress);
                     ProgressBar player2Progress = v.findViewById(R.id.opponentProgress);
 
-                    if (player1.equals("") && !message.substring(5, 13).matches("username")) {
+                    if (player1.equals("") && !message.substring(5, 13).matches("username")) { // Edit this to fix string operations
                         String[] msgArray = message.split(" ");
                         player1 = msgArray[1];
                         Log.d("Player 1", player1);
                         player1Text.setText(player1);
                         t.setText("Player 2 Click to Join!");
-                    } else if (player2.equals("") && !message.substring(5, 13).matches("username")) {
+                    } else if (player2.equals("") && !message.substring(5, 13).matches("username")) { // Edit this to fix string operations
                         String[] msgArray = message.split(" ");
                         player2 = msgArray[1];
                         Log.d("Player 2", player2);
