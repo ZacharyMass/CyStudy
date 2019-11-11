@@ -89,8 +89,6 @@ public class StudentGameFragment extends Fragment {
             cc = new WebSocketClient(new URI(w), drafts[0]) {
                 @Override
                 public void onMessage(String message) {
-                    Log.d("", "run() returned: " + message);
-                    // t.setText(message);
 
                     /**
                      * This is temporary until Zach G. can have time to edit what gets sent back
@@ -100,15 +98,14 @@ public class StudentGameFragment extends Fragment {
                     ProgressBar player1Progress = v.findViewById(R.id.userProgress);
                     ProgressBar player2Progress = v.findViewById(R.id.opponentProgress);
 
-                    if (player1.equals("") && !message.substring(5, 13).matches("username")) { // Edit this to fix string operations
-                        String[] msgArray = message.split(" ");
-                        player1 = msgArray[1];
-                        Log.d("Player 1", player1);
+                    if (player1.equals("") && !message.substring(0, 5).matches("User:")) { // Edit this to fix string operations
+                        String[] msgArray = message.split(":");
+                        player1 = msgArray[0];
                         player1Text.setText(player1);
                         t.setText("Player 2 Click to Join!");
-                    } else if (player2.equals("") && !message.substring(5, 13).matches("username")) { // Edit this to fix string operations
-                        String[] msgArray = message.split(" ");
-                        player2 = msgArray[1];
+                    } else if (player2.equals("") && !message.substring(0, 5).matches("User:")) { // Edit this to fix string operations
+                        String[] msgArray = message.split(":");
+                        player2 = msgArray[0];
                         Log.d("Player 2", player2);
                         player2Text.setText(player2);
                         buffer.start(); // Start timer once both players are entered
