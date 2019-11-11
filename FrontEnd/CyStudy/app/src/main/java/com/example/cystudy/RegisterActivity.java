@@ -13,16 +13,27 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.cystudy.ui.fragments.TeacherFragments.TeacherClassFragment;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+
+import static java.security.AccessController.getContext;
 
 /**
  * Register page for users not currently in database
  * @author Zach Mass
  */
 public class RegisterActivity extends AppCompatActivity {
+
+    String userRole;
 
     /**
      * Populate role spinner on creation of page
@@ -84,6 +95,44 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
+        try {
+            String URL = "http://coms-309-jr-7.misc.iastate.edu:8080/add-user";
+            JSONObject jsonBody = new JSONObject();
+            RequestQueue addUserQueue = Volley.newRequestQueue(getApplicationContext());
+
+            jsonBody.put("username", email.getText());
+            jsonBody.put("password", pass.getText());
+            jsonBody.put("role", role.getSelectedItem().toString());
+            userRole = role.getSelectedItem().toString();
+
+            JsonObjectRequest addUserRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonBody, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    // Need some form of verification here - ran into errors, but moving on to complete more work
+
+                    // Toast User Creation
+                    Toast toast = Toast.makeText(getApplicationContext(), "User Created", Toast.LENGTH_SHORT);
+                    toast.show();
+
+                    // Navigate Home
+                    Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                    startActivity(intent);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    error.printStackTrace();
+                    Log.d("addUser Error", error.toString());
+                }
+            });
+
+            addUserQueue.add(addUserRequest);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        /*
         // Establish Queue
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://coms-309-jr-7.misc.iastate.edu:8080/add-user";
@@ -127,5 +176,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Send to Server
         queue.add(postRequest);
+         */
     }
 }
