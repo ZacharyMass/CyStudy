@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static String url = "coms-309-jr-7.misc.iastate.edu";
     public static String user = LoginActivity.user;
-    public static String currentClass = "COMS309";
+    public static String currentClass = "COMS309"; // TODO: fix this once unique items in RecyclerView can be selected
     public static String userRole = LoginActivity.role; // TODO: fix this to account for user coming from RegisterActivity
     public static BottomNavigationView bottomNavigationView;
     public static NavController navController;
@@ -137,6 +137,18 @@ public class MainActivity extends AppCompatActivity {
                                 case R.id.action_settings:
                                     navController.navigate(R.id.action_teacherSetsFragment_to_teacherSettingsFragment);
                                     break;
+                            }
+                        } else if (navController.getCurrentDestination().getId() == R.id.adminManageClassesFragment) {
+                            if (menuItem.getItemId() == R.id.action_home) {
+                                navController.navigate(R.id.action_adminManageClassesFragment_to_adminHomeFragment);
+                            }
+                        } else if (navController.getCurrentDestination().getId() == R.id.adminManageTeachersFragment) {
+                            if (menuItem.getItemId() == R.id.action_home) {
+                                navController.navigate(R.id.action_adminManageTeachersFragment_to_adminHomeFragment);
+                            }
+                        } else if (navController.getCurrentDestination().getId() == R.id.adminManageStudentsFragment) {
+                            if (menuItem.getItemId() == R.id.action_home) {
+                                navController.navigate(R.id.action_adminManageStudentsFragment_to_adminHomeFragment);
                             }
                         }
 

@@ -53,7 +53,7 @@ public class AdminHomeFragment extends Fragment {
                 BottomNavigationView bottomNavView = MainActivity.bottomNavigationView;
                 NavController navController = MainActivity.navController;
                 setupWithNavController(bottomNavView, navController);
-                navController.navigate(R.id.action_adminHomeFragment_to_adminManageClassesFragment);
+                navController.navigate(R.id.action_adminHomeFragment_to_adminManageStudentsFragment);
             }
         });
 

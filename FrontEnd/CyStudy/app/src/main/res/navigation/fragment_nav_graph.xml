@@ -220,16 +220,36 @@
             <action
                 android:id="@+id/action_adminHomeFragment_to_adminManageTeachersFragment"
                 app:destination="@id/adminManageTeachersFragment" />
+            <action
+                android:id="@+id/action_adminHomeFragment_to_adminManageStudentsFragment"
+                app:destination="@id/adminManageStudentsFragment" />
         </fragment>
         <fragment
             android:id="@+id/adminManageClassesFragment"
             android:name="com.example.cystudy.ui.fragments.AdminFragments.AdminManageClassesFragment"
             android:label="fragment_admin_manage_classes"
-            tools:layout="@layout/fragment_admin_manage_classes" />
+            tools:layout="@layout/fragment_admin_manage_classes" >
+            <action
+                android:id="@+id/action_adminManageClassesFragment_to_adminHomeFragment"
+                app:destination="@id/adminHomeFragment" />
+        </fragment>
         <fragment
             android:id="@+id/adminManageTeachersFragment"
             android:name="com.example.cystudy.ui.fragments.AdminFragments.AdminManageTeachersFragment"
             android:label="fragment_admin_manage_teachers"
-            tools:layout="@layout/fragment_admin_manage_teachers" />
+            tools:layout="@layout/fragment_admin_manage_teachers" >
+            <action
+                android:id="@+id/action_adminManageTeachersFragment_to_adminHomeFragment"
+                app:destination="@id/adminHomeFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/adminManageStudentsFragment"
+            android:name="com.example.cystudy.ui.fragments.AdminFragments.AdminManageStudentsFragment"
+            android:label="fragment_admin_manage_students"
+            tools:layout="@layout/fragment_admin_manage_students" >
+            <action
+                android:id="@+id/action_adminManageStudentsFragment_to_adminHomeFragment"
+                app:destination="@id/adminHomeFragment" />
+        </fragment>
     </navigation>
 </navigation>
