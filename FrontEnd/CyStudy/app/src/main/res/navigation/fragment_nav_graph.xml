@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_blankConditionalNavFragment_to_studentHomeFragment"
             app:destination="@id/studentNavigation" />
+        <action
+            android:id="@+id/action_blankConditionalNavFragment_to_adminHomeFragment"
+            app:destination="@id/adminNavigation" />
     </fragment>
     <activity
         android:id="@+id/loginActivity"
@@ -202,5 +205,14 @@
                 android:id="@+id/action_teacherSetsFragment_to_teacherFlashcardFragment"
                 app:destination="@id/teacherFlashcardFragment" />
         </fragment>
+    </navigation>
+    <navigation
+        android:id="@+id/adminNavigation"
+        app:startDestination="@id/adminHomeFragment" >
+        <fragment
+            android:id="@+id/adminHomeFragment"
+            android:name="com.example.cystudy.ui.fragments.AdminFragments.AdminHomeFragment"
+            android:label="fragment_admin_home"
+            tools:layout="@layout/fragment_admin_home" />
     </navigation>
 </navigation>

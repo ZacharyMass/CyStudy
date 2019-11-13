@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     public static String url = "coms-309-jr-7.misc.iastate.edu";
     public static String user = LoginActivity.user;
     public static String currentClass = "COMS309";
-    public static String userRole = LoginActivity.role; // Will be initialized via a String Request to server
+    public static String userRole = LoginActivity.role; // TODO: fix this to account for user coming from RegisterActivity
     public static BottomNavigationView bottomNavigationView;
     public static NavController navController;
 
@@ -49,8 +49,10 @@ public class MainActivity extends AppCompatActivity {
             if (userRole.matches("student")) {
                 navController.navigate(R.id.action_blankConditionalNavFragment_to_studentHomeFragment);
             }
-            else { // userRole.matches("teacher")
+            else if (userRole.matches("teacher")){ // userRole.matches("teacher")
                 navController.navigate(R.id.action_blankConditionalNavFragment_to_teacherHomeFragment);
+            } else { // userRole.matches("Administrator")
+                navController.navigate(R.id.action_blankConditionalNavFragment_to_adminHomeFragment);
             }
         }
 
