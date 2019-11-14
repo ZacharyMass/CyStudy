@@ -23,22 +23,26 @@ public class Server {
   private final Logger logger = LoggerFactory.getLogger(Server.class);
 
 
-  //TODO This might actually be fine tbh
+  /*TODO
+   * - Check for same username entering game
+   * - Check for more than 2 players
+   * - multiple threads for other groups of 2 playing
+   */
   @OnOpen
   public void onOpen(Session session, @PathParam("username") String username) throws IOException {
 
     // get session and websocket connection
     logger.info("Entered onOpen in com.jr7.cystudy.sockets.Server");
 
+    //if(sessionUsernameMap.containsKey(username))
     sessionUsernameMap.put(session, username);
     usernameSessionMap.put(username, session);
 
-    String message="User:" + username + " has Joined the Game";
+    String message="User: " + username + " has Joined the Game";
     broadcast(message);
 
   }
 
-  // TODO this MIGHT also be fine, but likely needs some extra stuff inside the lambda
   private static void broadcast(String message) throws IOException {
     sessionUsernameMap.forEach((session, username) -> {
       synchronized (session) {
@@ -51,7 +55,11 @@ public class Server {
     });
   }
 
-  // TODO Fix so that it's more along the lines of "on interaction"
+  /*TODO
+   * - Population of terms and buttons
+   * - Taking in true and false
+   * - Taking in time spent on game
+   */
   @OnMessage
   public void onMessage(Session session, String message) throws IOException {
 
