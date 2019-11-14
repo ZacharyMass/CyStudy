@@ -15,6 +15,7 @@ import static androidx.navigation.ui.NavigationUI.setupWithNavController;
 
 /**
  * Basis for all conditional navigation in app. Directs user to appropriate set of fragments to navigate within.
+ *
  * @author Zach Mass
  */
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Initializes bottom navigation bar, directs user to appropriate set of pages based on user role.
+     *
      * @param savedInstanceState Bundle object
      */
     @Override
@@ -48,8 +50,7 @@ public class MainActivity extends AppCompatActivity {
         if (navController.getCurrentDestination().getId() == R.id.blankConditionalNavFragment) {
             if (userRole.matches("student")) {
                 navController.navigate(R.id.action_blankConditionalNavFragment_to_studentHomeFragment);
-            }
-            else { // userRole.matches("teacher")
+            } else { // userRole.matches("teacher")
                 navController.navigate(R.id.action_blankConditionalNavFragment_to_teacherHomeFragment);
             }
         }
@@ -136,13 +137,23 @@ public class MainActivity extends AppCompatActivity {
                                     navController.navigate(R.id.action_teacherSetsFragment_to_teacherSettingsFragment);
                                     break;
                             }
+                        } else if (navController.getCurrentDestination().getId() == R.id.gameFragment) {
+                            switch (menuItem.getItemId()) {
+                                case R.id.action_settings:
+                                    navController.navigate(R.id.action_gameFragment_to_settingsFragment);
+                                    break;
+                                case R.id.action_stats:
+                                    navController.navigate(R.id.action_gameFragment_to_studentStatsFragment);
+                                    break;
+                                case R.id.action_home:
+                                    navController.navigate(R.id.action_gameFragment_to_studentHomeFragment);
+                                    break;
+                            }
                         }
-
                         return true;
                     }
                 }
         );
+
     }
-
 }
-
