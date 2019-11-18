@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 29
+    buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.example.cystudy"
         minSdkVersion 19
@@ -44,6 +45,8 @@ dependencies {
     androidTestImplementation 'junit:junit:4.12'
     androidTestImplementation 'org.mockito:mockito-android:2.+'
     androidTestImplementation 'org.mockito:mockito-core:2.+'
+    // Core library
+    androidTestImplementation 'androidx.test:core:1.0.0'
 
     //Fragment Scenario
     debugImplementation 'androidx.fragment:fragment-testing:1.1.0'
