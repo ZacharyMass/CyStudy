@@ -40,7 +40,9 @@ public class AdminCreateClassFragment extends Fragment {
         createClassButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createClass();
+                if (className.getText() != null) {
+                    createClass();
+                }
             }
         });
 

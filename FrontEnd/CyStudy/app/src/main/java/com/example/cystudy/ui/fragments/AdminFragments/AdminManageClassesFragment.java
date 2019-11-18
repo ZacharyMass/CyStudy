@@ -111,7 +111,6 @@ public class AdminManageClassesFragment extends Fragment {
         );
 
         requestQueue.add(jsonArrayRequest);
-
     }
 }
 
