@@ -58,7 +58,7 @@ public class AdminManageClassesFragment extends Fragment {
             }
         });
 
-        pullClasses();
+        pullClasses(); // This can run every time because ArrayList will be empty
 
         return v;
     }
