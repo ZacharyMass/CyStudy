@@ -33,7 +33,7 @@ import java.util.Objects;
 
 public class AdminManageTeachersFragment extends Fragment {
 
-    private View v;
+    View v;
     ArrayList<String> teachersL = new ArrayList<>();
 
     @Override
@@ -47,7 +47,7 @@ public class AdminManageTeachersFragment extends Fragment {
 
         teachersL.clear(); // Clear on creation to prevent duplication of RecyclerView objects
 
-        View v = inflater.inflate(R.layout.fragment_admin_manage_teachers, container, false);
+        v = inflater.inflate(R.layout.fragment_admin_manage_teachers, container, false);
 
         pullTeachers();
 
@@ -56,8 +56,51 @@ public class AdminManageTeachersFragment extends Fragment {
 
     public void pullTeachers() {
 
-        String URL = "http://coms-309-jr-7.misc.iastate.edu:8080/get-users-by-role";
+        String URL = "http://coms-309-jr-7.misc.iastate.edu:8080/get-users-by-role?role=teacher";
 
+        RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(getContext()));
 
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                URL,
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+
+                        try {
+                            // Loop through the array elements
+                            for (int i = 0; i < response.length(); i++) {
+                                // Get current json object
+                                JSONObject teacher = response.getJSONObject(i);
+
+                                // Get the current teacher (json object) data
+                                String teacherName = teacher.getString("username");
+
+                                // Add names in desired format to array
+                                teachersL.add(teacherName);
+                                Log.d("Teacher", teachersL.get(i));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        // Initialize Recycler
+                        RecyclerView r = v.findViewById(R.id.adminTeachersRecyclerView);
+                        RecyclerViewAdapter a = new RecyclerViewAdapter(getContext(), teachersL);
+                        Log.d("Current context", getContext().toString());
+                        r.setAdapter(a);
+                        r.setLayoutManager(new LinearLayoutManager(getContext()));
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                }
+        );
+
+        requestQueue.add(jsonArrayRequest);
     }
 }
