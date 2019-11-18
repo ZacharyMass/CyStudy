@@ -1,6 +1,7 @@
 package com.jr7.cystudy.repository;
 
 import com.jr7.cystudy.model.User;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,4 +23,13 @@ public interface UserRepository extends JpaRepository<User, String> {
    * @return user {@link User}
    */
   User getUserByUsername(String username);
+
+  /**
+   * Query database to get all users with matching role.
+   *
+   * @see com.jr7.cystudy.service.UserService
+   * @param role string of role to get all of the users of
+   * @return array list of users {@link User}
+   */
+  List<User> getUsersByRole(String role);
 }

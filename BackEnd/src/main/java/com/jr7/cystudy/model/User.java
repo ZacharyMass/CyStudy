@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @NamedQuery(name = "User.getUserByUsername", query = "SELECT u FROM User u WHERE u.username = ?1")
+@NamedQuery(name = "User.getUsersByRole", query = "SELECT u FROM User u WHERE u.role = ?1")
 @Table(name = "users")
 public class User {
 
@@ -13,11 +14,11 @@ public class User {
   @Column(name = "id")
   private long id;
 
-  /** username. pretty self explanatory */
+  /** username. pretty self explanatory. */
   @Column(name = "username")
   private String username;
 
-  /** BCrypt hashed password of the user */
+  /** BCrypt hashed password of the user. */
   @Column(name = "password")
   private String password;
 
@@ -26,7 +27,7 @@ public class User {
   private String role;
 
   /**
-   * getter method to get the username of the User model
+   * getter method to get the username of the User model.
    *
    * @return username
    */
@@ -35,7 +36,7 @@ public class User {
   }
 
   /**
-   * Setter method to set a username of a User model
+   * Setter method to set a username of a User model.
    *
    * @param username self explanatory
    */
@@ -45,7 +46,7 @@ public class User {
 
   /**
    * Getter method to get the hashed password of the user. used for login in {@link
-   * com.jr7.cystudy.service.UserService} and {@link com.jr7.cystudy.controller.UserController}
+   * com.jr7.cystudy.service.UserService} and {@link com.jr7.cystudy.controller.UserController}.
    *
    * @return hashed password of user
    */
@@ -54,7 +55,7 @@ public class User {
   }
 
   /**
-   * setter method to set hashed password of a user model
+   * setter method to set hashed password of a user model.
    *
    * @param pass hashed password to set
    */
@@ -63,7 +64,7 @@ public class User {
   }
 
   /**
-   * getter method to get a user model's role
+   * getter method to get a user model's role.
    *
    * @return role of user
    */
@@ -72,7 +73,7 @@ public class User {
   }
 
   /**
-   * Setter method to set the role of a user
+   * Setter method to set the role of a user.
    *
    * @param role string to set the user's role to
    */

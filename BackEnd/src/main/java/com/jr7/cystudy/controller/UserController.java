@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * Controller for everything related to User models
+ * Controller for everything related to User models.
  *
  * @see UserService
  * @see com.jr7.cystudy.repository.UserRepository
@@ -26,7 +26,7 @@ public class UserController {
   private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
   /**
-   * Endpoint to get all users in the database
+   * Endpoint to get all users in the database.
    *
    * @return List of users, that shows up as a JSON (thanks either Spring or HTTP)
    */
@@ -37,7 +37,19 @@ public class UserController {
   }
 
   /**
-   * Gets a User object from the database based on the username specified
+   * Given a role, get all users with a matching role.
+   *
+   * @param u User object with ONLY role defined
+   * @return ArrayList of Users with matching roles
+   */
+  @GetMapping(path = "/get-users-by-role")
+  public List<User> getUsersByRole(@RequestBody User u) {
+    logger.info("Entered UserController - getUsersByRole");
+    return UserService.getUsersByRole(u.getRole());
+  }
+
+  /**
+   * Gets a User object from the database based on the username specified.
    *
    * @param username name of user object to retrieve. sent as a url parameter
    * @return User object (but actually JSON version)
@@ -49,7 +61,7 @@ public class UserController {
   }
 
   /**
-   * Gets the role of a user specified as a parameter
+   * Gets the role of a user specified as a parameter.
    *
    * @param username String of username of a User object to check the role of (sent as url
    *     parameter)
@@ -68,7 +80,7 @@ public class UserController {
   }
 
   /**
-   * Check if the user exists via request. Likely soon to be deprecated b/c of login
+   * Check if the user exists via request. Likely soon to be deprecated b/c of login.
    *
    * @param username String url parameter of the username portion of a User object you're checking
    *     that exists
@@ -81,7 +93,7 @@ public class UserController {
   }
 
   /**
-   * Adds a user to the database
+   * Adds a user to the database.
    *
    * @param u User object, with only the username and password
    * @return String saying that either the user exists, or that a user with that username already
@@ -103,7 +115,7 @@ public class UserController {
   }
 
   /**
-   * endpoint used for logging in
+   * endpoint used for logging in.
    *
    * @param u User object containing ONLY username and password
    * @return String saying that the user doesn't exist, the password was correct, or the password
