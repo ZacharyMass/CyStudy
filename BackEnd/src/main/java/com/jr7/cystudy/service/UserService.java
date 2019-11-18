@@ -53,6 +53,10 @@ public class UserService {
     return UserRepository.getUserByUsername(username);
   }
 
+  public List<User> getUsersByRole(String role) {
+    return UserRepository.getUsersByRole(role);
+  }
+
   /**
    * Checking is a user is registered or not.
    *
