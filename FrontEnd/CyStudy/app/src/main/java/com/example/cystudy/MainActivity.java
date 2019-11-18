@@ -12,6 +12,7 @@ import androidx.navigation.Navigation;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import static androidx.navigation.ui.NavigationUI.setupWithNavController;
+import static java.lang.Boolean.FALSE;
 
 /**
  * Basis for all conditional navigation in app. Directs user to appropriate set of fragments to navigate within.
