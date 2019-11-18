@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan(basePackages = {"com.jr7"})
 @EnableJpaRepositories("com.jr7.cystudy.repository")
 public class CyStudyApplication {
-    public static void main(String[] args){
-        SpringApplication.run(CyStudyApplication.class, args);
-    }
+  public static void main(String[] args) {
+    SpringApplication.run(CyStudyApplication.class, args);
+  }
 }

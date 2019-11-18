@@ -1,16 +1,14 @@
 package com.jr7.cystudy.sockets;
 
-import com.jr7.cystudy.sockets.Config;
-import org.springframework.stereotype.Component;
-
-import javax.websocket.*;
-import javax.websocket.server.PathParam;
-import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import javax.websocket.*;
+import javax.websocket.server.PathParam;
+import javax.websocket.server.ServerEndpoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 @ServerEndpoint("/websocket/{username}")
 @Component
@@ -21,7 +19,6 @@ public class Server {
   private static Map<String, Session> usernameSessionMap = new HashMap<>();
 
   private final Logger logger = LoggerFactory.getLogger(Server.class);
-
 
   /*TODO
    * - Check for same username entering game
@@ -34,25 +31,25 @@ public class Server {
     // get session and websocket connection
     logger.info("Entered onOpen in com.jr7.cystudy.sockets.Server");
 
-    //if(sessionUsernameMap.containsKey(username))
+    // if(sessionUsernameMap.containsKey(username))
     sessionUsernameMap.put(session, username);
     usernameSessionMap.put(username, session);
 
-    String message="User: " + username + " has Joined the Game";
+    String message = "User: " + username + " has Joined the Game";
     broadcast(message);
-
   }
 
   private static void broadcast(String message) throws IOException {
-    sessionUsernameMap.forEach((session, username) -> {
-      synchronized (session) {
-        try {
-          session.getBasicRemote().sendText(message);
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-      }
-    });
+    sessionUsernameMap.forEach(
+        (session, username) -> {
+          synchronized (session) {
+            try {
+              session.getBasicRemote().sendText(message);
+            } catch (IOException e) {
+              e.printStackTrace();
+            }
+          }
+        });
   }
 
   /*TODO
@@ -64,11 +61,10 @@ public class Server {
   public void onMessage(Session session, String message) throws IOException {
 
     // Handle new messages
-    logger.info("Entered into Message: Got Message:"+message);
+    logger.info("Entered into Message: Got Message:" + message);
     String username = sessionUsernameMap.get(session);
 
     broadcast(username + ": " + message);
-
   }
 
   // TODO
@@ -81,7 +77,7 @@ public class Server {
     sessionUsernameMap.remove(session);
     usernameSessionMap.remove(username);
 
-    String message= username + " disconnected";
+    String message = username + " disconnected";
     broadcast(message);
   }
 

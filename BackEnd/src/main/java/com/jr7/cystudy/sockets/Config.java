@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
 /**
- * Web Sockets Configuration
+ * Web Sockets Configuration.
  *
  * @author Zach Gorman
  */
@@ -13,7 +13,7 @@ import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 public class Config {
 
   @Bean
-  public ServerEndpointExporter serverEndpointExporter(){
+  public ServerEndpointExporter serverEndpointExporter() {
     return new ServerEndpointExporter();
   }
 }
