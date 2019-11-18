@@ -45,6 +45,8 @@ public class AdminManageClassesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
+        classesL.clear(); // Clear on creation to prevent duplication of RecyclerView objects
+
         v = inflater.inflate(R.layout.fragment_admin_manage_classes, container, false);
 
         FloatingActionButton goToAddClasses = v.findViewById(R.id.adminAddClassFloat);
