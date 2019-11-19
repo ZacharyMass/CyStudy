@@ -108,12 +108,14 @@ public class Server {
         || message.equalsIgnoreCase("false")
         || message.equalsIgnoreCase("start")) {
 
+      if (g.round == 1) {
+        sendTerms();
+      }
+
       if (username.equalsIgnoreCase(g.player1)) {
         sendTerms(g.round, g.player2);
       } else if (username.equalsIgnoreCase(g.player2)) {
         sendTerms(g.round, g.player1);
-      } else {
-        sendTerms();
       }
 
       if (message.equalsIgnoreCase("true")) {
@@ -133,7 +135,7 @@ public class Server {
   private static void sendTerms() throws IOException {
 
     List<Terms> roundTerms = new ArrayList<>();
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 4; i++) {
       if (i < g.questions.size() - 1) {
         break;
       }
@@ -154,9 +156,9 @@ public class Server {
 
   private static void sendTerms(int round, String uname) throws IOException {
 
-    int firstCardIdx = round * 5;
+    int firstCardIdx = round * 4;
     List<Terms> roundTerms = new ArrayList<>();
-    for (int i = firstCardIdx; i <= firstCardIdx + 5; i++) {
+    for (int i = firstCardIdx; i <= firstCardIdx + 4; i++) {
       if (i < g.questions.size() - 1) {
         break;
       }
