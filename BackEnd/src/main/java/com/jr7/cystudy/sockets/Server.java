@@ -59,18 +59,24 @@ public class Server {
 //      onClose(session);
 //    }
 
-    if (sessionUsernameMap.isEmpty()) {
-      g.player1 = username;
-    } else {
-      g.player2 = username;
-    }
+//    if (sessionUsernameMap.isEmpty()) {
+//      g.player1 = username;
+//    } else {
+//      g.player2 = username;
+//    }
+
+    if(g.player1.equalsIgnoreCase("none")) g.player1 = username;
+    else if(g.player2.equalsIgnoreCase("none")) g.player2 = username;
 
     sessionUsernameMap.put(session, username);
     usernameSessionMap.put(username, session);
 
-    gameService.getQuestions(g, "COMS309");
+    logger.info("about to enter getQuestions");
+    g.questions =  gameService.getQuestions(g, "COMS309");
+    logger.info("exited getQuestions");
 
     String message = "User: " + username + " has Joined the Game";
+    logger.info("entering broadcast");
     broadcast(message);
   }
 
@@ -208,6 +214,6 @@ public class Server {
     logger.error(throwable.toString());
     logger.error(throwable.getMessage());
     logger.error(throwable.getLocalizedMessage());
-    logger.error(throwable.getCause().toString());
+    //logger.error(throwable.getCause().toString());
   }
 }
