@@ -198,7 +198,7 @@ public class Server {
 
     logger.info("inside sendTerms, username is: " + uname);
 
-    int firstCardIdx = (round * 4 > g.questions.size() - 1) ? ((round * 4)) : round * 4;
+    int firstCardIdx = ((round * 4) > (g.questions.size() - 1)) ? ((round * 4) % (g.questions.size()-1)) : round * 4;
     FakeTerm roundTerm = new FakeTerm();
 
     logger.info("inside sendTerms(arg arg) on firstCardIdx: " + firstCardIdx);
