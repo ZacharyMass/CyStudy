@@ -21,5 +21,7 @@ public class Game {
     p1Correct = 0;
     p2Correct = 0;
     round = 1;
+    player1 = "none";
+    player2 = "none";
   }
 }
