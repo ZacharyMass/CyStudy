@@ -2,14 +2,10 @@ package com.jr7.cystudy.sockets;
 
 import com.jr7.cystudy.model.FakeTerm;
 import com.jr7.cystudy.model.Game;
-import com.jr7.cystudy.model.Terms;
 import com.jr7.cystudy.service.GameService;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import javax.websocket.EncodeException;
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
@@ -17,7 +13,6 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,25 +51,28 @@ public class Server {
     // Plus, can't find a good example of rejecting an incoming connection this way.
     // if(sessionUsernameMap.containsKey(username)){ }
 
-//    if (sessionUsernameMap.size() >= 2) {
-//      broadcast("This game already has 2 players, and another tried to join.");
-//      onClose(session);
-//    }
+    //    if (sessionUsernameMap.size() >= 2) {
+    //      broadcast("This game already has 2 players, and another tried to join.");
+    //      onClose(session);
+    //    }
 
-//    if (sessionUsernameMap.isEmpty()) {
-//      g.player1 = username;
-//    } else {
-//      g.player2 = username;
-//    }
+    //    if (sessionUsernameMap.isEmpty()) {
+    //      g.player1 = username;
+    //    } else {
+    //      g.player2 = username;
+    //    }
 
-    if(g.player1.contains("none")) g.player1 = username;
-    else if(g.player2.contains("none")) g.player2 = username;
+    if (g.player1.contains("none")) {
+      g.player1 = username;
+    } else if (g.player2.contains("none")) {
+      g.player2 = username;
+    }
 
     sessionUsernameMap.put(session, username);
     usernameSessionMap.put(username, session);
 
     logger.info("about to enter getQuestions");
-    g.questions =  gameService.getQuestions(g, "COMS309");
+    g.questions = gameService.getQuestions(g, "COMS309");
     logger.info("exited getQuestions");
 
     String message = "User: " + username + " has Joined the Game";
@@ -110,14 +108,15 @@ public class Server {
     String username = sessionUsernameMap.get(session);
 
     logger.info("about to check if message contains correct, incorrect, or clicked");
-    if ( (message.contains("correct")) || message.contains("incorrect")) {
+    if ((message.contains("correct")) || message.contains("incorrect")) {
+      logger.info("congrats your message contains correct or incorrect");
 
-//      if (g.round == 1) {
-//        sendTerms();
-//      }
+      //      if (g.round == 1) {
+      //        sendTerms();
+      //      }
 
       logger.info("about to check username to send terms to");
-      if(g.player1 != null && g.player1 != null){
+      if (g.player1 != null && g.player1 != null) {
         if (username.equalsIgnoreCase(g.player1)) {
           logger.info("sending terms to player1");
           sendTerms(g.round, g.player2);
@@ -126,7 +125,6 @@ public class Server {
           sendTerms(g.round, g.player1);
         }
       }
-
 
       logger.info("about to increment if answer was correct");
       if (message.contains("correct")) {
@@ -138,13 +136,14 @@ public class Server {
         }
       }
       g.round++;
-    }
-    else if(message.contains("clicked")){
+    } else if (message.contains("clicked")) {
       logger.info("message.contains(clicked) == true");
-      if(g.round ==1) sendTerms();
+      if (g.round == 1) {
+        sendTerms();
+      }
       logger.info("boutta broadcast from clicked shit");
       broadcast(username + ": " + message);
-    } else{
+    } else {
       logger.info("message didn't contain any of the shit you're testing for, so you fucked");
       broadcast(username + ": " + message);
     }
@@ -153,29 +152,24 @@ public class Server {
   private static void sendTerms() throws IOException {
 
     FakeTerm roundTerm = new FakeTerm();
-    for (int i = 0; i < 4; i++) {
-      logger.info("inside sendTerms() for loop on iteration: " + i);
 
-      if(i > g.questions.size() - 1){
-        break;
-      }
+    logger.info("abt to enter ternary madness in sendTerms");
+    roundTerm.question = g.questions.get(0).getAnswer();
+    roundTerm.correctAnswer = g.questions.get(0).getAnswer();
+    roundTerm.wrongAnswer0 =
+        (1 < g.questions.size())
+            ? g.questions.get(1).getAnswer()
+            : g.questions.get((1) - (g.questions.size() - 1)).getAnswer();
+    roundTerm.wrongAnswer1 =
+        (2 < g.questions.size())
+            ? g.questions.get(2).getAnswer()
+            : g.questions.get((2) - (g.questions.size() - 1)).getAnswer();
+    roundTerm.wrongAnswer2 =
+        (3 < g.questions.size())
+            ? g.questions.get(3).getAnswer()
+            : g.questions.get((3) - (g.questions.size() - 1)).getAnswer();
 
-      roundTerm.question = g.questions.get(i).getAnswer();
-      roundTerm.correctAnswer = g.questions.get(i).getAnswer();
-      roundTerm.wrongAnswer0 =
-          (i + 1 < g.questions.size())
-              ? g.questions.get(i + 1).getAnswer()
-              : g.questions.get((i + 1) - (g.questions.size() - 1)).getAnswer();
-      roundTerm.wrongAnswer1 =
-          (i + 2 < g.questions.size())
-              ? g.questions.get(i + 2).getAnswer()
-              : g.questions.get((i + 2) - (g.questions.size() - 1)).getAnswer();
-      roundTerm.wrongAnswer2 =
-          (i + 3 < g.questions.size())
-              ? g.questions.get(i + 3).getAnswer()
-              : g.questions.get((i + 3) - (g.questions.size() - 1)).getAnswer();
-    }
-    logger.info("exited for loop from sendTerms()");
+    logger.info("exited ternary madness in sendTerms()");
 
     logger.info("inside sendTerms() about to do session foreach lambda");
     sessionUsernameMap.forEach(
@@ -202,33 +196,24 @@ public class Server {
     int firstCardIdx = round * 4;
     FakeTerm roundTerm = new FakeTerm();
 
-    logger.info("about to enter sendTerms(arg arg) for loop");
-    for (int i = firstCardIdx; i <= firstCardIdx + 4; i++){
+    logger.info("inside sendTerms(arg arg) on firstCardIdx: " + firstCardIdx);
 
-      logger.info("inside sendTerms(arg arg) for loop on iteration: " + i);
-      if(i > g.questions.size() - 1){
-        logger.error("breaking inside sendTerms(arg arg) cuz out of terms");
-        break;
-      }
-
-      logger.info("about to enter ternary madness inside sendTerms(arg arg)");
-      roundTerm.question = g.questions.get(i).getAnswer();
-      roundTerm.correctAnswer = g.questions.get(i).getAnswer();
-      roundTerm.wrongAnswer0 =
-          (i + 1 < g.questions.size())
-              ? g.questions.get(i + 1).getAnswer()
-              : g.questions.get((i + 1) - (g.questions.size() - 1)).getAnswer();
-      roundTerm.wrongAnswer1 =
-          (i + 2 < g.questions.size())
-              ? g.questions.get(i + 2).getAnswer()
-              : g.questions.get((i + 2) - (g.questions.size() - 1)).getAnswer();
-      roundTerm.wrongAnswer2 =
-          (i + 3 < g.questions.size())
-              ? g.questions.get(i + 3).getAnswer()
-              : g.questions.get((i + 3) - (g.questions.size() - 1)).getAnswer();
-      logger.info("exited ternary madness in sendTerms(arg arg");
-    }
-    logger.info("exited for loop in sendTerms(arg arg");
+    logger.info("about to enter ternary madness inside sendTerms(arg arg)");
+    roundTerm.question = g.questions.get(firstCardIdx).getAnswer();
+    roundTerm.correctAnswer = g.questions.get(firstCardIdx).getAnswer();
+    roundTerm.wrongAnswer0 =
+        (firstCardIdx + 1 < g.questions.size())
+            ? g.questions.get(firstCardIdx + 1).getAnswer()
+            : g.questions.get((firstCardIdx + 1) - (g.questions.size() - 1)).getAnswer();
+    roundTerm.wrongAnswer1 =
+        (firstCardIdx + 2 < g.questions.size())
+            ? g.questions.get(firstCardIdx + 2).getAnswer()
+            : g.questions.get((firstCardIdx + 2) - (g.questions.size() - 1)).getAnswer();
+    roundTerm.wrongAnswer2 =
+        (firstCardIdx + 3 < g.questions.size())
+            ? g.questions.get(firstCardIdx + 3).getAnswer()
+            : g.questions.get((firstCardIdx + 3) - (g.questions.size() - 1)).getAnswer();
+    logger.info("exited ternary madness in sendTerms(arg arg");
 
     try {
       logger.info("about to try sending q&a  in sendTerms(arg arg)");
@@ -239,36 +224,35 @@ public class Server {
       usernameSessionMap.get(uname).getBasicRemote().sendText(roundTerm.wrongAnswer2);
       logger.info("finished sending q&a in sendTerms(arg arg)");
 
-    }
-    catch (IOException e) {
+    } catch (IOException e) {
       logger.error("you fucked up and caught an IOException in sendTerms(arg arg)");
       logger.error(e.toString());
       e.printStackTrace();
     }
   }
 
-//  private static boolean getFakeTerm(FakeTerm roundTerm, int i){
-//    if(i < g.questions.size() - 1){
-//      return true;
-//    }
-//    FakeTerm ft = new FakeTerm();
-//    ft.question = g.questions.get(i).getAnswer();
-//    ft.correctAnswer = g.questions.get(i).getAnswer();
-//    ft.wrongAnswer0 =
-//        (i + 1 < g.questions.size())
-//            ? g.questions.get(i + 1).getAnswer()
-//            : g.questions.get((i + 1) - (g.questions.size() - 1)).getAnswer();
-//    ft.wrongAnswer1 =
-//        (i + 2 < g.questions.size())
-//            ? g.questions.get(i + 2).getAnswer()
-//            : g.questions.get((i + 2) - (g.questions.size() - 1)).getAnswer();
-//    ft.wrongAnswer2 =
-//        (i + 3 < g.questions.size())
-//            ? g.questions.get(i + 3).getAnswer()
-//            : g.questions.get((i + 3) - (g.questions.size() - 1)).getAnswer();
-//    roundTerm.add(ft);
-//    return false;
-//  }
+  //  private static boolean getFakeTerm(FakeTerm roundTerm, int i){
+  //    if(i < g.questions.size() - 1){
+  //      return true;
+  //    }
+  //    FakeTerm ft = new FakeTerm();
+  //    ft.question = g.questions.get(i).getAnswer();
+  //    ft.correctAnswer = g.questions.get(i).getAnswer();
+  //    ft.wrongAnswer0 =
+  //        (i + 1 < g.questions.size())
+  //            ? g.questions.get(i + 1).getAnswer()
+  //            : g.questions.get((i + 1) - (g.questions.size() - 1)).getAnswer();
+  //    ft.wrongAnswer1 =
+  //        (i + 2 < g.questions.size())
+  //            ? g.questions.get(i + 2).getAnswer()
+  //            : g.questions.get((i + 2) - (g.questions.size() - 1)).getAnswer();
+  //    ft.wrongAnswer2 =
+  //        (i + 3 < g.questions.size())
+  //            ? g.questions.get(i + 3).getAnswer()
+  //            : g.questions.get((i + 3) - (g.questions.size() - 1)).getAnswer();
+  //    roundTerm.add(ft);
+  //    return false;
+  //  }
 
   /**
    * What happens when the socket is closed.
@@ -304,8 +288,8 @@ public class Server {
     logger.error("Entered into onError");
     logger.error(session.toString());
     logger.error(throwable.toString());
-    //logger.error(throwable.getMessage());
-    //logger.error(throwable.getLocalizedMessage());
-    //logger.error(throwable.getCause().toString());
+    // logger.error(throwable.getMessage());
+    // logger.error(throwable.getLocalizedMessage());
+    // logger.error(throwable.getCause().toString());
   }
 }
