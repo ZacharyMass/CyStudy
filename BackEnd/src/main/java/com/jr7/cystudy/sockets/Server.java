@@ -175,15 +175,15 @@ public class Server {
           synchronized (session) {
             try {
               logger.info("about to try sending all the roundTerm shit in sendTerms()");
-              session.getBasicRemote().sendText(roundTerm.question);
+              session.getBasicRemote().sendText("term:" + roundTerm.question);
               logger.info("sent " + roundTerm.question);
-              session.getBasicRemote().sendText(roundTerm.correctAnswer);
+              session.getBasicRemote().sendText("correct:" + roundTerm.correctAnswer);
               logger.info("sent " + roundTerm.correctAnswer);
-              session.getBasicRemote().sendText(roundTerm.wrongAnswer0);
+              session.getBasicRemote().sendText("incorrect:" + roundTerm.wrongAnswer0);
               logger.info("sent " + roundTerm.wrongAnswer0);
-              session.getBasicRemote().sendText(roundTerm.wrongAnswer1);
+              session.getBasicRemote().sendText("incorrect:" + roundTerm.wrongAnswer1);
               logger.info("sent " + roundTerm.wrongAnswer1);
-              session.getBasicRemote().sendText(roundTerm.wrongAnswer2);
+              session.getBasicRemote().sendText("incorrect:" + roundTerm.wrongAnswer2);
               logger.info("sent " + roundTerm.wrongAnswer2);
             } catch (IOException e) {
               logger.error(e.toString());
@@ -198,7 +198,10 @@ public class Server {
 
     logger.info("inside sendTerms, username is: " + uname);
 
-    int firstCardIdx = ((round * 4) > (g.questions.size() - 1)) ? ((round * 4) % (g.questions.size()-1)) : round * 4;
+    int firstCardIdx =
+        ((round * 4) > (g.questions.size() - 1))
+            ? ((round * 4) % (g.questions.size() - 1))
+            : round * 4;
     FakeTerm roundTerm = new FakeTerm();
 
     logger.info("inside sendTerms(arg arg) on firstCardIdx: " + firstCardIdx);
@@ -224,15 +227,24 @@ public class Server {
     try {
       logger.info("about to try sending q&a  in sendTerms(arg arg)");
       logger.info("username to send shit to is: " + uname);
-      usernameSessionMap.get(uname).getBasicRemote().sendText(roundTerm.question);
+      usernameSessionMap.get(uname).getBasicRemote().sendText("term:" + roundTerm.question);
       logger.info("sent " + roundTerm.question);
-      usernameSessionMap.get(uname).getBasicRemote().sendText(roundTerm.correctAnswer);
+      usernameSessionMap.get(uname).getBasicRemote().sendText("correct:" + roundTerm.correctAnswer);
       logger.info("sent " + roundTerm.correctAnswer);
-      usernameSessionMap.get(uname).getBasicRemote().sendText(roundTerm.wrongAnswer0);
+      usernameSessionMap
+          .get(uname)
+          .getBasicRemote()
+          .sendText("incorrect:" + roundTerm.wrongAnswer0);
       logger.info("sent " + roundTerm.wrongAnswer0);
-      usernameSessionMap.get(uname).getBasicRemote().sendText(roundTerm.wrongAnswer1);
+      usernameSessionMap
+          .get(uname)
+          .getBasicRemote()
+          .sendText("incorrect:" + roundTerm.wrongAnswer1);
       logger.info("sent " + roundTerm.wrongAnswer1);
-      usernameSessionMap.get(uname).getBasicRemote().sendText(roundTerm.wrongAnswer2);
+      usernameSessionMap
+          .get(uname)
+          .getBasicRemote()
+          .sendText("incorrect:" + roundTerm.wrongAnswer2);
       logger.info("sent " + roundTerm.wrongAnswer2);
       logger.info("finished sending q&a in sendTerms(arg arg)");
 
