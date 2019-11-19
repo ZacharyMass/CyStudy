@@ -273,6 +273,8 @@ public class Server {
 
     String message = username + " disconnected";
     broadcast(message);
+
+    session.close();
   }
 
   /**
@@ -282,7 +284,7 @@ public class Server {
    * @param throwable I think an error?
    */
   @OnError
-  public void onError(Session session, Throwable throwable) {
+  public void onError(Session session, Throwable throwable) throws IOException{
     // Do error handling here
     logger.error("Entered into onError");
     logger.error(session.toString());
@@ -291,6 +293,7 @@ public class Server {
       broadcast(throwable.toString());
     } catch (IOException e) {
       logger.error("tried to broadcast thrown error but broadcast threw an IOException");
+      onClose(session);
     }
   }
 }
