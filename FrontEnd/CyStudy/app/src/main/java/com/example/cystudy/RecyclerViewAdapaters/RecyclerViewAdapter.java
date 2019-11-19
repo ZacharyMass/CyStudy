@@ -72,7 +72,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 if (LoginActivity.role.matches("student")) {
                     Navigation.findNavController(view).navigate(R.id.action_studentHomeFragment_to_classFragment);
                 }
-                else {
+                else if (LoginActivity.role.matches("teacher")){
                     // int position = viewHolder.getAdapterPosition();
                     className = classesList.get(0); // Hardcoded this just to show something on next page
                     Log.d("Class Name", className);

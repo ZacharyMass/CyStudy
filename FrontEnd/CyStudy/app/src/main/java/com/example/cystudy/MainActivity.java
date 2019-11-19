@@ -12,6 +12,7 @@ import androidx.navigation.Navigation;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import static androidx.navigation.ui.NavigationUI.setupWithNavController;
+import static java.lang.Boolean.FALSE;
 
 /**
  * Basis for all conditional navigation in app. Directs user to appropriate set of fragments to navigate within.
@@ -22,8 +23,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static String url = "coms-309-jr-7.misc.iastate.edu";
     public static String user = LoginActivity.user;
-    public static String currentClass = "COMS309";
-    public static String userRole = LoginActivity.role; // Will be initialized via a String Request to server
+    public static String currentClass = "COMS309"; // TODO: fix this once unique items in RecyclerView can be selected
+    public static String userRole = LoginActivity.role; // TODO: fix this to account for user coming from RegisterActivity, setting Boolean in Login and Register activities?
     public static BottomNavigationView bottomNavigationView;
     public static NavController navController;
 
@@ -50,8 +51,11 @@ public class MainActivity extends AppCompatActivity {
         if (navController.getCurrentDestination().getId() == R.id.blankConditionalNavFragment) {
             if (userRole.matches("student")) {
                 navController.navigate(R.id.action_blankConditionalNavFragment_to_studentHomeFragment);
-            } else { // userRole.matches("teacher")
+            }
+            else if (userRole.matches("teacher")){ // userRole.matches("teacher")
                 navController.navigate(R.id.action_blankConditionalNavFragment_to_teacherHomeFragment);
+            } else { // userRole.matches("Administrator")
+                navController.navigate(R.id.action_blankConditionalNavFragment_to_adminHomeFragment);
             }
         }
 

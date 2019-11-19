@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_blankConditionalNavFragment_to_studentHomeFragment"
             app:destination="@id/studentNavigation" />
+        <action
+            android:id="@+id/action_blankConditionalNavFragment_to_adminHomeFragment"
+            app:destination="@id/adminNavigation" />
     </fragment>
     <activity
         android:id="@+id/loginActivity"
@@ -201,6 +204,88 @@
             <action
                 android:id="@+id/action_teacherSetsFragment_to_teacherFlashcardFragment"
                 app:destination="@id/teacherFlashcardFragment" />
+        </fragment>
+    </navigation>
+    <navigation
+        android:id="@+id/adminNavigation"
+        app:startDestination="@id/adminHomeFragment" >
+        <fragment
+            android:id="@+id/adminHomeFragment"
+            android:name="com.example.cystudy.ui.fragments.AdminFragments.AdminHomeFragment"
+            android:label="fragment_admin_home"
+            tools:layout="@layout/fragment_admin_home" >
+            <action
+                android:id="@+id/action_adminHomeFragment_to_adminManageClassesFragment"
+                app:destination="@id/adminManageClassesFragment" />
+            <action
+                android:id="@+id/action_adminHomeFragment_to_adminManageTeachersFragment"
+                app:destination="@id/adminManageTeachersFragment" />
+            <action
+                android:id="@+id/action_adminHomeFragment_to_adminManageStudentsFragment"
+                app:destination="@id/adminManageStudentsFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/adminManageClassesFragment"
+            android:name="com.example.cystudy.ui.fragments.AdminFragments.AdminManageClassesFragment"
+            android:label="fragment_admin_manage_classes"
+            tools:layout="@layout/fragment_admin_manage_classes" >
+            <action
+                android:id="@+id/action_adminManageClassesFragment_to_adminHomeFragment"
+                app:destination="@id/adminHomeFragment" />
+            <action
+                android:id="@+id/action_adminManageClassesFragment_to_adminCreateClassFragment"
+                app:destination="@id/adminCreateClassFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/adminManageTeachersFragment"
+            android:name="com.example.cystudy.ui.fragments.AdminFragments.AdminManageTeachersFragment"
+            android:label="fragment_admin_manage_teachers"
+            tools:layout="@layout/fragment_admin_manage_teachers" >
+            <action
+                android:id="@+id/action_adminManageTeachersFragment_to_adminHomeFragment"
+                app:destination="@id/adminHomeFragment" />
+            <action
+                android:id="@+id/action_adminManageTeachersFragment_to_adminAddTeacherToClassFragment"
+                app:destination="@id/adminAddTeacherToClassFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/adminManageStudentsFragment"
+            android:name="com.example.cystudy.ui.fragments.AdminFragments.AdminManageStudentsFragment"
+            android:label="fragment_admin_manage_students"
+            tools:layout="@layout/fragment_admin_manage_students" >
+            <action
+                android:id="@+id/action_adminManageStudentsFragment_to_adminHomeFragment"
+                app:destination="@id/adminHomeFragment" />
+            <action
+                android:id="@+id/action_adminManageStudentsFragment_to_adminAddStudentToClassFragment"
+                app:destination="@id/adminAddStudentToClassFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/adminCreateClassFragment"
+            android:name="com.example.cystudy.ui.fragments.AdminFragments.AdminCreateClassFragment"
+            android:label="fragment_admin_add_class"
+            tools:layout="@layout/fragment_admin_add_class" >
+            <action
+                android:id="@+id/action_adminCreateClassFragment_to_adminManageClassesFragment"
+                app:destination="@id/adminManageClassesFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/adminAddTeacherToClassFragment"
+            android:name="com.example.cystudy.ui.fragments.AdminFragments.AdminAddTeacherToClassFragment"
+            android:label="fragment_admin_add_teacher_to_class"
+            tools:layout="@layout/fragment_admin_add_teacher_to_class" >
+            <action
+                android:id="@+id/action_adminAddTeacherToClassFragment_to_adminManageTeachersFragment"
+                app:destination="@id/adminManageTeachersFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/adminAddStudentToClassFragment"
+            android:name="com.example.cystudy.ui.fragments.AdminFragments.AdminAddStudentToClassFragment"
+            android:label="fragment_add_student_to_class"
+            tools:layout="@layout/fragment_add_student_to_class" >
+            <action
+                android:id="@+id/action_adminAddStudentToClassFragment_to_adminManageStudentsFragment"
+                app:destination="@id/adminManageStudentsFragment" />
         </fragment>
     </navigation>
 </navigation>
