@@ -62,11 +62,15 @@ public class Server {
     //      g.player2 = username;
     //    }
 
+    logger.info("trying to make " + username + " either p1 or p2");
     if (g.player1.contains("none")) {
       g.player1 = username;
     } else if (g.player2.contains("none")) {
       g.player2 = username;
     }
+    logger.info("p1 is " + g.player1 + " after assignment in onOpen");
+    logger.info("p2 is " + g.player1 + " after assignment in onOpen");
+
 
     sessionUsernameMap.put(session, username);
     usernameSessionMap.put(username, session);
@@ -185,7 +189,7 @@ public class Server {
             }
           }
         });
-    logger.info("finished synced lambed for each bs");
+    logger.info("finished synced lambda for each bs");
   }
 
   private static void sendTerms(int round, String uname) throws IOException {
