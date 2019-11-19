@@ -26,7 +26,7 @@ public class Server {
   private static Map<Session, String> sessionUsernameMap = new HashMap<>();
   private static Map<String, Session> usernameSessionMap = new HashMap<>();
 
-  private static Game g = new Game();
+  private Game g = new Game();
   @Autowired GameService gameService;
 
   private static final Logger logger = LoggerFactory.getLogger(Server.class);
@@ -155,7 +155,7 @@ public class Server {
     }
   }
 
-  private static void sendTerms() throws IOException {
+  private void sendTerms() throws IOException {
 
     FakeTerm roundTerm = new FakeTerm();
 
