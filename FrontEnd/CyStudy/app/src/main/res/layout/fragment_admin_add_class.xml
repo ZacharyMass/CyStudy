@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/enterClassNameBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:ems="10"
+        android:hint="Class Name Here (no spaces)"
+        android:inputType="textAutoCorrect"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.8" />
+
+    <Button
+        android:id="@+id/adminDiscardClassBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="Discard"
+        android:backgroundTint="#C8102E"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/enterClassNameBox"
+        app:layout_constraintStart_toStartOf="@+id/enterClassNameBox" />
+
+    <Button
+        android:id="@+id/adminCreateClassBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="Create"
+        android:backgroundTint="#367C2B"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/enterClassNameBox"
+        app:layout_constraintEnd_toEndOf="@+id/enterClassNameBox" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
