@@ -32,7 +32,7 @@ public class Server {
   private static Game g = new Game();
   @Autowired GameService gameService;
 
-  private final Logger logger = LoggerFactory.getLogger(Server.class);
+  private static final Logger logger = LoggerFactory.getLogger(Server.class);
 
   /*TODO
    * - Check for same username entering game
@@ -81,6 +81,7 @@ public class Server {
             try {
               session.getBasicRemote().sendText(message);
             } catch (IOException e) {
+              logger.info(e.toString());
               e.printStackTrace();
             }
           }
@@ -144,6 +145,7 @@ public class Server {
             try {
               session.getBasicRemote().sendObject(roundTerms);
             } catch (IOException | EncodeException e) {
+              logger.info(e.toString());
               e.printStackTrace();
             }
           }
@@ -163,7 +165,9 @@ public class Server {
 
     try {
       usernameSessionMap.get(uname).getBasicRemote().sendObject(roundTerms);
-    } catch (IOException | EncodeException e) {
+    }
+    catch (IOException | EncodeException e) {
+      logger.info(e.toString());
       e.printStackTrace();
     }
   }
@@ -199,6 +203,11 @@ public class Server {
   @OnError
   public void onError(Session session, Throwable throwable) {
     // Do error handling here
-    logger.info("Entered into Error from somewhere");
+    logger.error("Entered into Error from somewhere");
+    logger.error(session.toString());
+    logger.error(throwable.toString());
+    logger.error(throwable.getMessage());
+    logger.error(throwable.getLocalizedMessage());
+    logger.error(throwable.getCause().toString());
   }
 }
