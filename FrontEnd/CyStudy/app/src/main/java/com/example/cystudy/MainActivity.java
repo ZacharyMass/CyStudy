@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 navController.navigate(R.id.action_blankConditionalNavFragment_to_studentHomeFragment);
             }
             else if (userRole.matches("teacher")){ // userRole.matches("teacher")
+                navController.navigate(R.id.action_blankConditionalNavFragment_to_teacherHomeFragment);
             } else { // userRole.matches("Administrator")
                 navController.navigate(R.id.action_blankConditionalNavFragment_to_adminHomeFragment);
             }
