@@ -35,6 +35,7 @@ public class StudentGameFragment extends Fragment {
     private WebSocketClient cc;
     private String player1 = ""; // Will be pulled from message
     private String player2 = ""; // Will be pulled from message
+    public boolean joined = false;
 
     public StudentGameFragment() {
         // Required empty public constructor
@@ -218,7 +219,10 @@ public class StudentGameFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 try {
-                    cc.send(MainActivity.user + " clicked the button");
+                    if(!joined) {
+                        cc.send(MainActivity.user + " clicked the button");
+                        joined = true;
+                    }
                 } catch (Exception e) {
                     Log.d("ExceptionSendMessage:", e.getMessage());
                 }
