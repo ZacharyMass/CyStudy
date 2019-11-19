@@ -54,10 +54,10 @@ public class Server {
     // Plus, can't find a good example of rejecting an incoming connection this way.
     // if(sessionUsernameMap.containsKey(username)){ }
 
-    if (sessionUsernameMap.size() >= 2) {
-      broadcast("This game already has 2 players, and another tried to join.");
-      onClose(session);
-    }
+//    if (sessionUsernameMap.size() >= 2) {
+//      broadcast("This game already has 2 players, and another tried to join.");
+//      onClose(session);
+//    }
 
     if (sessionUsernameMap.isEmpty()) {
       g.player1 = username;
@@ -199,11 +199,6 @@ public class Server {
   @OnError
   public void onError(Session session, Throwable throwable) {
     // Do error handling here
-    logger.info("Entered into Error");
-    try {
-      broadcast("An error was encountered. Sorry this is so undescriptive :(");
-    } catch (IOException e) {
-      logger.info("broadcast() had an IOException inside of error");
-    }
+    logger.info("Entered into Error from somewhere");
   }
 }
