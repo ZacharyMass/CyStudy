@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.cystudy.MainActivity;
 import com.example.cystudy.R;
 import com.example.cystudy.RecyclerViewAdapaters.RecyclerViewAdapter;
 import com.example.cystudy.ui.fragments.TeacherFragments.TeacherClassFragment;
@@ -48,6 +50,15 @@ public class AdminManageTeachersFragment extends Fragment {
         teachersL.clear(); // Clear on creation to prevent duplication of RecyclerView objects
 
         v = inflater.inflate(R.layout.fragment_admin_manage_teachers, container, false);
+
+        Button goToAddTeacherBtn = v.findViewById(R.id.adminAddTeacherToClassBtn);
+
+        goToAddTeacherBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.navController.navigate(R.id.action_adminManageTeachersFragment_to_adminAddTeacherToClassFragment);
+            }
+        });
 
         pullTeachers();
 

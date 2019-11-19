@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
         android:text="Select Teacher:"
+        android:textColor="@android:color/black"
         app:layout_constraintBottom_toTopOf="@+id/adminSelectTeacherDropdown"
         app:layout_constraintStart_toStartOf="@+id/adminSelectTeacherDropdown" />
 
@@ -34,6 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="90dp"
         android:text="Select Class:"
+        android:textColor="@android:color/black"
         app:layout_constraintStart_toStartOf="@+id/adminSelectTeacherDropdown"
         app:layout_constraintTop_toBottomOf="@+id/adminSelectTeacherDropdown" />
 
@@ -55,24 +57,22 @@
         android:id="@+id/adminAddTeacherBtn"
         android:layout_width="125dp"
         android:layout_height="75dp"
-        android:layout_marginEnd="75dp"
         android:backgroundTint="#367C2B"
         android:text="Add Teacher to Class"
         android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/adminSelectClassDropdown"
         app:layout_constraintTop_toTopOf="@+id/adminCancelAddTeacherBtn" />
 
     <Button
         android:id="@+id/adminCancelAddTeacherBtn"
         android:layout_width="125dp"
         android:layout_height="75dp"
-        android:layout_marginStart="75dp"
         android:layout_marginBottom="150dp"
         android:backgroundTint="#C8210E"
         android:text="Cancel"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/adminSelectClassDropdown" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

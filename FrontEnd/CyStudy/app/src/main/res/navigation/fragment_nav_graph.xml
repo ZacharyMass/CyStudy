@@ -244,6 +244,9 @@
             <action
                 android:id="@+id/action_adminManageTeachersFragment_to_adminHomeFragment"
                 app:destination="@id/adminHomeFragment" />
+            <action
+                android:id="@+id/action_adminManageTeachersFragment_to_adminAddTeacherToClassFragment"
+                app:destination="@id/adminAddTeacherToClassFragment" />
         </fragment>
         <fragment
             android:id="@+id/adminManageStudentsFragment"
@@ -262,6 +265,15 @@
             <action
                 android:id="@+id/action_adminCreateClassFragment_to_adminManageClassesFragment"
                 app:destination="@id/adminManageClassesFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/adminAddTeacherToClassFragment"
+            android:name="com.example.cystudy.ui.fragments.AdminFragments.AdminAddTeacherToClassFragment"
+            android:label="fragment_admin_add_teacher_to_class"
+            tools:layout="@layout/fragment_admin_add_teacher_to_class" >
+            <action
+                android:id="@+id/action_adminAddTeacherToClassFragment_to_adminManageTeachersFragment"
+                app:destination="@id/adminManageTeachersFragment" />
         </fragment>
     </navigation>
 </navigation>
