@@ -106,23 +106,24 @@ public class Server {
   public void onMessage(Session session, String message) throws IOException {
 
     // Handle new messages
-    logger.info("Entered into Message: Got Message: " + message);
+    logger.info("Entered into onMessage: Got Message: " + message);
     String username = sessionUsernameMap.get(session);
 
-    if ( (message.contains("correct"))
-        || message.contains("incorrect")
-        || message.equalsIgnoreCase("clicked")) {
+    logger.info("about to check if message contains correct, incorrect, or clicked");
+    if ( (message.contains("correct")) || message.contains("incorrect")) {
 
-      if (g.round == 1) {
-        sendTerms();
-      }
+//      if (g.round == 1) {
+//        sendTerms();
+//      }
 
+      logger.info("about to check username to send terms to");
       if (username.equalsIgnoreCase(g.player1)) {
         sendTerms(g.round, g.player2);
       } else if (username.equalsIgnoreCase(g.player2)) {
         sendTerms(g.round, g.player1);
       }
 
+      logger.info("about to increment if answer was correct");
       if (message.contains("correct")) {
         if (username.equalsIgnoreCase(g.player1)) {
           g.p1Correct++;
@@ -132,7 +133,14 @@ public class Server {
         }
       }
       g.round++;
-    } else {
+    }
+    else if(message.contains("clicked")){
+      logger.info("message.contains(clicked) == true");
+      if(g.round ==1) sendTerms();
+      logger.info("boutta broadcast from clicked shit");
+      broadcast(username + ": " + message);
+    } else{
+      logger.info("message didn't contain any of the shit you're testing for, so you fucked");
       broadcast(username + ": " + message);
     }
   }
