@@ -176,15 +176,15 @@ public class Server {
             try {
               logger.info("about to try sending all the roundTerm shit in sendTerms()");
               session.getBasicRemote().sendText("term:" + roundTerm.question);
-              logger.info("sent " + roundTerm.question);
+              logger.info("sent term:" + roundTerm.question);
               session.getBasicRemote().sendText("correct:" + roundTerm.correctAnswer);
-              logger.info("sent " + roundTerm.correctAnswer);
+              logger.info("sent correct:" + roundTerm.correctAnswer);
               session.getBasicRemote().sendText("incorrect:" + roundTerm.wrongAnswer0);
-              logger.info("sent " + roundTerm.wrongAnswer0);
+              logger.info("sent incorrect:" + roundTerm.wrongAnswer0);
               session.getBasicRemote().sendText("incorrect:" + roundTerm.wrongAnswer1);
-              logger.info("sent " + roundTerm.wrongAnswer1);
+              logger.info("sent incorrect:" + roundTerm.wrongAnswer1);
               session.getBasicRemote().sendText("incorrect:" + roundTerm.wrongAnswer2);
-              logger.info("sent " + roundTerm.wrongAnswer2);
+              logger.info("sent incorrect:" + roundTerm.wrongAnswer2);
             } catch (IOException e) {
               logger.error(e.toString());
               e.printStackTrace();
@@ -228,24 +228,24 @@ public class Server {
       logger.info("about to try sending q&a  in sendTerms(arg arg)");
       logger.info("username to send shit to is: " + uname);
       usernameSessionMap.get(uname).getBasicRemote().sendText("term:" + roundTerm.question);
-      logger.info("sent " + roundTerm.question);
+      logger.info("sent term:" + roundTerm.question);
       usernameSessionMap.get(uname).getBasicRemote().sendText("correct:" + roundTerm.correctAnswer);
-      logger.info("sent " + roundTerm.correctAnswer);
+      logger.info("sent correct:" + roundTerm.correctAnswer);
       usernameSessionMap
           .get(uname)
           .getBasicRemote()
           .sendText("incorrect:" + roundTerm.wrongAnswer0);
-      logger.info("sent " + roundTerm.wrongAnswer0);
+      logger.info("sent incorrect:" + roundTerm.wrongAnswer0);
       usernameSessionMap
           .get(uname)
           .getBasicRemote()
           .sendText("incorrect:" + roundTerm.wrongAnswer1);
-      logger.info("sent " + roundTerm.wrongAnswer1);
+      logger.info("sent incorrect:" + roundTerm.wrongAnswer1);
       usernameSessionMap
           .get(uname)
           .getBasicRemote()
           .sendText("incorrect:" + roundTerm.wrongAnswer2);
-      logger.info("sent " + roundTerm.wrongAnswer2);
+      logger.info("sent incorrect:" + roundTerm.wrongAnswer2);
       logger.info("finished sending q&a in sendTerms(arg arg)");
 
     } catch (IOException e) {
