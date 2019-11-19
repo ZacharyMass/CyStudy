@@ -1,10 +1,12 @@
 package com.example.cystudy;
 
 import android.content.Context;
+import android.view.View;
 
 import androidx.test.runner.AndroidJUnit4;
 
 import com.example.cystudy.RecyclerViewAdapaters.RecyclerViewAdapter;
+import com.example.cystudy.ui.fragments.StudentFragments.StudentSettingsFragment;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +17,8 @@ import java.util.ArrayList;
 import static junit.framework.TestCase.assertEquals;
 import static net.bytebuddy.matcher.ElementMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 /**
@@ -41,10 +45,14 @@ public class RecyclerViewAdapterTest {
     private static final ArrayList<String> classesList = new ArrayList<>();
 
     @Mock
-    Context mockContext;
+    Context mockContext = mock(Context.class);
+    StudentSettingsFragment sf = mock(StudentSettingsFragment.class);
 
+    // Written by Zach M
     @Test
     public void testItemCount() {
+        doReturn("Hello").when(mockContext).toString();
+
         // Given a mocked Context injected into the object under test...
         classesList.add("COMS 309");
         RecyclerViewAdapter myObjectUnderTest = new RecyclerViewAdapter(mockContext, classesList);
@@ -56,5 +64,13 @@ public class RecyclerViewAdapterTest {
         assertEquals(result, 1);
     }
 
+    // Written by Zach M
+    @Test
+    public void testLogout() {
+        // Given a mocked Student Settings Fragment...
+        sf.logout();
 
+        // ...then the result should be the expected one.
+        assertEquals(MainActivity.user, null);
+    }
 }
