@@ -106,7 +106,7 @@ public class Server {
   public void onMessage(Session session, String message) throws IOException {
 
     // Handle new messages
-    logger.info("Entered into Message: Got Message:" + message);
+    logger.info("Entered into Message: Got Message: " + message);
     String username = sessionUsernameMap.get(session);
 
     if ( (message.contains("correct"))
@@ -139,37 +139,40 @@ public class Server {
 
   private static void sendTerms() throws IOException {
 
-    List<FakeTerm> roundTerm = new ArrayList<>();
+    FakeTerm roundTerm = new FakeTerm();
     for (int i = 0; i < 4; i++) {
-      if (i < g.questions.size() - 1) {
+
+      if(i > g.questions.size() - 1){
         break;
       }
 
-      FakeTerm ft = new FakeTerm();
-      ft.question = g.questions.get(i).getAnswer();
-      ft.correctAnswer = g.questions.get(i).getAnswer();
-      ft.wrongAnswer0 =
-          (i+1 < g.questions.size())
-              ? g.questions.get(i+1).getAnswer()
-              : g.questions.get((i+1)-(g.questions.size()-1)).getAnswer();
-      ft.wrongAnswer1 =
-          (i+2 < g.questions.size())
-              ? g.questions.get(i+2).getAnswer()
-              : g.questions.get((i+2)-(g.questions.size()-1)).getAnswer();
-      ft.wrongAnswer2 =
-          (i+3 < g.questions.size())
-              ? g.questions.get(i+3).getAnswer()
-              : g.questions.get((i+3)-(g.questions.size()-1)).getAnswer();
-      roundTerm.add(ft);
+      roundTerm.question = g.questions.get(i).getAnswer();
+      roundTerm.correctAnswer = g.questions.get(i).getAnswer();
+      roundTerm.wrongAnswer0 =
+          (i + 1 < g.questions.size())
+              ? g.questions.get(i + 1).getAnswer()
+              : g.questions.get((i + 1) - (g.questions.size() - 1)).getAnswer();
+      roundTerm.wrongAnswer1 =
+          (i + 2 < g.questions.size())
+              ? g.questions.get(i + 2).getAnswer()
+              : g.questions.get((i + 2) - (g.questions.size() - 1)).getAnswer();
+      roundTerm.wrongAnswer2 =
+          (i + 3 < g.questions.size())
+              ? g.questions.get(i + 3).getAnswer()
+              : g.questions.get((i + 3) - (g.questions.size() - 1)).getAnswer();
     }
 
     sessionUsernameMap.forEach(
         (session, username) -> {
           synchronized (session) {
             try {
-              session.getBasicRemote().sendObject(roundTerm);
-            } catch (IOException | EncodeException e) {
-              logger.info(e.toString());
+              session.getBasicRemote().sendText(roundTerm.question);
+              session.getBasicRemote().sendText(roundTerm.correctAnswer);
+              session.getBasicRemote().sendText(roundTerm.wrongAnswer0);
+              session.getBasicRemote().sendText(roundTerm.wrongAnswer1);
+              session.getBasicRemote().sendText(roundTerm.wrongAnswer2);
+            } catch (IOException e) {
+              logger.error(e.toString());
               e.printStackTrace();
             }
           }
@@ -179,37 +182,64 @@ public class Server {
   private static void sendTerms(int round, String uname) throws IOException {
 
     int firstCardIdx = round * 4;
-    List<FakeTerm> roundTerm = new ArrayList<>();
+    FakeTerm roundTerm = new FakeTerm();
     for (int i = firstCardIdx; i <= firstCardIdx + 4; i++){
-      if(i < g.questions.size() - 1){
+
+      if(i > g.questions.size() - 1){
         break;
       }
-      FakeTerm ft = new FakeTerm();
-      ft.question = g.questions.get(i).getAnswer();
-      ft.correctAnswer = g.questions.get(i).getAnswer();
-      ft.wrongAnswer0 =
+
+      roundTerm.question = g.questions.get(i).getAnswer();
+      roundTerm.correctAnswer = g.questions.get(i).getAnswer();
+      roundTerm.wrongAnswer0 =
           (i + 1 < g.questions.size())
               ? g.questions.get(i + 1).getAnswer()
               : g.questions.get((i + 1) - (g.questions.size() - 1)).getAnswer();
-      ft.wrongAnswer1 =
+      roundTerm.wrongAnswer1 =
           (i + 2 < g.questions.size())
               ? g.questions.get(i + 2).getAnswer()
               : g.questions.get((i + 2) - (g.questions.size() - 1)).getAnswer();
-      ft.wrongAnswer2 =
+      roundTerm.wrongAnswer2 =
           (i + 3 < g.questions.size())
               ? g.questions.get(i + 3).getAnswer()
               : g.questions.get((i + 3) - (g.questions.size() - 1)).getAnswer();
-      roundTerm.add(ft);
     }
 
     try {
-      usernameSessionMap.get(uname).getBasicRemote().sendObject(roundTerm);
+      usernameSessionMap.get(uname).getBasicRemote().sendText(roundTerm.question);
+      usernameSessionMap.get(uname).getBasicRemote().sendText(roundTerm.correctAnswer);
+      usernameSessionMap.get(uname).getBasicRemote().sendText(roundTerm.wrongAnswer0);
+      usernameSessionMap.get(uname).getBasicRemote().sendText(roundTerm.wrongAnswer1);
+      usernameSessionMap.get(uname).getBasicRemote().sendText(roundTerm.wrongAnswer2);
     }
-    catch (IOException | EncodeException e) {
+    catch (IOException e) {
       logger.info(e.toString());
       e.printStackTrace();
     }
   }
+
+//  private static boolean getFakeTerm(FakeTerm roundTerm, int i){
+//    if(i < g.questions.size() - 1){
+//      return true;
+//    }
+//    FakeTerm ft = new FakeTerm();
+//    ft.question = g.questions.get(i).getAnswer();
+//    ft.correctAnswer = g.questions.get(i).getAnswer();
+//    ft.wrongAnswer0 =
+//        (i + 1 < g.questions.size())
+//            ? g.questions.get(i + 1).getAnswer()
+//            : g.questions.get((i + 1) - (g.questions.size() - 1)).getAnswer();
+//    ft.wrongAnswer1 =
+//        (i + 2 < g.questions.size())
+//            ? g.questions.get(i + 2).getAnswer()
+//            : g.questions.get((i + 2) - (g.questions.size() - 1)).getAnswer();
+//    ft.wrongAnswer2 =
+//        (i + 3 < g.questions.size())
+//            ? g.questions.get(i + 3).getAnswer()
+//            : g.questions.get((i + 3) - (g.questions.size() - 1)).getAnswer();
+//    roundTerm.add(ft);
+//    return false;
+//  }
 
   /**
    * What happens when the socket is closed.
@@ -245,8 +275,8 @@ public class Server {
     logger.error("Entered into Error from somewhere");
     logger.error(session.toString());
     logger.error(throwable.toString());
-    logger.error(throwable.getMessage());
-    logger.error(throwable.getLocalizedMessage());
+    //logger.error(throwable.getMessage());
+    //logger.error(throwable.getLocalizedMessage());
     //logger.error(throwable.getCause().toString());
   }
 }
