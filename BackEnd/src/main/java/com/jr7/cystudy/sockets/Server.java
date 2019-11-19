@@ -1,17 +1,21 @@
 package com.jr7.cystudy.sockets;
 
+import com.jr7.cystudy.model.Game;
+import com.jr7.cystudy.model.Terms;
+import com.jr7.cystudy.service.GameService;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.websocket.*;
+import javax.websocket.EncodeException;
+import javax.websocket.OnClose;
+import javax.websocket.OnError;
+import javax.websocket.OnMessage;
+import javax.websocket.OnOpen;
+import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
-
-import com.jr7.cystudy.model.Game;
-import com.jr7.cystudy.model.Terms;
-import com.jr7.cystudy.service.GameService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +45,10 @@ public class Server {
    * @param username username of the user joining the session
    */
   @OnOpen
-  public void onOpen(Session session, @PathParam("class_name") String cName, @PathParam("username") String username)
+  public void onOpen(
+      Session session,
+      @PathParam("class_name") String className,
+      @PathParam("username") String username)
       throws IOException {
 
     // get session and websocket connection
@@ -56,13 +63,16 @@ public class Server {
       onClose(session);
     }
 
-    if(sessionUsernameMap.isEmpty()) g.player1 = username;
-    else g.player2 = username;
+    if (sessionUsernameMap.isEmpty()) {
+      g.player1 = username;
+    } else {
+      g.player2 = username;
+    }
 
     sessionUsernameMap.put(session, username);
     usernameSessionMap.put(username, session);
 
-    gameService.getQuestions(g, cName);
+    gameService.getQuestions(g, className);
 
     String message = "User: " + username + " has Joined the Game";
     broadcast(message);
@@ -94,57 +104,68 @@ public class Server {
     logger.info("Entered into Message: Got Message:" + message);
     String username = sessionUsernameMap.get(session);
 
-    if( message.equalsIgnoreCase("true")  ||
-        message.equalsIgnoreCase("false") ||
-        message.equalsIgnoreCase("start") ){
+    if (message.equalsIgnoreCase("true")
+        || message.equalsIgnoreCase("false")
+        || message.equalsIgnoreCase("start")) {
 
-      if(username.equalsIgnoreCase(g.player1)) sendTerms(g.round, g.player2);
-      else if(username.equalsIgnoreCase(g.player2)) sendTerms(g.round, g.player1);
-      else sendTerms();
+      if (username.equalsIgnoreCase(g.player1)) {
+        sendTerms(g.round, g.player2);
+      } else if (username.equalsIgnoreCase(g.player2)) {
+        sendTerms(g.round, g.player1);
+      } else {
+        sendTerms();
+      }
 
-      if(message.equalsIgnoreCase("true")){
-        if(username.equalsIgnoreCase(g.player1)) g.p1Correct++;
-        if(username.equalsIgnoreCase(g.player2)) g.p2Correct++;
+      if (message.equalsIgnoreCase("true")) {
+        if (username.equalsIgnoreCase(g.player1)) {
+          g.p1Correct++;
+        }
+        if (username.equalsIgnoreCase(g.player2)) {
+          g.p2Correct++;
+        }
       }
       g.round++;
-    }
-    else{
+    } else {
       broadcast(username + ": " + message);
     }
   }
 
   private static void sendTerms() throws IOException {
 
-    List<Terms> round_terms = new ArrayList<>();
-    for(int i = 0; i < 5; i++){
-      round_terms.add(g.questions.get(i));
+    List<Terms> roundTerms = new ArrayList<>();
+    for (int i = 0; i < 5; i++) {
+      if (i < g.questions.size() - 1) {
+        break;
+      }
+      roundTerms.add(g.questions.get(i));
     }
 
     sessionUsernameMap.forEach(
-      (session, username) -> {
-        synchronized (session) {
-          try {
-            session.getBasicRemote().sendObject(round_terms);
-          } catch (IOException | EncodeException e) {
-            e.printStackTrace();
+        (session, username) -> {
+          synchronized (session) {
+            try {
+              session.getBasicRemote().sendObject(roundTerms);
+            } catch (IOException | EncodeException e) {
+              e.printStackTrace();
+            }
           }
-        }
-      }
-    );
+        });
   }
 
   private static void sendTerms(int round, String uname) throws IOException {
 
-    int firstCardIdx = round*5;
-    List<Terms> round_terms = new ArrayList<>();
-    for(int i = firstCardIdx; i <= firstCardIdx+5; i++){
-      round_terms.add(g.questions.get(i));
+    int firstCardIdx = round * 5;
+    List<Terms> roundTerms = new ArrayList<>();
+    for (int i = firstCardIdx; i <= firstCardIdx + 5; i++) {
+      if (i < g.questions.size() - 1) {
+        break;
+      }
+      roundTerms.add(g.questions.get(i));
     }
 
-    try{
-      usernameSessionMap.get(uname).getBasicRemote().sendObject(round_terms);
-    }
-    catch(IOException | EncodeException e){
+    try {
+      usernameSessionMap.get(uname).getBasicRemote().sendObject(roundTerms);
+    } catch (IOException | EncodeException e) {
       e.printStackTrace();
     }
   }
@@ -171,14 +192,19 @@ public class Server {
     broadcast(message);
   }
 
+  /**
+   * What happens when there's an error.
+   *
+   * @param session the session
+   * @param throwable I think an error?
+   */
   @OnError
   public void onError(Session session, Throwable throwable) {
     // Do error handling here
     logger.info("Entered into Error");
-    try{
+    try {
       broadcast("An error was encountered. Sorry this is so undescriptive :(");
-    }
-    catch(IOException e) {
+    } catch (IOException e) {
       logger.info("broadcast() had an IOException inside of error");
     }
   }
