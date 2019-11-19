@@ -35,6 +35,7 @@ public class StudentGameFragment extends Fragment {
     private WebSocketClient cc;
     private String player1 = ""; // Will be pulled from message
     private String player2 = ""; // Will be pulled from message
+    public boolean joined = false;
 
     public StudentGameFragment() {
         // Required empty public constructor
@@ -45,7 +46,18 @@ public class StudentGameFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         //Inflate view
         final View v = inflater.inflate(R.layout.fragment_game, container, false);
+
+        // Define all views for manipulation
         final TextView t = v.findViewById(R.id.term);
+        TextView player1Text = v.findViewById(R.id.student);
+        TextView player2Text = v.findViewById(R.id.opponentName);
+        ProgressBar player1Progress = v.findViewById(R.id.userProgress);
+        ProgressBar player2Progress = v.findViewById(R.id.opponentProgress);
+        TextView[] answers = new TextView[4];
+        answers[0] = v.findViewById(R.id.answer1);
+        answers[1] = v.findViewById(R.id.answer2);
+        answers[2] = v.findViewById(R.id.answer3);
+        answers[3] = v.findViewById(R.id.answer4);
         t.setBackgroundColor(Color.GRAY);
 
         t.setText("Click to enter game!"); // Temporary placeholder here
@@ -90,13 +102,7 @@ public class StudentGameFragment extends Fragment {
                 @Override
                 public void onMessage(String message) {
 
-                    /**
-                     * This is temporary until Zach G. can have time to edit what gets sent back
-                     */
-                    TextView player1Text = v.findViewById(R.id.student);
-                    TextView player2Text = v.findViewById(R.id.opponentName);
-                    ProgressBar player1Progress = v.findViewById(R.id.userProgress);
-                    ProgressBar player2Progress = v.findViewById(R.id.opponentProgress);
+                    Log.d("WebSocket:", message);
 
                     if (player1.equals("") && !message.substring(0, 5).matches("User:")) { // Edit this to fix string operations
                         String[] msgArray = message.split(":");
@@ -110,24 +116,35 @@ public class StudentGameFragment extends Fragment {
                         player2Text.setText(player2);
                         buffer.start(); // Start timer once both players are entered
                     } else if (!player1.equals("") && !player2.equals("")) { // player1 and player2 have been assigned, can update ProgressBar now
-                        String[] msgArray = message.split(" ");
-                        String userClick = msgArray[1];
+                        String[] msgArray = message.split(":");
+                        String user = msgArray[0];
+                        String thirdElement = msgArray[2];
 
-                        if (userClick.matches(player1)) {
-                            t.setText(player1 + " clicked!");
+
+                        // Fill term and answer
+
+                        // Handle correct messages by updating progress bars
+                        if (user.matches(player1) && thirdElement.equals("correct")) {
                             player1Progress.incrementProgressBy(20);
                             if (player1Progress.getProgress() == 100) { // Full progress bar
                                 timer.cancel(); // Stop timer
                                 timeText.setText(player1 + " Wins!");
                                 t.setClickable(false); // Disable the term TextView from being clicked again
+                                for(TextView answer : answers)
+                                {
+                                    answer.setClickable(false);
+                                }
                             }
-                        } else if (userClick.matches(player2)) {
-                            t.setText(player2 + " clicked!");
+                        } else if (user.matches(player2) && thirdElement.equals("correct")) {
                             player2Progress.incrementProgressBy(20);
                             if (player2Progress.getProgress() == 100) { // Full progress bar
                                 timer.cancel(); // Stop timer
                                 timeText.setText((player2 + " Wins!"));
                                 t.setClickable(false); // Disable the term TextView from being clicked again
+                                for(TextView answer : answers)
+                                {
+                                    answer.setClickable(false);
+                                }
                             }
                         }
                     }
@@ -154,14 +171,58 @@ public class StudentGameFragment extends Fragment {
         }
         cc.connect();
 
+        answers[0].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    cc.send(MainActivity.user + ":" + t.getText() + ":correct");
+                } catch (Exception e) {
+                    Log.d("ExceptionSendMessage:", e.getMessage());
+                }
+            }
+        });
+        answers[1].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    cc.send(MainActivity.user + ":" + t.getText() + ":incorrect");
+                } catch (Exception e) {
+                    Log.d("ExceptionSendMessage:", e.getMessage());
+                }
+            }
+        });
+        answers[2].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    cc.send(MainActivity.user + ":" + t.getText() + ":incorrect");
+                } catch (Exception e) {
+                    Log.d("ExceptionSendMessage:", e.getMessage());
+                }
+            }
+        });
+        answers[3].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    cc.send(MainActivity.user + ":" + t.getText() + ":incorrect");
+                } catch (Exception e) {
+                    Log.d("ExceptionSendMessage:", e.getMessage());
+                }
+            }
+        });
+
         // Set Click Listener
         t.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    cc.send(MainActivity.user + " clicked the button");
+                    if(!joined) {
+                        cc.send(MainActivity.user + " clicked the button");
+                        joined = true;
+                    }
                 } catch (Exception e) {
-                    Log.d("ExceptionSendMessage:", Objects.requireNonNull(e.getMessage()));
+                    Log.d("ExceptionSendMessage:", e.getMessage());
                 }
             }
         });
