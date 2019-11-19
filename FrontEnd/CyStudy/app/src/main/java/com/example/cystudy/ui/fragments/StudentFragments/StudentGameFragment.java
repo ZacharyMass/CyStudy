@@ -104,15 +104,6 @@ public class StudentGameFragment extends Fragment {
 
                     Log.d("WebSocket:", message);
 
-
-
-                    // Fill the array with definitions from received json object
-                    for(TextView answer : answers)
-                    {
-                        //TODO replace null
-                        answer.setText(null);
-                    }
-
                     if (player1.equals("") && !message.substring(0, 5).matches("User:")) { // Edit this to fix string operations
                         String[] msgArray = message.split(":");
                         player1 = msgArray[0];
@@ -125,28 +116,35 @@ public class StudentGameFragment extends Fragment {
                         player2Text.setText(player2);
                         buffer.start(); // Start timer once both players are entered
                     } else if (!player1.equals("") && !player2.equals("")) { // player1 and player2 have been assigned, can update ProgressBar now
-                        String[] msgArray = message.split(" ");
-                        String userClick = msgArray[1];
+                        String[] msgArray = message.split(":");
+                        String user = msgArray[0];
+                        String thirdElement = msgArray[2];
 
 
                         // Fill term and answer
 
                         // Handle correct messages by updating progress bars
-                        if (userClick.matches(player1)) {
-                            t.setText(player1 + " clicked!");
+                        if (user.matches(player1) && thirdElement.equals("correct")) {
                             player1Progress.incrementProgressBy(20);
                             if (player1Progress.getProgress() == 100) { // Full progress bar
                                 timer.cancel(); // Stop timer
                                 timeText.setText(player1 + " Wins!");
                                 t.setClickable(false); // Disable the term TextView from being clicked again
+                                for(TextView answer : answers)
+                                {
+                                    answer.setClickable(false);
+                                }
                             }
-                        } else if (userClick.matches(player2)) {
-                            t.setText(player2 + " clicked!");
+                        } else if (user.matches(player2) && thirdElement.equals("correct")) {
                             player2Progress.incrementProgressBy(20);
                             if (player2Progress.getProgress() == 100) { // Full progress bar
                                 timer.cancel(); // Stop timer
                                 timeText.setText((player2 + " Wins!"));
                                 t.setClickable(false); // Disable the term TextView from being clicked again
+                                for(TextView answer : answers)
+                                {
+                                    answer.setClickable(false);
+                                }
                             }
                         }
                     }
