@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@ServerEndpoint("/websocket/{class_name}/{username}")
+@ServerEndpoint("/websocket/{username}")
 @Component
 public class Server {
 
@@ -45,11 +45,7 @@ public class Server {
    * @param username username of the user joining the session
    */
   @OnOpen
-  public void onOpen(
-      Session session,
-      @PathParam("class_name") String className,
-      @PathParam("username") String username)
-      throws IOException {
+  public void onOpen(Session session, @PathParam("username") String username) throws IOException {
 
     // get session and websocket connection
     logger.info("Entered onOpen in com.jr7.cystudy.sockets.Server");
@@ -72,7 +68,7 @@ public class Server {
     sessionUsernameMap.put(session, username);
     usernameSessionMap.put(username, session);
 
-    gameService.getQuestions(g, className);
+    gameService.getQuestions(g, "COMS309");
 
     String message = "User: " + username + " has Joined the Game";
     broadcast(message);
