@@ -1,5 +1,6 @@
 package com.jr7.cystudy.sockets;
 
+import com.jr7.cystudy.model.FakeTerm;
 import com.jr7.cystudy.model.Game;
 import com.jr7.cystudy.model.Terms;
 import com.jr7.cystudy.service.GameService;
@@ -16,6 +17,7 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,9 +109,9 @@ public class Server {
     logger.info("Entered into Message: Got Message:" + message);
     String username = sessionUsernameMap.get(session);
 
-    if (message.equalsIgnoreCase("true")
-        || message.equalsIgnoreCase("false")
-        || message.equalsIgnoreCase("start")) {
+    if ( (message.contains("correct"))
+        || message.contains("incorrect")
+        || message.equalsIgnoreCase("clicked")) {
 
       if (g.round == 1) {
         sendTerms();
@@ -121,7 +123,7 @@ public class Server {
         sendTerms(g.round, g.player1);
       }
 
-      if (message.equalsIgnoreCase("true")) {
+      if (message.contains("correct")) {
         if (username.equalsIgnoreCase(g.player1)) {
           g.p1Correct++;
         }
@@ -137,19 +139,35 @@ public class Server {
 
   private static void sendTerms() throws IOException {
 
-    List<Terms> roundTerms = new ArrayList<>();
+    List<FakeTerm> roundTerm = new ArrayList<>();
     for (int i = 0; i < 4; i++) {
       if (i < g.questions.size() - 1) {
         break;
       }
-      roundTerms.add(g.questions.get(i));
+
+      FakeTerm ft = new FakeTerm();
+      ft.question = g.questions.get(i).getAnswer();
+      ft.correctAnswer = g.questions.get(i).getAnswer();
+      ft.wrongAnswer0 =
+          (i+1 < g.questions.size())
+              ? g.questions.get(i+1).getAnswer()
+              : g.questions.get((i+1)-(g.questions.size()-1)).getAnswer();
+      ft.wrongAnswer1 =
+          (i+2 < g.questions.size())
+              ? g.questions.get(i+2).getAnswer()
+              : g.questions.get((i+2)-(g.questions.size()-1)).getAnswer();
+      ft.wrongAnswer2 =
+          (i+3 < g.questions.size())
+              ? g.questions.get(i+3).getAnswer()
+              : g.questions.get((i+3)-(g.questions.size()-1)).getAnswer();
+      roundTerm.add(ft);
     }
 
     sessionUsernameMap.forEach(
         (session, username) -> {
           synchronized (session) {
             try {
-              session.getBasicRemote().sendObject(roundTerms);
+              session.getBasicRemote().sendObject(roundTerm);
             } catch (IOException | EncodeException e) {
               logger.info(e.toString());
               e.printStackTrace();
