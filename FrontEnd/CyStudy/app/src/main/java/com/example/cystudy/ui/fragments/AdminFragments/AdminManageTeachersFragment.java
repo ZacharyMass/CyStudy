@@ -36,7 +36,7 @@ import java.util.Objects;
 public class AdminManageTeachersFragment extends Fragment {
 
     View v;
-    ArrayList<String> teachersL = new ArrayList<>();
+    static ArrayList<String> teachersL = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
