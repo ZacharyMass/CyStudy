@@ -125,10 +125,12 @@ public class Server {
       if (g.player1 != null && g.player1 != null) {
         if (username.equalsIgnoreCase(g.player1)) {
           logger.info("sending terms to player1 with name: " + g.player1);
-          sendTerms(g.round, g.player2);
+          final String p1UsrName = g.player1;
+          sendTerms(g.round, p1UsrName);
         } else if (username.equalsIgnoreCase(g.player2)) {
           logger.info("sending terms to player2 with name: " + g.player2);
-          sendTerms(g.round, g.player1);
+          final String p2UsrName = g.player2;
+          sendTerms(g.round, p2UsrName);
         }
       }
 
