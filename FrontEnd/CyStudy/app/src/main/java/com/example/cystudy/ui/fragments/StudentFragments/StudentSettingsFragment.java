@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.cystudy.LoginActivity;
+import com.example.cystudy.MainActivity;
 import com.example.cystudy.R;
 
 import static androidx.test.core.app.ApplicationProvider.getApplicationContext;
@@ -37,7 +38,9 @@ public class StudentSettingsFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_settings, container, false);
     }
 
-    public void logout(View view){
+    public void logout(){
+        MainActivity.user = null;
+        MainActivity.userRole = null;
         NavController navController = Navigation.findNavController(getActivity(), R.id.conditionalNavigation);
         navController.navigate(R.id.action_settingsFragment_to_loginActivity);
     }

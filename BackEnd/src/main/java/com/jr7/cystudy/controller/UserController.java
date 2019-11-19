@@ -43,7 +43,7 @@ public class UserController {
    * @return ArrayList of Users with matching roles
    */
   @GetMapping(path = "/get-users-by-role")
-  public List<User> getUsersByRole(@RequestParam String role) {
+  public @ResponseBody List<User> getUsersByRole(@RequestParam String role) {
     logger.info("Entered UserController - getUsersByRole");
     return UserService.getUsersByRole(role);
   }
