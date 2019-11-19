@@ -1,7 +1,7 @@
 ## Pipeline stages
 stages:
   - mavenbuild
-  - maventest
+#  - maventest
   - autodeploy
   - android-build
 
@@ -15,16 +15,16 @@ maven-build:
     - mvn clean install
 
 # test stage
-maven-test:
-  stage: maventest
-  tags:
-    - shell
-  script:
-    - cd BackEnd
-    - mvn test
-  artifacts:
-    paths:
-      - BackEnd/target/*.jar
+# maven-test:
+#  stage: maventest
+#  tags:
+#    - shell
+#  script:
+#    - cd BackEnd
+#    - mvn test
+#  artifacts:
+#    paths:
+#      - BackEnd/target/*.jar
 
 # autodeploy stage
 autoDeploy:

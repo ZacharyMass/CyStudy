@@ -3,15 +3,12 @@ package com.example.cystudy.ui.fragments.StudentFragments;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,7 +21,6 @@ import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft;
 import org.java_websocket.drafts.Draft_6455;
 import org.java_websocket.handshake.ServerHandshake;
-import org.w3c.dom.Text;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -69,6 +65,7 @@ public class StudentGameFragment extends Fragment {
             public void onTick(long millisUntilFinished) {
                 timeText.setText(millisUntilFinished / 1000 + "");
             }
+
             public void onFinish() {
                 timeText.setText("You suck!");
             }
@@ -118,10 +115,29 @@ public class StudentGameFragment extends Fragment {
                     } else if (!player1.equals("") && !player2.equals("")) { // player1 and player2 have been assigned, can update ProgressBar now
                         String[] msgArray = message.split(":");
                         String user = msgArray[0];
-                        String thirdElement = msgArray[2];
+                        String secondElement = "";
+                        if (msgArray.length >= 2) {
+                            secondElement = msgArray[1];
+                        }
+                        String thirdElement = "";
+                        if (msgArray.length >= 3) {
+                            thirdElement = msgArray[2];
+                        }
 
 
                         // Fill term and answer
+                        int count = 1;
+                        if (user.equals("term")) {
+                            count = 1;
+                            t.setText(secondElement);
+                        }
+                        if (user.equals("correct")) {
+                            answers[0].setText(secondElement);
+                        }
+                        if (user.equals("incorrect")) {
+                            answers[count].setText(secondElement);
+                            count++;
+                        }
 
                         // Handle correct messages by updating progress bars
                         if (user.matches(player1) && thirdElement.equals("correct")) {
@@ -130,10 +146,6 @@ public class StudentGameFragment extends Fragment {
                                 timer.cancel(); // Stop timer
                                 timeText.setText(player1 + " Wins!");
                                 t.setClickable(false); // Disable the term TextView from being clicked again
-                                for(TextView answer : answers)
-                                {
-                                    answer.setClickable(false);
-                                }
                             }
                         } else if (user.matches(player2) && thirdElement.equals("correct")) {
                             player2Progress.incrementProgressBy(20);
@@ -141,10 +153,6 @@ public class StudentGameFragment extends Fragment {
                                 timer.cancel(); // Stop timer
                                 timeText.setText((player2 + " Wins!"));
                                 t.setClickable(false); // Disable the term TextView from being clicked again
-                                for(TextView answer : answers)
-                                {
-                                    answer.setClickable(false);
-                                }
                             }
                         }
                     }
@@ -171,59 +179,44 @@ public class StudentGameFragment extends Fragment {
         }
         cc.connect();
 
-        answers[0].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    cc.send(MainActivity.user + ":" + t.getText() + ":correct");
-                } catch (Exception e) {
-                    Log.d("ExceptionSendMessage:", e.getMessage());
-                }
+        answers[0].setOnClickListener(v15 -> {
+            try {
+                cc.send(MainActivity.user + ":" + t.getText() + ":correct");
+            } catch (Exception e) {
+                Log.d("ExceptionSendMessage:", e.getMessage());
             }
         });
-        answers[1].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    cc.send(MainActivity.user + ":" + t.getText() + ":incorrect");
-                } catch (Exception e) {
-                    Log.d("ExceptionSendMessage:", e.getMessage());
-                }
+        answers[1].setOnClickListener(v14 -> {
+            try {
+                cc.send(MainActivity.user + ":" + t.getText() + ":incorrect");
+            } catch (Exception e) {
+                Log.d("ExceptionSendMessage:", e.getMessage());
             }
         });
-        answers[2].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    cc.send(MainActivity.user + ":" + t.getText() + ":incorrect");
-                } catch (Exception e) {
-                    Log.d("ExceptionSendMessage:", e.getMessage());
-                }
+        answers[2].setOnClickListener(v13 -> {
+            try {
+                cc.send(MainActivity.user + ":" + t.getText() + ":incorrect");
+            } catch (Exception e) {
+                Log.d("ExceptionSendMessage:", e.getMessage());
             }
         });
-        answers[3].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    cc.send(MainActivity.user + ":" + t.getText() + ":incorrect");
-                } catch (Exception e) {
-                    Log.d("ExceptionSendMessage:", e.getMessage());
-                }
+        answers[3].setOnClickListener(v1 -> {
+            try {
+                cc.send(MainActivity.user + ":" + t.getText() + ":incorrect");
+            } catch (Exception e) {
+                Log.d("ExceptionSendMessage:", e.getMessage());
             }
         });
 
         // Set Click Listener
-        t.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    if(!joined) {
-                        cc.send(MainActivity.user + " clicked the button");
-                        joined = true;
-                    }
-                } catch (Exception e) {
-                    Log.d("ExceptionSendMessage:", e.getMessage());
+        t.setOnClickListener(v12 -> {
+            try {
+                if (!joined) {
+                    cc.send(MainActivity.user + " clicked the button");
+                    joined = true;
                 }
+            } catch (Exception e) {
+                Log.d("ExceptionSendMessage:", e.getMessage());
             }
         });
 
