@@ -71,7 +71,6 @@ public class Server {
     logger.info("p1 is " + g.player1 + " after assignment in onOpen");
     logger.info("p2 is " + g.player1 + " after assignment in onOpen");
 
-
     sessionUsernameMap.put(session, username);
     usernameSessionMap.put(username, session);
 
@@ -199,7 +198,7 @@ public class Server {
 
     logger.info("inside sendTerms, username is: " + uname);
 
-    int firstCardIdx = round * 4;
+    int firstCardIdx = (round * 4 > g.questions.size() - 1) ? ((round * 4)) : round * 4;
     FakeTerm roundTerm = new FakeTerm();
 
     logger.info("inside sendTerms(arg arg) on firstCardIdx: " + firstCardIdx);
@@ -219,6 +218,7 @@ public class Server {
         (firstCardIdx + 3 < g.questions.size())
             ? g.questions.get(firstCardIdx + 3).getAnswer()
             : g.questions.get((firstCardIdx + 3) - (g.questions.size() - 1)).getAnswer();
+
     logger.info("exited ternary madness in sendTerms(arg arg");
 
     try {
@@ -257,6 +257,7 @@ public class Server {
     sessionUsernameMap.remove(session);
     usernameSessionMap.remove(username);
 
+    g.round = 0;
     /*TODO
      * Send stats here
      */
