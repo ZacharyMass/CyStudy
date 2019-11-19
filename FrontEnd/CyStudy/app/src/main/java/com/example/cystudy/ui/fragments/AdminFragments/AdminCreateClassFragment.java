@@ -19,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.cystudy.MainActivity;
 import com.example.cystudy.R;
 
 import java.util.Objects;
@@ -35,6 +36,7 @@ public class AdminCreateClassFragment extends Fragment {
         v = inflater.inflate(R.layout.fragment_admin_add_class, container, false);
 
         Button createClassButton = v.findViewById(R.id.adminCreateClassBtn);
+        Button discardClassButton = v.findViewById(R.id.adminDiscardClassBtn);
         className = v.findViewById(R.id.enterClassNameBox);
 
         createClassButton.setOnClickListener(new View.OnClickListener() {
@@ -43,6 +45,13 @@ public class AdminCreateClassFragment extends Fragment {
                 if (className.getText() != null) {
                     createClass();
                 }
+            }
+        });
+
+        discardClassButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.navController.navigate(R.id.action_adminCreateClassFragment_to_adminManageClassesFragment);
             }
         });
 
