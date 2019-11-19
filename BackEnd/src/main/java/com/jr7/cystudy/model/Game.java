@@ -15,7 +15,8 @@ public class Game {
   public int p1Correct;
   public int p2Correct;
 
-  public Game(){
+  /** Default constructor. */
+  public Game() {
     questions = new ArrayList<>();
     p1Correct = 0;
     p2Correct = 0;
