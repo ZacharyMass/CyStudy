@@ -119,10 +119,10 @@ public class Server {
       logger.info("about to check username to send terms to");
       if (g.player1 != null && g.player1 != null) {
         if (username.equalsIgnoreCase(g.player1)) {
-          logger.info("sending terms to player1");
+          logger.info("sending terms to player1 with name: " + g.player1);
           sendTerms(g.round, g.player2);
         } else if (username.equalsIgnoreCase(g.player2)) {
-          logger.info("sending terms to player2");
+          logger.info("sending terms to player2 with name: " + g.player2);
           sendTerms(g.round, g.player1);
         }
       }
@@ -154,21 +154,12 @@ public class Server {
 
     FakeTerm roundTerm = new FakeTerm();
 
-    logger.info("abt to enter ternary madness in sendTerms");
-    roundTerm.question = g.questions.get(0).getAnswer();
+    logger.info("abt add terms to send in sendTerms");
+    roundTerm.question = g.questions.get(0).getTerm();
     roundTerm.correctAnswer = g.questions.get(0).getAnswer();
-    roundTerm.wrongAnswer0 =
-        (1 < g.questions.size())
-            ? g.questions.get(1).getAnswer()
-            : g.questions.get((1) - (g.questions.size() - 1)).getAnswer();
-    roundTerm.wrongAnswer1 =
-        (2 < g.questions.size())
-            ? g.questions.get(2).getAnswer()
-            : g.questions.get((2) - (g.questions.size() - 1)).getAnswer();
-    roundTerm.wrongAnswer2 =
-        (3 < g.questions.size())
-            ? g.questions.get(3).getAnswer()
-            : g.questions.get((3) - (g.questions.size() - 1)).getAnswer();
+    roundTerm.wrongAnswer0 = g.questions.get(1).getAnswer();
+    roundTerm.wrongAnswer1 = g.questions.get(2).getAnswer();
+    roundTerm.wrongAnswer2 = g.questions.get(3).getAnswer();
 
     logger.info("exited ternary madness in sendTerms()");
 
@@ -205,7 +196,7 @@ public class Server {
     logger.info("inside sendTerms(arg arg) on firstCardIdx: " + firstCardIdx);
 
     logger.info("about to enter ternary madness inside sendTerms(arg arg)");
-    roundTerm.question = g.questions.get(firstCardIdx).getAnswer();
+    roundTerm.question = g.questions.get(firstCardIdx).getTerm();
     roundTerm.correctAnswer = g.questions.get(firstCardIdx).getAnswer();
     roundTerm.wrongAnswer0 =
         (firstCardIdx + 1 < g.questions.size())
@@ -223,6 +214,7 @@ public class Server {
 
     try {
       logger.info("about to try sending q&a  in sendTerms(arg arg)");
+      logger.info("username to send shit to is: " + uname);
       usernameSessionMap.get(uname).getBasicRemote().sendText(roundTerm.question);
       logger.info("sent " + roundTerm.question);
       usernameSessionMap.get(uname).getBasicRemote().sendText(roundTerm.correctAnswer);
