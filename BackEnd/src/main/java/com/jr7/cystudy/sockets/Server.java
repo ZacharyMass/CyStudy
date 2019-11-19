@@ -179,16 +179,31 @@ public class Server {
   private static void sendTerms(int round, String uname) throws IOException {
 
     int firstCardIdx = round * 4;
-    List<Terms> roundTerms = new ArrayList<>();
-    for (int i = firstCardIdx; i <= firstCardIdx + 4; i++) {
-      if (i < g.questions.size() - 1) {
+    List<FakeTerm> roundTerm = new ArrayList<>();
+    for (int i = firstCardIdx; i <= firstCardIdx + 4; i++){
+      if(i < g.questions.size() - 1){
         break;
       }
-      roundTerms.add(g.questions.get(i));
+      FakeTerm ft = new FakeTerm();
+      ft.question = g.questions.get(i).getAnswer();
+      ft.correctAnswer = g.questions.get(i).getAnswer();
+      ft.wrongAnswer0 =
+          (i + 1 < g.questions.size())
+              ? g.questions.get(i + 1).getAnswer()
+              : g.questions.get((i + 1) - (g.questions.size() - 1)).getAnswer();
+      ft.wrongAnswer1 =
+          (i + 2 < g.questions.size())
+              ? g.questions.get(i + 2).getAnswer()
+              : g.questions.get((i + 2) - (g.questions.size() - 1)).getAnswer();
+      ft.wrongAnswer2 =
+          (i + 3 < g.questions.size())
+              ? g.questions.get(i + 3).getAnswer()
+              : g.questions.get((i + 3) - (g.questions.size() - 1)).getAnswer();
+      roundTerm.add(ft);
     }
 
     try {
-      usernameSessionMap.get(uname).getBasicRemote().sendObject(roundTerms);
+      usernameSessionMap.get(uname).getBasicRemote().sendObject(roundTerm);
     }
     catch (IOException | EncodeException e) {
       logger.info(e.toString());
