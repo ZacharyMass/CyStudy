@@ -26,7 +26,7 @@ public class Server {
   private static Map<Session, String> sessionUsernameMap = new HashMap<>();
   private static Map<String, Session> usernameSessionMap = new HashMap<>();
 
-  static Game g = new Game();
+  private static Game g = new Game();
   @Autowired GameService gameService;
 
   private static final Logger logger = LoggerFactory.getLogger(Server.class);
@@ -96,6 +96,7 @@ public class Server {
             }
           }
         });
+    logger.info("broadcast worked and is exiting");
   }
 
   /**
@@ -165,7 +166,7 @@ public class Server {
     roundTerm.wrongAnswer1 = g.questions.get(2).getAnswer();
     roundTerm.wrongAnswer2 = g.questions.get(3).getAnswer();
 
-    logger.info("exited ternary madness in sendTerms()");
+    logger.info("exited adding terms to send in sendTerms()");
 
     logger.info("inside sendTerms() about to do session foreach lambda");
     sessionUsernameMap.forEach(
@@ -192,14 +193,16 @@ public class Server {
     logger.info("finished synced lambda for each bs");
   }
 
-  private static void sendTerms(int round, String uname) throws IOException {
+  private void sendTerms(int round, String uname) throws IOException {
+
+    logger.info("inside sendTerms, username is: " + uname);
 
     int firstCardIdx = round * 4;
     FakeTerm roundTerm = new FakeTerm();
 
     logger.info("inside sendTerms(arg arg) on firstCardIdx: " + firstCardIdx);
-
     logger.info("about to enter ternary madness inside sendTerms(arg arg)");
+
     roundTerm.question = g.questions.get(firstCardIdx).getTerm();
     roundTerm.correctAnswer = g.questions.get(firstCardIdx).getAnswer();
     roundTerm.wrongAnswer0 =
@@ -237,29 +240,6 @@ public class Server {
       e.printStackTrace();
     }
   }
-
-  //  private static boolean getFakeTerm(FakeTerm roundTerm, int i){
-  //    if(i < g.questions.size() - 1){
-  //      return true;
-  //    }
-  //    FakeTerm ft = new FakeTerm();
-  //    ft.question = g.questions.get(i).getAnswer();
-  //    ft.correctAnswer = g.questions.get(i).getAnswer();
-  //    ft.wrongAnswer0 =
-  //        (i + 1 < g.questions.size())
-  //            ? g.questions.get(i + 1).getAnswer()
-  //            : g.questions.get((i + 1) - (g.questions.size() - 1)).getAnswer();
-  //    ft.wrongAnswer1 =
-  //        (i + 2 < g.questions.size())
-  //            ? g.questions.get(i + 2).getAnswer()
-  //            : g.questions.get((i + 2) - (g.questions.size() - 1)).getAnswer();
-  //    ft.wrongAnswer2 =
-  //        (i + 3 < g.questions.size())
-  //            ? g.questions.get(i + 3).getAnswer()
-  //            : g.questions.get((i + 3) - (g.questions.size() - 1)).getAnswer();
-  //    roundTerm.add(ft);
-  //    return false;
-  //  }
 
   /**
    * What happens when the socket is closed.
