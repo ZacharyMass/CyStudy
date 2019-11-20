@@ -146,7 +146,7 @@ public class Server {
       logger.info("boutta broadcast from clicked stuff");
       broadcast(username + ": " + message);
     } else {
-      logger.info("message didn't contain any of the stuff you're testing for, so you messed");
+      logger.info("message didn't contain any of the stuff you're testing for, so you messed up");
       broadcast(username + ": " + message);
     }
   }
@@ -223,7 +223,7 @@ public class Server {
     logger.info("exited ternary madness in sendTerms(arg arg");
 
     Session sesh = usernameSessionMap.get(uname);
-    synchronized(sesh){
+    //synchronized(sesh){
       try {
 
         logger.info("about to try sending q&a  in sendTerms(arg arg)");
@@ -251,7 +251,7 @@ public class Server {
         logger.error(e.toString());
         e.printStackTrace();
       }
-    }
+    //}
   }
 
   /**
@@ -262,13 +262,16 @@ public class Server {
   @OnClose
   public void onClose(Session session) throws IOException {
     // WebSocket connection closes
-    logger.info("Entered into Close");
+    logger.info("Entered into onClose");
 
     String username = sessionUsernameMap.get(session);
+    logger.info("removing session from sessionUsernameMap in onClose");
     sessionUsernameMap.remove(session);
+    logger.info("removing username from usernameSessionMap in onClose");
     usernameSessionMap.remove(username);
 
-    game = new Game();
+    //game = new Game();
+    game.round = 0;
 
     /*TODO
      * Send stats here
@@ -277,7 +280,9 @@ public class Server {
     String message = username + " disconnected";
     broadcast(message);
 
+    logger.info("closing session in onClose");
     session.close();
+    logger.info("closed session in onClose and ending onClose");
   }
 
   /**
@@ -294,6 +299,7 @@ public class Server {
     logger.error(throwable.toString());
     try {
       broadcast(throwable.toString());
+      onClose(session);
     } catch (IOException e) {
       logger.error("tried to broadcast thrown error but broadcast threw an IOException");
       onClose(session);
