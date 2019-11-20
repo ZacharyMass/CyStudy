@@ -96,6 +96,7 @@ public class StudentGameFragment extends Fragment {
         try {
             Log.d("Socket:", "Trying socket");
             cc = new WebSocketClient(new URI(w), drafts[0]) {
+                int count = 0;
                 @Override
                 public void onMessage(String message) {
 
@@ -126,7 +127,6 @@ public class StudentGameFragment extends Fragment {
 
 
                         // Fill term and answer
-                        int count = 1;
                         if (user.equals("term")) {
                             count = 1;
                             t.setText(secondElement);
