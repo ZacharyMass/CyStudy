@@ -179,7 +179,7 @@ public class StudentGameFragment extends Fragment {
         }
         cc.connect();
 
-        answers[0].setOnClickListener(v15 -> {
+        answers[0].setOnClickListener((View v15) -> {
             try {
                 cc.send(MainActivity.user + ":" + t.getText() + ":correct");
             } catch (Exception e) {
