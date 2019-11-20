@@ -26,7 +26,7 @@ public class Server {
   private static Map<Session, String> sessionUsernameMap = new HashMap<>();
   private static Map<String, Session> usernameSessionMap = new HashMap<>();
 
-  private static Game game = new Game();
+  private Game game = new Game();
   @Autowired GameService gameService;
 
   private static final Logger logger = LoggerFactory.getLogger(Server.class);
@@ -222,32 +222,35 @@ public class Server {
 
     logger.info("exited ternary madness in sendTerms(arg arg");
 
-    try {
+    Session sesh = usernameSessionMap.get(uname);
+    synchronized(sesh){
+      try {
 
-      logger.info("about to try sending q&a  in sendTerms(arg arg)");
-      logger.info("username to send stuff to is: " + uname);
+        logger.info("about to try sending q&a  in sendTerms(arg arg)");
+        logger.info("username to send stuff to is: " + uname);
 
-      usernameSessionMap.get(uname).getBasicRemote().sendText("term:" + roundTerm.question);
-      logger.info("sent term:" + roundTerm.question);
+        sesh.getBasicRemote().sendText("term:" + roundTerm.question);
+        logger.info("sent term:" + roundTerm.question);
 
-      usernameSessionMap.get(uname).getBasicRemote().sendText("correct:" + roundTerm.correctAnswer);
-      logger.info("sent correct:" + roundTerm.correctAnswer);
+        sesh.getBasicRemote().sendText("correct:" + roundTerm.correctAnswer);
+        logger.info("sent correct:" + roundTerm.correctAnswer);
 
-      usernameSessionMap.get(uname).getBasicRemote().sendText("incorrect:" + roundTerm.wrongAnswer0);
-      logger.info("sent incorrect:" + roundTerm.wrongAnswer0);
+        sesh.getBasicRemote().sendText("incorrect:" + roundTerm.wrongAnswer0);
+        logger.info("sent incorrect:" + roundTerm.wrongAnswer0);
 
-      usernameSessionMap.get(uname).getBasicRemote().sendText("incorrect:" + roundTerm.wrongAnswer1);
-      logger.info("sent incorrect:" + roundTerm.wrongAnswer1);
+        sesh.getBasicRemote().sendText("incorrect:" + roundTerm.wrongAnswer1);
+        logger.info("sent incorrect:" + roundTerm.wrongAnswer1);
 
-      usernameSessionMap.get(uname).getBasicRemote().sendText("incorrect:" + roundTerm.wrongAnswer2);
-      logger.info("sent incorrect:" + roundTerm.wrongAnswer2);
+        sesh.getBasicRemote().sendText("incorrect:" + roundTerm.wrongAnswer2);
+        logger.info("sent incorrect:" + roundTerm.wrongAnswer2);
 
-      logger.info("finished sending q&a in sendTerms(arg arg)");
+        logger.info("finished sending q&a in sendTerms(arg arg)");
 
-    } catch (IOException e) {
-      logger.error("you messed up and caught an IOException in sendTerms(arg arg)");
-      logger.error(e.toString());
-      e.printStackTrace();
+      } catch (IOException e) {
+        logger.error("you messed up and caught an IOException in sendTerms(arg arg)");
+        logger.error(e.toString());
+        e.printStackTrace();
+      }
     }
   }
 
