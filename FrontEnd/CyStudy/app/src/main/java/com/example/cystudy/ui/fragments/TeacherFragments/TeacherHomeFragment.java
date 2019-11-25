@@ -53,6 +53,8 @@ public class TeacherHomeFragment extends Fragment {
 
         v = inflater.inflate(R.layout.fragment_teacher_home, container, false);
 
+        classesL.clear(); // Clear to prevent duplication on navigation backwards
+
         //Pull list of classes from server
         pullClasses();
 

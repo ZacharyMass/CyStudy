@@ -69,7 +69,7 @@ public class StudentGameFragment extends Fragment {
             }
 
             public void onFinish() {
-                timeText.setText("You suck!");
+                timeText.setText("Out of time!");
             }
         };
 
