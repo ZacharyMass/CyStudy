@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -59,7 +60,7 @@ public class TeacherFlashcardFragment extends Fragment {
         v = inflater.inflate(R.layout.fragment_teacher_flashcards, container, false);
 
         TextView className = v.findViewById(R.id.teacherClassNameTitle);
-        className.setText(TeacherClassFragment.className);
+        className.setText(TeacherClassFragment.className.split("\n")[1] + " Cards");
 
         FloatingActionButton fab = v.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -106,7 +107,7 @@ public class TeacherFlashcardFragment extends Fragment {
                                 String timeSpent = flashcard.getString("timeSpent");
 
                                 // Add terms in desired format to array
-                                flashcardsL.add(term + ": " + answer);
+                                flashcardsL.add("\n" + term + "\n");
                                 Log.d("Flashcard", flashcardsL.get(i));
                             }
                         } catch (JSONException e) {
@@ -116,9 +117,10 @@ public class TeacherFlashcardFragment extends Fragment {
                         // Initialize Recycler
                         RecyclerView r = v.findViewById(R.id.teacher_flashcards_recycler_view);
                         RecyclerViewAdapter a = new RecyclerViewAdapter(getContext(), flashcardsL);
+                        RecyclerView.LayoutManager manager = new GridLayoutManager(getContext(), 2);
                         Log.d("Current context", getContext().toString());
                         r.setAdapter(a);
-                        r.setLayoutManager(new LinearLayoutManager(getContext()));
+                        r.setLayoutManager(manager);
                     }
                 },
                 new Response.ErrorListener() {

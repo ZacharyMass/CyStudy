@@ -40,7 +40,7 @@ public class TeacherClassFragment extends Fragment {
         final View v = inflater.inflate(R.layout.fragment_teacher_class, container, false);
 
         TextView pageTitle = v.findViewById(R.id.teacherClassPageTitle);
-        pageTitle.setText(className + " Home");
+        pageTitle.setText(className.split("\n")[1] + " Home");
 
         Button viewSetsButton = v.findViewById(R.id.teacherViewFlashcards);
 

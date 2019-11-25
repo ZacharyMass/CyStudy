@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -72,7 +73,7 @@ public class StudentFlashcardsFragment extends Fragment {
         URL += MainActivity.currentClass;
 
         TextView t = v.findViewById(R.id.studentClassNameTitle);
-        t.setText(MainActivity.currentClass);
+        t.setText(MainActivity.currentClass + " Cards");
 
         //Pull list of classes from server
         pullFlashcards();
@@ -110,7 +111,7 @@ public class StudentFlashcardsFragment extends Fragment {
                                 String timeSpent = flashcard.getString("timeSpent");
 
                                 // Add terms in desired format to array
-                                flashcardsL.add(term + ": " + answer);
+                                flashcardsL.add("\n" + term + "\n");
                                 Log.d("Flashcard", flashcardsL.get(i));
                             }
                         } catch (JSONException e) {
@@ -120,9 +121,10 @@ public class StudentFlashcardsFragment extends Fragment {
                         // Initialize Recycler
                         RecyclerView r = v.findViewById(R.id.student_flashcards_recycler_view);
                         RecyclerViewAdapter a = new RecyclerViewAdapter(getContext(), flashcardsL);
+                        RecyclerView.LayoutManager manager = new GridLayoutManager(getContext(), 2);
                         Log.d("Current context", getContext().toString());
                         r.setAdapter(a);
-                        r.setLayoutManager(new LinearLayoutManager(getContext()));
+                        r.setLayoutManager(manager);
                     }
                 },
                 new Response.ErrorListener() {

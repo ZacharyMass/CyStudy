@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -73,15 +74,16 @@ public class TeacherHomeFragment extends Fragment {
 
                 for (int i = 0; i < classes.length; i++)
                 {
-                    classesL.add(classes[i]);
+                    classesL.add("\n" + classes[i] + "\n");
                 }
 
                 // Convert data to RecyclerView
                 RecyclerView r = v.findViewById(R.id.teacher_classes_recycler_view);
                 RecyclerViewAdapter a = new RecyclerViewAdapter(getContext(), classesL);
+                RecyclerView.LayoutManager manager = new GridLayoutManager(getContext(), 2);
                 Log.d("Current context", getContext().toString());
                 r.setAdapter(a);
-                r.setLayoutManager(new LinearLayoutManager(getContext()));
+                r.setLayoutManager(manager);
 
             }
         }, new Response.ErrorListener() {
