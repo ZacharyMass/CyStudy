@@ -26,6 +26,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Objects;
 
+import static com.example.cystudy.MainActivity.user;
+
 public class StudentGameFragment extends Fragment {
 
     private WebSocketClient cc;
@@ -91,11 +93,12 @@ public class StudentGameFragment extends Fragment {
 
         Draft[] drafts = {new Draft_6455()};
         String w = "http://coms-309-jr-7.misc.iastate.edu:8080/websocket/";
-        w += MainActivity.user;
+        w += user;
 
         try {
             Log.d("Socket:", "Trying socket");
             cc = new WebSocketClient(new URI(w), drafts[0]) {
+                int count = 0;
                 @Override
                 public void onMessage(String message) {
 
@@ -126,7 +129,6 @@ public class StudentGameFragment extends Fragment {
 
 
                         // Fill term and answer
-                        int count = 1;
                         if (user.equals("term")) {
                             count = 1;
                             t.setText(secondElement);
@@ -140,14 +142,14 @@ public class StudentGameFragment extends Fragment {
                         }
 
                         // Handle correct messages by updating progress bars
-                        if (user.matches(player1) && thirdElement.equals("correct")) {
+                        if (user.matches(player1)) {
                             player1Progress.incrementProgressBy(20);
                             if (player1Progress.getProgress() == 100) { // Full progress bar
                                 timer.cancel(); // Stop timer
                                 timeText.setText(player1 + " Wins!");
                                 t.setClickable(false); // Disable the term TextView from being clicked again
                             }
-                        } else if (user.matches(player2) && thirdElement.equals("correct")) {
+                        } else if (user.matches(player2)) {
                             player2Progress.incrementProgressBy(20);
                             if (player2Progress.getProgress() == 100) { // Full progress bar
                                 timer.cancel(); // Stop timer
@@ -179,30 +181,30 @@ public class StudentGameFragment extends Fragment {
         }
         cc.connect();
 
-        answers[0].setOnClickListener(v15 -> {
+        answers[0].setOnClickListener((View v15) -> {
             try {
-                cc.send(MainActivity.user + ":" + t.getText() + ":correct");
+                cc.send(user + ":" + t.getText() + ":correct");
             } catch (Exception e) {
                 Log.d("ExceptionSendMessage:", e.getMessage());
             }
         });
         answers[1].setOnClickListener(v14 -> {
             try {
-                cc.send(MainActivity.user + ":" + t.getText() + ":incorrect");
+                cc.send(user + ":" + t.getText() + ":incorrect");
             } catch (Exception e) {
                 Log.d("ExceptionSendMessage:", e.getMessage());
             }
         });
         answers[2].setOnClickListener(v13 -> {
             try {
-                cc.send(MainActivity.user + ":" + t.getText() + ":incorrect");
+                cc.send(user + ":" + t.getText() + ":incorrect");
             } catch (Exception e) {
                 Log.d("ExceptionSendMessage:", e.getMessage());
             }
         });
         answers[3].setOnClickListener(v1 -> {
             try {
-                cc.send(MainActivity.user + ":" + t.getText() + ":incorrect");
+                cc.send(user + ":" + t.getText() + ":incorrect");
             } catch (Exception e) {
                 Log.d("ExceptionSendMessage:", e.getMessage());
             }
@@ -212,7 +214,7 @@ public class StudentGameFragment extends Fragment {
         t.setOnClickListener(v12 -> {
             try {
                 if (!joined) {
-                    cc.send(MainActivity.user + " clicked the button");
+                    cc.send(user + " clicked the button");
                     joined = true;
                 }
             } catch (Exception e) {
