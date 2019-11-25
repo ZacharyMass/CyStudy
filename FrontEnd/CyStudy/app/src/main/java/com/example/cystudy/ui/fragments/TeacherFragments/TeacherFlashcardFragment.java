@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -32,6 +34,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static android.widget.LinearLayout.VERTICAL;
 import static androidx.navigation.ui.NavigationUI.setupWithNavController;
 
 /**
@@ -117,7 +120,9 @@ public class TeacherFlashcardFragment extends Fragment {
                         // Initialize Recycler
                         RecyclerView r = v.findViewById(R.id.teacher_flashcards_recycler_view);
                         RecyclerViewAdapter a = new RecyclerViewAdapter(getContext(), flashcardsL);
-                        RecyclerView.LayoutManager manager = new GridLayoutManager(getContext(), 2);
+                        StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+                        Log.d("Width", manager.getWidth() + "");
+                        Log.d("Height", manager.getHeight() + "");
                         Log.d("Current context", getContext().toString());
                         r.setAdapter(a);
                         r.setLayoutManager(manager);

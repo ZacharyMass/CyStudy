@@ -15,6 +15,7 @@ import androidx.navigation.NavController;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -121,7 +122,7 @@ public class StudentFlashcardsFragment extends Fragment {
                         // Initialize Recycler
                         RecyclerView r = v.findViewById(R.id.student_flashcards_recycler_view);
                         RecyclerViewAdapter a = new RecyclerViewAdapter(getContext(), flashcardsL);
-                        RecyclerView.LayoutManager manager = new GridLayoutManager(getContext(), 2);
+                        StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
                         Log.d("Current context", getContext().toString());
                         r.setAdapter(a);
                         r.setLayoutManager(manager);
