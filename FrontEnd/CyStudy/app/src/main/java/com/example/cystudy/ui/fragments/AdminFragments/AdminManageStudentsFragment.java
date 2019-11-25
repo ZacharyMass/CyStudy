@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -96,9 +97,10 @@ public class AdminManageStudentsFragment extends Fragment {
                         // Initialize Recycler
                         RecyclerView r = v.findViewById(R.id.adminStudentsRecyclerView);
                         RecyclerViewAdapter a = new RecyclerViewAdapter(getContext(), studentsL);
+                        StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
                         Log.d("Current context", getContext().toString());
                         r.setAdapter(a);
-                        r.setLayoutManager(new LinearLayoutManager(getContext()));
+                        r.setLayoutManager(manager);
                     }
                 },
                 new Response.ErrorListener() {

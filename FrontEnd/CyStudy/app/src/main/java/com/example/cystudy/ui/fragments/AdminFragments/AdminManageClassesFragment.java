@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -89,7 +90,7 @@ public class AdminManageClassesFragment extends Fragment {
                                 String className = classObj.getString("className");
 
                                 // Add terms in desired format to array
-                                classesL.add(className);
+                                classesL.add("\n" + className + "\n");
                                 Log.d("Flashcard", classesL.get(i));
                             }
                         } catch (JSONException e) {
@@ -99,9 +100,10 @@ public class AdminManageClassesFragment extends Fragment {
                         // Initialize Recycler
                         RecyclerView r = v.findViewById(R.id.admin_classes_recycler_view);
                         RecyclerViewAdapter a = new RecyclerViewAdapter(getContext(), classesL);
+                        StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
                         Log.d("Current context", getContext().toString());
                         r.setAdapter(a);
-                        r.setLayoutManager(new LinearLayoutManager(getContext()));
+                        r.setLayoutManager(manager);
                     }
                 },
                 new Response.ErrorListener() {
