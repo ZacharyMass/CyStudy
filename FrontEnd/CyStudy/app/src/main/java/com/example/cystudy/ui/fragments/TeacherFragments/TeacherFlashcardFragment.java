@@ -5,13 +5,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -31,6 +34,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static android.widget.LinearLayout.VERTICAL;
 import static androidx.navigation.ui.NavigationUI.setupWithNavController;
 
 /**
@@ -59,7 +63,7 @@ public class TeacherFlashcardFragment extends Fragment {
         v = inflater.inflate(R.layout.fragment_teacher_flashcards, container, false);
 
         TextView className = v.findViewById(R.id.teacherClassNameTitle);
-        className.setText(TeacherClassFragment.className);
+        className.setText(TeacherClassFragment.className.split("\n")[1] + " Cards");
 
         FloatingActionButton fab = v.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -106,7 +110,7 @@ public class TeacherFlashcardFragment extends Fragment {
                                 String timeSpent = flashcard.getString("timeSpent");
 
                                 // Add terms in desired format to array
-                                flashcardsL.add(term + ": " + answer);
+                                flashcardsL.add("\n" + term + "\n");
                                 Log.d("Flashcard", flashcardsL.get(i));
                             }
                         } catch (JSONException e) {
@@ -116,9 +120,12 @@ public class TeacherFlashcardFragment extends Fragment {
                         // Initialize Recycler
                         RecyclerView r = v.findViewById(R.id.teacher_flashcards_recycler_view);
                         RecyclerViewAdapter a = new RecyclerViewAdapter(getContext(), flashcardsL);
+                        StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+                        Log.d("Width", manager.getWidth() + "");
+                        Log.d("Height", manager.getHeight() + "");
                         Log.d("Current context", getContext().toString());
                         r.setAdapter(a);
-                        r.setLayoutManager(new LinearLayoutManager(getContext()));
+                        r.setLayoutManager(manager);
                     }
                 },
                 new Response.ErrorListener() {

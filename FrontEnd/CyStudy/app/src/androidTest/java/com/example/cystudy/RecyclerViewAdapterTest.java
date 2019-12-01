@@ -11,8 +11,6 @@ import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.runner.AndroidJUnit4;
 
 import com.example.cystudy.RecyclerViewAdapaters.RecyclerViewAdapter;
-import com.example.cystudy.ui.fragments.StudentFragments.StudentFlashcardsFragment;
-import com.example.cystudy.ui.fragments.StudentFragments.StudentHomeFragment;
 import com.example.cystudy.ui.fragments.StudentFragments.StudentSettingsFragment;
 
 import org.junit.Test;
@@ -24,6 +22,7 @@ import java.util.ArrayList;
 
 import static androidx.test.espresso.Espresso.onView;
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertNull;
 import static net.bytebuddy.matcher.ElementMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.doReturn;
@@ -56,6 +55,7 @@ public class RecyclerViewAdapterTest {
     @Mock
     Context mockContext = mock(Context.class);
     StudentSettingsFragment sf = mock(StudentSettingsFragment.class);
+    LoginActivity login = mock(LoginActivity.class);
 
     // Written by Zach M
     @Test
@@ -81,5 +81,16 @@ public class RecyclerViewAdapterTest {
 
         // ...then the result should be the expected one.
         assertEquals(MainActivity.user, null);
+    }
+
+    // Written by Brad
+    @Test
+    public void testLoginRole() {
+        // Mock calling the getRole function in the LoginActivity
+        login.getRole("dummyTeacher");
+
+        // This should be null because the parameter inside is not actually instantiated until MainActivity
+        // This is a necessary test to make sure we have correct role verification and the user can access their appropriate set of pages
+        assertNull(login.role);
     }
 }

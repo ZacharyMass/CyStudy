@@ -110,9 +110,9 @@ public class LoginActivity extends AppCompatActivity {
      * Gets role of user via stringRequest, which is used in conditional navigation
      * @param username the username of current user
      */
-    private void getRole(String username) {
+    public void getRole(String username) {
         String URL = "http://coms-309-jr-7.misc.iastate.edu:8080/get-role?username=";
-        URL += LoginActivity.user; // This is the user that logged in and now needs conditional navigation
+        URL += username; // This is the user that logged in and now needs conditional navigation
         RequestQueue roleQueue = Volley.newRequestQueue(this);
 
         StringRequest roleRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {

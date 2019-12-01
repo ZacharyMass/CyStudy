@@ -141,18 +141,6 @@ public class MainActivity extends AppCompatActivity {
                                     navController.navigate(R.id.action_teacherSetsFragment_to_teacherSettingsFragment);
                                     break;
                             }
-                        } else if (navController.getCurrentDestination().getId() == R.id.gameFragment) {
-                            switch (menuItem.getItemId()) {
-                                case R.id.action_settings:
-                                    navController.navigate(R.id.action_gameFragment_to_settingsFragment);
-                                    break;
-                                case R.id.action_stats:
-                                    navController.navigate(R.id.action_gameFragment_to_studentStatsFragment);
-                                    break;
-                                case R.id.action_home:
-                                    navController.navigate(R.id.action_gameFragment_to_studentHomeFragment);
-                                    break;
-                            }
                         }
                         return true;
                     }
