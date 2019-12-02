@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -52,6 +53,12 @@ public class StudentSettingsFragment extends Fragment {
         getActivity().finish();
         NavController navController = Navigation.findNavController(getActivity(), R.id.conditionalNavigation);
         navController.navigate(R.id.action_settingsFragment_to_loginActivity);
+
+        //Clear backstack
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        for(int i = 0; i < fm.getBackStackEntryCount(); i++) {
+            fm.popBackStack();
+        }
     }
 
 }
