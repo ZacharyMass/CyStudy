@@ -100,7 +100,7 @@ public class AdminManageStudentsFragment extends Fragment {
                     r.setAdapter(a);
                     r.setLayoutManager(manager);
                 },
-                error -> error.printStackTrace()
+                Throwable::printStackTrace
         );
 
         requestQueue.add(jsonArrayRequest);
