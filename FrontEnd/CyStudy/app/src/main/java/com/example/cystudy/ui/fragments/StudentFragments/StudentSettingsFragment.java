@@ -11,6 +11,7 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.cystudy.LoginActivity;
 import com.example.cystudy.MainActivity;
@@ -34,13 +35,21 @@ public class StudentSettingsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+        View v = inflater.inflate(R.layout.fragment_settings, container, false);
+        Button logoutButton = v.findViewById(R.id.logout_button);
+        logoutButton.setOnClickListener((View v2) -> {
+            logout();
+        });
+
+        return v;
     }
 
     public void logout(){
         MainActivity.user = null;
         MainActivity.userRole = null;
+        getActivity().finish();
         NavController navController = Navigation.findNavController(getActivity(), R.id.conditionalNavigation);
         navController.navigate(R.id.action_settingsFragment_to_loginActivity);
     }

@@ -5,6 +5,17 @@
     android:layout_width="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/studentClassNameTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:padding="16dp"
+        android:text="Classes"
+        android:textAlignment="textStart"
+        android:textColor="@android:color/white"
+        android:textSize="36sp"/>
+
     <androidx.recyclerview.widget.RecyclerView
 
         android:id="@+id/classes_recycler_view"
