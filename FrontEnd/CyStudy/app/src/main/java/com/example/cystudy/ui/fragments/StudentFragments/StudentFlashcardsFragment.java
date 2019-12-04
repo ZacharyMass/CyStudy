@@ -73,10 +73,10 @@ public class StudentFlashcardsFragment extends Fragment {
         }
         );
 
-        URL += MainActivity.currentClass;
+        URL += RecyclerViewAdapter.studentClass;
 
         TextView t = v.findViewById(R.id.studentClassNameTitle);
-        t.setText(MainActivity.currentClass + " Cards");
+        t.setText(RecyclerViewAdapter.studentClass + " Cards");
 
         //Pull list of classes from server
         pullFlashcards();
@@ -115,7 +115,6 @@ public class StudentFlashcardsFragment extends Fragment {
 
                                 // Add terms in desired format to array
                                 flashcardsL.add("\n" + term + "\n");
-                                Log.d("Flashcard", flashcardsL.get(i));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

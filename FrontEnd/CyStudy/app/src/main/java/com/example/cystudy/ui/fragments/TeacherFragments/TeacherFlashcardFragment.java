@@ -60,6 +60,8 @@ public class TeacherFlashcardFragment extends Fragment {
 
         URL += TeacherClassFragment.className;
 
+        Log.d("Get Flashcards", TeacherClassFragment.className);
+
         v = inflater.inflate(R.layout.fragment_teacher_flashcards, container, false);
 
         TextView className = v.findViewById(R.id.teacherClassNameTitle);

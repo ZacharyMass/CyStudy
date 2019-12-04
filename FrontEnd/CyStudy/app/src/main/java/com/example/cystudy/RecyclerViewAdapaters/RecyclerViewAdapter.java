@@ -31,6 +31,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     ArrayList<String> classesList;
     private Context mContext;
 
+    public static String studentClass;
+
     /**
      * Constructor
      * @param context Context object
@@ -65,15 +67,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.classNameTextView.setText(classesList.get(position));
-        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() { // Changed this to holder.itemView instead of holder.parentlayout
             @Override
             public void onClick(View view){
+                Log.d("Position", position + ""); // THIS WORKS!!
+                Log.d("Class Selected", classesList.get(position));
                 if (LoginActivity.role.matches("student")) {
+                    studentClass = classesList.get(position);
                     Navigation.findNavController(view).navigate(R.id.action_studentHomeFragment_to_classFragment);
                 }
                 else if (LoginActivity.role.matches("teacher")){
                     // int position = viewHolder.getAdapterPosition();
-                    className = classesList.get(0); // Hardcoded this just to show something on next page
+                    className = classesList.get(position); // Hardcoded this just to show something on next page
                     Log.d("Class Name", className);
                     Navigation.findNavController(view).navigate(R.id.action_teacherHomeFragment_to_teacherClassFragment);
                 }
