@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cystudy.LoginActivity;
 import com.example.cystudy.R;
+import com.example.cystudy.ui.fragments.TeacherFragments.TeacherHomeFragment;
 
 import java.util.ArrayList;
 
@@ -74,7 +75,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     Navigation.findNavController(view).navigate(R.id.action_studentHomeFragment_to_classFragment);
                 }
                 else if (LoginActivity.role.matches("teacher")){
-                    teacherClass = classesList.get(position); // Hardcoded this just to show something on next page
+                    teacherClass = TeacherHomeFragment.unformattedTeacherClasses.get(position); // Hardcoded this just to show something on next page
                     Navigation.findNavController(view).navigate(R.id.action_teacherHomeFragment_to_teacherClassFragment);
                 }
             }
