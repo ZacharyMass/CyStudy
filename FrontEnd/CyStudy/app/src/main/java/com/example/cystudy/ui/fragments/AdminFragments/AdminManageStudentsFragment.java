@@ -73,42 +73,34 @@ public class AdminManageStudentsFragment extends Fragment {
                 Request.Method.GET,
                 URL,
                 null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
+                response -> {
 
-                        try {
-                            // Loop through the array elements
-                            for (int i = 0; i < response.length(); i++) {
-                                // Get current json object
-                                JSONObject student = response.getJSONObject(i);
+                    try {
+                        // Loop through the array elements
+                        for (int i = 0; i < response.length(); i++) {
+                            // Get current json object
+                            JSONObject student = response.getJSONObject(i);
 
-                                // Get the current teacher (json object) data
-                                String studentName = student.getString("username");
+                            // Get the current teacher (json object) data
+                            String studentName = student.getString("username");
 
-                                // Add names in desired format to array
-                                studentsL.add(studentName);
-                                Log.d("Student", studentsL.get(i));
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                            // Add names in desired format to array
+                            studentsL.add(studentName);
+                            Log.d("Student", studentsL.get(i));
                         }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
-                        // Initialize Recycler
-                        RecyclerView r = v.findViewById(R.id.adminStudentsRecyclerView);
-                        RecyclerViewAdapter a = new RecyclerViewAdapter(getContext(), studentsL);
-                        StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-                        Log.d("Current context", getContext().toString());
-                        r.setAdapter(a);
-                        r.setLayoutManager(manager);
-                    }
+                    // Initialize Recycler
+                    RecyclerView r = v.findViewById(R.id.adminStudentsRecyclerView);
+                    RecyclerViewAdapter a = new RecyclerViewAdapter(getContext(), studentsL);
+                    StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+                    Log.d("Current context", getContext().toString());
+                    r.setAdapter(a);
+                    r.setLayoutManager(manager);
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                    }
-                }
+                Throwable::printStackTrace
         );
 
         requestQueue.add(jsonArrayRequest);
