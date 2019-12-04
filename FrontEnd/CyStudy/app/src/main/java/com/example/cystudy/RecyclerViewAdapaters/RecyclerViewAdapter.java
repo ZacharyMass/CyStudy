@@ -17,8 +17,6 @@ import com.example.cystudy.R;
 
 import java.util.ArrayList;
 
-import static com.example.cystudy.ui.fragments.TeacherFragments.TeacherClassFragment.className;
-
 /**
  * Generic RecyclerViewAdapter, used with many fragments in this app
  * @author Zach Mass
@@ -32,6 +30,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private Context mContext;
 
     public static String studentClass;
+    public static String teacherClass;
 
     /**
      * Constructor
@@ -70,16 +69,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.itemView.setOnClickListener(new View.OnClickListener() { // Changed this to holder.itemView instead of holder.parentlayout
             @Override
             public void onClick(View view){
-                Log.d("Position", position + ""); // THIS WORKS!!
-                Log.d("Class Selected", classesList.get(position));
                 if (LoginActivity.role.matches("student")) {
                     studentClass = classesList.get(position);
                     Navigation.findNavController(view).navigate(R.id.action_studentHomeFragment_to_classFragment);
                 }
                 else if (LoginActivity.role.matches("teacher")){
-                    // int position = viewHolder.getAdapterPosition();
-                    className = classesList.get(position); // Hardcoded this just to show something on next page
-                    Log.d("Class Name", className);
+                    teacherClass = classesList.get(position); // Hardcoded this just to show something on next page
                     Navigation.findNavController(view).navigate(R.id.action_teacherHomeFragment_to_teacherClassFragment);
                 }
             }
