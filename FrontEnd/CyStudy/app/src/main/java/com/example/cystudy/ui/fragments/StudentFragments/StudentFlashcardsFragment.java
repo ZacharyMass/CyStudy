@@ -56,6 +56,8 @@ public class StudentFlashcardsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
+        flashcardsL.clear(); // Trying this to fix a weird blank error (did not work, but needed to clear back stack)
+
         //Inflate view
         v = inflater.inflate(R.layout.fragment_class, container, false);
 

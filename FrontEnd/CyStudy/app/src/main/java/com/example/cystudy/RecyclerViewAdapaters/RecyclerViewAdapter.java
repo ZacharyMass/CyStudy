@@ -64,7 +64,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
      */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Log.d("In OnBindViewHolder", "true");
         holder.classNameTextView.setText(classesList.get(position));
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -58,6 +58,8 @@ public class StudentHomeFragment extends Fragment {
         //Inflate view
         v = inflater.inflate(R.layout.fragment_student_home, container, false);
 
+        classesL.clear(); // Clear this to prevent duplication in back stack
+
         //Pull list of classes from server
         pullClasses();
 
@@ -88,7 +90,6 @@ public class StudentHomeFragment extends Fragment {
                 RecyclerViewAdapter a = new RecyclerViewAdapter(getContext(), classesL);
                 r.setAdapter(a);
                 r.setLayoutManager(manager);
-
             }
         }, new Response.ErrorListener() {
             @Override
