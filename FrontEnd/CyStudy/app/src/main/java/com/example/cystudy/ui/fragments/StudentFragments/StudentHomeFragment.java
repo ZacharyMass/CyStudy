@@ -38,6 +38,7 @@ public class StudentHomeFragment extends Fragment {
     private View v;
 
     ArrayList<String> classesL = new ArrayList<>();
+    public static ArrayList<String> unformattedStudentClasses = new ArrayList<>();
 
     /**
      * Sets View object to appropriate XML document, calls pull request from server
@@ -82,6 +83,7 @@ public class StudentHomeFragment extends Fragment {
                 for (int i = 0; i < classes.length; i++)
                 {
                     classesL.add("\n" + classes[i] + "\n");
+                    unformattedStudentClasses.add(classes[i]);
                 }
 
                 // Initialize Recycler
