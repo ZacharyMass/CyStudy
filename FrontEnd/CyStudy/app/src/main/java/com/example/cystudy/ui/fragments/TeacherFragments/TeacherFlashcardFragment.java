@@ -58,12 +58,12 @@ public class TeacherFlashcardFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        URL += TeacherClassFragment.className;
+        URL += RecyclerViewAdapter.teacherClass;
 
         v = inflater.inflate(R.layout.fragment_teacher_flashcards, container, false);
 
         TextView className = v.findViewById(R.id.teacherClassNameTitle);
-        className.setText(TeacherClassFragment.className.split("\n")[1] + " Cards");
+        className.setText(RecyclerViewAdapter.teacherClass + " Cards");
 
         FloatingActionButton fab = v.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

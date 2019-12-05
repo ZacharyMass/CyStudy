@@ -40,6 +40,7 @@ public class TeacherHomeFragment extends Fragment {
     private View v;
 
     ArrayList<String> classesL = new ArrayList<>();
+    public static ArrayList<String> unformattedTeacherClasses = new ArrayList<>();
 
     /**
      * Initializes current View object, calls a GET request to pull list of classes for teacher user from DB
@@ -75,6 +76,7 @@ public class TeacherHomeFragment extends Fragment {
                 for (int i = 0; i < classes.length; i++)
                 {
                     classesL.add("\n" + classes[i] + "\n");
+                    unformattedTeacherClasses.add(classes[i]);
                 }
 
                 // Convert data to RecyclerView

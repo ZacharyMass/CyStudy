@@ -14,10 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cystudy.LoginActivity;
 import com.example.cystudy.R;
+import com.example.cystudy.ui.fragments.StudentFragments.StudentHomeFragment;
+import com.example.cystudy.ui.fragments.TeacherFragments.TeacherHomeFragment;
 
 import java.util.ArrayList;
-
-import static com.example.cystudy.ui.fragments.TeacherFragments.TeacherClassFragment.className;
 
 /**
  * Generic RecyclerViewAdapter, used with many fragments in this app
@@ -30,6 +30,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     ArrayList<String> classesList;
     private Context mContext;
+
+    public static String studentClass;
+    public static String teacherClass;
 
     /**
      * Constructor
@@ -64,18 +67,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
      */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Log.d("In OnBindViewHolder", "true");
         holder.classNameTextView.setText(classesList.get(position));
-        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() { // Changed this to holder.itemView instead of holder.parentlayout
             @Override
             public void onClick(View view){
                 if (LoginActivity.role.matches("student")) {
-                    Navigation.findNavController(view).navigate(R.id.action_studentHomeFragment_to_classFragment);
+                    studentClass = StudentHomeFragment.unformattedStudentClasses.get(position);
+                    Navigation.findNavController(view).navigate(R.id.action_studentHomeFragment_to_studentClassHomeFragment);
                 }
                 else if (LoginActivity.role.matches("teacher")){
-                    // int position = viewHolder.getAdapterPosition();
-                    className = classesList.get(0); // Hardcoded this just to show something on next page
-                    Log.d("Class Name", className);
+                    teacherClass = TeacherHomeFragment.unformattedTeacherClasses.get(position); // Hardcoded this just to show something on next page
                     Navigation.findNavController(view).navigate(R.id.action_teacherHomeFragment_to_teacherClassFragment);
                 }
             }

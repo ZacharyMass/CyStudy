@@ -41,7 +41,7 @@ public class TeacherSetsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        URL += TeacherClassFragment.className; // Should be COMS309 currently for testing purposes
+        URL += RecyclerViewAdapter.teacherClass;
 
         v = inflater.inflate(R.layout.fragment_teacher_sets, container, false);
 

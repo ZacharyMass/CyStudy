@@ -14,6 +14,7 @@ import androidx.navigation.NavController;
 
 import com.example.cystudy.MainActivity;
 import com.example.cystudy.R;
+import com.example.cystudy.RecyclerViewAdapaters.RecyclerViewAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import static androidx.navigation.ui.NavigationUI.setupWithNavController;
@@ -23,8 +24,6 @@ import static androidx.navigation.ui.NavigationUI.setupWithNavController;
  * @author Brad Gannon
  */
 public class TeacherClassFragment extends Fragment {
-
-    public static String className;
 
     /**
      * Initializes the buttons and sets up some navigation on creation of the fragment
@@ -40,7 +39,7 @@ public class TeacherClassFragment extends Fragment {
         final View v = inflater.inflate(R.layout.fragment_teacher_class, container, false);
 
         TextView pageTitle = v.findViewById(R.id.teacherClassPageTitle);
-        pageTitle.setText(className.split("\n")[1] + " Home");
+        pageTitle.setText(RecyclerViewAdapter.teacherClass + " Home");
 
         Button viewSetsButton = v.findViewById(R.id.teacherViewFlashcards);
 
