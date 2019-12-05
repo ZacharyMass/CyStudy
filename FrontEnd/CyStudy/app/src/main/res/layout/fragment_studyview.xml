@@ -48,19 +48,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/studyViewFlipCard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:backgroundTint="#E0D784"
-        app:elevation="0dp"
-        app:borderWidth="0dp"
-        app:fabSize="mini"
-        app:layout_constraintBottom_toBottomOf="@+id/studyViewFlashcardText"
-        app:layout_constraintEnd_toEndOf="@+id/studyViewFlashcardText"
-        app:srcCompat="@android:drawable/stat_notify_sync_noanim" />
-
     <TextView
         android:id="@+id/studyViewNextCardArrow"
         android:layout_width="75dp"
@@ -84,5 +71,15 @@
         android:clickable="true"
         app:layout_constraintStart_toStartOf="@+id/studyViewFlashcardText"
         app:layout_constraintTop_toBottomOf="@+id/studyViewFlashcardText" />
+
+    <TextView
+        android:id="@+id/studyViewFlipCard"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/flip_icon"
+        android:clickable="true"
+        android:backgroundTint="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/studyViewFlashcardText"
+        app:layout_constraintEnd_toEndOf="@+id/studyViewFlashcardText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

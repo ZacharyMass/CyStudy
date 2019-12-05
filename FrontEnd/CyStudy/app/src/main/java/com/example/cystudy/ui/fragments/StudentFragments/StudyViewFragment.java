@@ -32,7 +32,7 @@ public class StudyViewFragment extends Fragment {
     private static TextView cardText;
     private static TextView leftArrow;
     private static TextView rightArrow;
-    private static FloatingActionButton flipCard;
+    private static TextView flipCard;
     private static TextView progressText;
 
     @Override
