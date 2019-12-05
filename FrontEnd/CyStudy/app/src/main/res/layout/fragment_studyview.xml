@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/teacherClassesLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/studyViewPageTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:padding="16dp"
+        android:text="Class Name Here"
+        android:textColor="@android:color/white"
+        android:textSize="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/studyViewFlashcardText"
+        android:layout_width="350dp"
+        android:layout_height="200dp"
+        android:background="#E0D784"
+        android:fontFamily="casual"
+        android:gravity="center_vertical"
+        android:text="Flashcard Here"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/studyViewPageTitle"
+        app:layout_constraintVertical_bias="0.35000002" />
+
+    <TextView
+        android:id="@+id/studyViewCardProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="x / n"
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintBottom_toTopOf="@+id/studyViewFlashcardText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/studyViewFlipCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:backgroundTint="#E0D784"
+        app:elevation="0dp"
+        app:borderWidth="0dp"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="@+id/studyViewFlashcardText"
+        app:layout_constraintEnd_toEndOf="@+id/studyViewFlashcardText"
+        app:srcCompat="@android:drawable/stat_notify_sync_noanim" />
+
+    <TextView
+        android:id="@+id/studyViewNextCardArrow"
+        android:layout_width="75dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="85dp"
+        android:background="@drawable/right_arrow"
+        android:backgroundTint="@android:color/darker_gray"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="@+id/studyViewFlashcardText"
+        app:layout_constraintTop_toBottomOf="@+id/studyViewFlashcardText" />
+
+    <TextView
+        android:id="@+id/studyViewPrevCardArrow"
+        android:layout_width="75dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="85dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/arrow_left"
+        android:backgroundTint="@android:color/darker_gray"
+        android:clickable="true"
+        app:layout_constraintStart_toStartOf="@+id/studyViewFlashcardText"
+        app:layout_constraintTop_toBottomOf="@+id/studyViewFlashcardText" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
