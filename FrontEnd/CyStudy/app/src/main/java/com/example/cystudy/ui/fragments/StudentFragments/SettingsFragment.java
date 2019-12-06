@@ -25,10 +25,10 @@ import static com.example.cystudy.MainActivity.navController;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class StudentSettingsFragment extends Fragment {
+public class SettingsFragment extends Fragment {
 
 
-    public StudentSettingsFragment() {
+    public SettingsFragment() {
         // Required empty public constructor
     }
 

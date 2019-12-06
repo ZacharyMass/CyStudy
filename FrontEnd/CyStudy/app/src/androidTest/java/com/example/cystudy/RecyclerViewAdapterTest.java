@@ -1,26 +1,18 @@
 package com.example.cystudy;
 
 import android.content.Context;
-import android.view.View;
 
-import androidx.fragment.app.testing.FragmentScenario;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.test.espresso.action.ViewActions;
-import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.runner.AndroidJUnit4;
 
 import com.example.cystudy.RecyclerViewAdapaters.RecyclerViewAdapter;
-import com.example.cystudy.ui.fragments.StudentFragments.StudentSettingsFragment;
+import com.example.cystudy.ui.fragments.StudentFragments.SettingsFragment;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 
 import java.util.ArrayList;
 
-import static androidx.test.espresso.Espresso.onView;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
 import static net.bytebuddy.matcher.ElementMatchers.is;
@@ -54,7 +46,7 @@ public class RecyclerViewAdapterTest {
 
     @Mock
     Context mockContext = mock(Context.class);
-    StudentSettingsFragment sf = mock(StudentSettingsFragment.class);
+    SettingsFragment sf = mock(SettingsFragment.class);
     LoginActivity login = mock(LoginActivity.class);
 
     // Written by Zach M

@@ -12,7 +12,6 @@ import androidx.navigation.Navigation;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import static androidx.navigation.ui.NavigationUI.setupWithNavController;
-import static java.lang.Boolean.FALSE;
 
 /**
  * Basis for all conditional navigation in app. Directs user to appropriate set of fragments to navigate within.
@@ -84,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                                     navController.navigate(R.id.action_studentHomeFragment_to_settingsFragment);
                                     break;
                             }
-                        } else if (navController.getCurrentDestination().getId() == R.id.settingsFragment) {
+                        } else if (navController.getCurrentDestination().getId() == R.id.teacherSettingsFragment) {
                             switch (menuItem.getItemId()) {
                                 case R.id.action_stats:
                                     navController.navigate(R.id.action_settingsFragment_to_studentStatsFragment);
