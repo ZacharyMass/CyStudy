@@ -22,6 +22,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.cystudy.MainActivity;
 import com.example.cystudy.R;
+import com.example.cystudy.RecyclerViewAdapaters.RecyclerViewAdapter;
 import com.example.cystudy.ui.fragments.TeacherFragments.TeacherClassFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -97,7 +98,7 @@ public class AddFlashcardFragment extends Fragment {
             JSONObject jsonBody = new JSONObject();
             RequestQueue createFlashcard = Volley.newRequestQueue(Objects.requireNonNull(getContext()));
 
-            jsonBody.put("className", TeacherClassFragment.className);
+            jsonBody.put("className", RecyclerViewAdapter.teacherClass);
             jsonBody.put("topic", "test");
             jsonBody.put("term", term.getText().toString());
             jsonBody.put("answer", definition.getText().toString());

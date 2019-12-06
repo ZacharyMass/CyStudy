@@ -53,11 +53,11 @@
                 android:id="@+id/action_studentHomeFragment_to_studentStatsFragment"
                 app:destination="@id/studentStatsFragment" />
             <action
-                android:id="@+id/action_studentHomeFragment_to_classFragment"
-                app:destination="@id/classFragment" />
-            <action
                 android:id="@+id/action_studentHomeFragment_to_settingsFragment"
-                app:destination="@id/teacherSettingsFragment" />
+                app:destination="@id/settingsFragment" />
+            <action
+                android:id="@+id/action_studentHomeFragment_to_studentClassHomeFragment"
+                app:destination="@id/studentClassHomeFragment" />
         </fragment>
         <fragment
             android:id="@+id/studentStatsFragment"
@@ -107,6 +107,23 @@
                 android:id="@+id/action_gameFragment_to_settingsFragment"
                 app:destination="@id/teacherSettingsFragment" />
         </fragment>
+        <fragment
+            android:id="@+id/studentClassHomeFragment"
+            android:name="com.example.cystudy.ui.fragments.StudentFragments.StudentClassHomeFragment"
+            android:label="fragment_student_class_home"
+            tools:layout="@layout/fragment_student_class_home" >
+            <action
+                android:id="@+id/action_studentClassHomeFragment_to_classFragment"
+                app:destination="@id/classFragment" />
+            <action
+                android:id="@+id/action_studentClassHomeFragment_to_studyViewFragment"
+                app:destination="@id/studyViewFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/studyViewFragment"
+            android:name="com.example.cystudy.ui.fragments.StudentFragments.StudyViewFragment"
+            android:label="fragment_studyview"
+            tools:layout="@layout/fragment_studyview" />
     </navigation>
     <navigation
         android:id="@+id/teacherNavigation"

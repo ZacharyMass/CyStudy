@@ -38,6 +38,7 @@ public class StudentHomeFragment extends Fragment {
     private View v;
 
     ArrayList<String> classesL = new ArrayList<>();
+    public static ArrayList<String> unformattedStudentClasses = new ArrayList<>();
 
     /**
      * Sets View object to appropriate XML document, calls pull request from server
@@ -57,6 +58,8 @@ public class StudentHomeFragment extends Fragment {
 
         //Inflate view
         v = inflater.inflate(R.layout.fragment_student_home, container, false);
+
+        classesL.clear(); // Clear this to prevent duplication in back stack
 
         //Pull list of classes from server
         pullClasses();
@@ -80,6 +83,7 @@ public class StudentHomeFragment extends Fragment {
                 for (int i = 0; i < classes.length; i++)
                 {
                     classesL.add("\n" + classes[i] + "\n");
+                    unformattedStudentClasses.add(classes[i]);
                 }
 
                 // Initialize Recycler
@@ -88,7 +92,6 @@ public class StudentHomeFragment extends Fragment {
                 RecyclerViewAdapter a = new RecyclerViewAdapter(getContext(), classesL);
                 r.setAdapter(a);
                 r.setLayoutManager(manager);
-
             }
         }, new Response.ErrorListener() {
             @Override
