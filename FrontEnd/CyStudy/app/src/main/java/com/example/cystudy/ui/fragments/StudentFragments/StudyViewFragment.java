@@ -1,6 +1,7 @@
 package com.example.cystudy.ui.fragments.StudentFragments;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,12 +35,31 @@ public class StudyViewFragment extends Fragment {
     private static TextView rightArrow;
     private static TextView flipCard;
     private static TextView progressText;
+    private static CountDownTimer timer;
+    private static int totalTime;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_studyview, container, false);
+
+        totalTime = 0; // Start as 0
+
+        // Initialize timer
+        timer = new CountDownTimer(36000000, 1000) { // Set this starting at 10 hours to avoid timing out
+            @Override
+            public void onTick(long millisUntilFinished) {
+                totalTime += 1000;
+            }
+
+            @Override
+            public void onFinish() {
+                timer.cancel();
+            }
+        };
+
+        timer.start();
 
         terms = StudentClassHomeFragment.studyViewTerms;
         defs = StudentClassHomeFragment.studyViewDefs;
@@ -80,6 +100,13 @@ public class StudyViewFragment extends Fragment {
         });
 
         return v;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        totalTime /= 1000;
+        Log.d("Time Spent", totalTime + " seconds");
     }
 
     private void nextCard() {
