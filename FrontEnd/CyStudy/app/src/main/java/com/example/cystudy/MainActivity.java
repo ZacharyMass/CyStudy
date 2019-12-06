@@ -12,7 +12,6 @@ import androidx.navigation.Navigation;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import static androidx.navigation.ui.NavigationUI.setupWithNavController;
-import static java.lang.Boolean.FALSE;
 
 /**
  * Basis for all conditional navigation in app. Directs user to appropriate set of fragments to navigate within.
@@ -21,10 +20,10 @@ import static java.lang.Boolean.FALSE;
  */
 public class MainActivity extends AppCompatActivity {
 
-    public static String url = "coms-309-jr-7.misc.iastate.edu";
-    public static String user = LoginActivity.user;
+    public static final String url = "coms-309-jr-7.misc.iastate.edu";
+    public static String user;
     public static String currentClass = "COMS309"; // TODO: fix this once unique items in RecyclerView can be selected
-    public static String userRole = LoginActivity.role; // TODO: fix this to account for user coming from RegisterActivity, setting Boolean in Login and Register activities?
+    public static String userRole; // TODO: fix this to account for user coming from RegisterActivity, setting Boolean in Login and Register activities?
     public static BottomNavigationView bottomNavigationView;
     public static NavController navController;
 
@@ -37,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        user = LoginActivity.user;
+        userRole = LoginActivity.role;
 
         Log.d("MainAct Role", userRole);
 
@@ -81,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                                     navController.navigate(R.id.action_studentHomeFragment_to_settingsFragment);
                                     break;
                             }
-                        } else if (navController.getCurrentDestination().getId() == R.id.settingsFragment) {
+                        } else if (navController.getCurrentDestination().getId() == R.id.teacherSettingsFragment) {
                             switch (menuItem.getItemId()) {
                                 case R.id.action_stats:
                                     navController.navigate(R.id.action_settingsFragment_to_studentStatsFragment);
