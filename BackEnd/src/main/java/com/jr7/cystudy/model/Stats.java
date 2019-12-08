@@ -5,11 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-// @NamedQuery(name = "User.getUserByUsername", query = "SELECT u FROM User u WHERE u.username =
-// ?1")
+@NamedQuery(name = "Stats.getStatsByUsernameAndClassName", query = "SELECT s FROM Stats s WHERE s.username = ?1 AND s.className =?2")
 @Table(name = "stats")
 public class Stats {
 
@@ -36,7 +36,7 @@ public class Stats {
   private int correctQs;
 
   /** total time spent studying for a class. */
-  @Column(name = "time_spent")
+  @Column(name = "time_spent", columnDefinition = "float default 0.0")
   private float time;
 
   /**
