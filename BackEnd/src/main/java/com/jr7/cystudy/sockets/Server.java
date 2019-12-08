@@ -46,17 +46,6 @@ public class Server {
     // get session and websocket connection
     logger.info("Entered onOpen in com.jr7.cystudy.sockets.Server");
 
-    //    if (sessionUsernameMap.size() >= 2) {
-    //      broadcast("This game already has 2 players, and another tried to join.");
-    //      onClose(session);
-    //    }
-
-    //    if (sessionUsernameMap.isEmpty()) {
-    //      g.player1 = username;
-    //    } else {
-    //      g.player2 = username;
-    //    }
-
     logger.info("trying to make " + username + " either p1 or p2");
     if (game.player1.contains("none")) {
       game.player1 = username;
@@ -223,35 +212,32 @@ public class Server {
     logger.info("exited ternary madness in sendTerms(arg arg");
 
     Session sesh = usernameSessionMap.get(uname);
-    //synchronized(sesh){
-      try {
+    try {
+      logger.info("about to try sending q&a  in sendTerms(arg arg)");
+      logger.info("username to send stuff to is: " + uname);
 
-        logger.info("about to try sending q&a  in sendTerms(arg arg)");
-        logger.info("username to send stuff to is: " + uname);
+      sesh.getBasicRemote().sendText("term:" + roundTerm.question);
+      logger.info("sent term:" + roundTerm.question);
 
-        sesh.getBasicRemote().sendText("term:" + roundTerm.question);
-        logger.info("sent term:" + roundTerm.question);
+      sesh.getBasicRemote().sendText("correct:" + roundTerm.correctAnswer);
+      logger.info("sent correct:" + roundTerm.correctAnswer);
 
-        sesh.getBasicRemote().sendText("correct:" + roundTerm.correctAnswer);
-        logger.info("sent correct:" + roundTerm.correctAnswer);
+      sesh.getBasicRemote().sendText("incorrect:" + roundTerm.wrongAnswer0);
+      logger.info("sent incorrect:" + roundTerm.wrongAnswer0);
 
-        sesh.getBasicRemote().sendText("incorrect:" + roundTerm.wrongAnswer0);
-        logger.info("sent incorrect:" + roundTerm.wrongAnswer0);
+      sesh.getBasicRemote().sendText("incorrect:" + roundTerm.wrongAnswer1);
+      logger.info("sent incorrect:" + roundTerm.wrongAnswer1);
 
-        sesh.getBasicRemote().sendText("incorrect:" + roundTerm.wrongAnswer1);
-        logger.info("sent incorrect:" + roundTerm.wrongAnswer1);
+      sesh.getBasicRemote().sendText("incorrect:" + roundTerm.wrongAnswer2);
+      logger.info("sent incorrect:" + roundTerm.wrongAnswer2);
 
-        sesh.getBasicRemote().sendText("incorrect:" + roundTerm.wrongAnswer2);
-        logger.info("sent incorrect:" + roundTerm.wrongAnswer2);
+      logger.info("finished sending q&a in sendTerms(arg arg)");
 
-        logger.info("finished sending q&a in sendTerms(arg arg)");
-
-      } catch (IOException e) {
-        logger.error("you messed up and caught an IOException in sendTerms(arg arg)");
-        logger.error(e.toString());
-        e.printStackTrace();
-      }
-    //}
+    } catch (IOException e) {
+      logger.error("you messed up and caught an IOException in sendTerms(arg arg)");
+      logger.error(e.toString());
+      e.printStackTrace();
+    }
   }
 
   /**
@@ -270,7 +256,6 @@ public class Server {
     logger.info("removing username from usernameSessionMap in onClose");
     usernameSessionMap.remove(username);
 
-    //game = new Game();
     game.round = 0;
 
     /*TODO
