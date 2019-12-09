@@ -42,6 +42,13 @@ public class StatsService {
     return "Time added successfully";
   }
 
+  public void gameAdd(int correct, String username){
+
+    Stats s = statsRepo.getStatsByUsernameAndClassName(username, "COMS309");
+    s.addTotal();
+    s.addCorrect(correct);
+  }
+
   public Stats getUsersStats(String username, String className){
     return statsRepo.getStatsByUsernameAndClassName(username, className);
   }
