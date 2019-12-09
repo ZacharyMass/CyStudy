@@ -5,8 +5,6 @@ import com.jr7.cystudy.repository.StatsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class StatsService {
 
@@ -43,7 +41,7 @@ public class StatsService {
     return "Time added successfully";
   }
 
-  public void gameAdd(int correct, String username){
+  public void gameAdd(int correct, String username) {
 
     Stats s = statsRepo.getStatsByUsernameAndClassName(username, "COMS309");
     s.addTotal();
@@ -51,11 +49,11 @@ public class StatsService {
     statsRepo.save(s);
   }
 
-  public Stats getUsersStats(String username, String className){
+  public Stats getUsersStats(String username, String className) {
     return statsRepo.getStatsByUsernameAndClassName(username, className);
   }
 
-  public void save(String username, String className){
+  public void save(String username, String className) {
 
     Stats s = new Stats();
     s.setUsername(username);
