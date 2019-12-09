@@ -86,6 +86,10 @@ public class Stats {
     return this.totalQs;
   }
 
+  public void addTotal(){
+    this.totalQs += 5;
+  }
+
   /**
    * getter method for correctQs.
    *
@@ -93,6 +97,10 @@ public class Stats {
    */
   public int getCorrect() {
     return this.correctQs;
+  }
+
+  public void addCorrect(int c){
+    this.correctQs += c;
   }
 
   /**
