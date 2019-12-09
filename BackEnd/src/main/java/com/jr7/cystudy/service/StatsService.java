@@ -5,8 +5,6 @@ import com.jr7.cystudy.repository.StatsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class StatsService {
 
@@ -23,27 +21,31 @@ public class StatsService {
    * @param t time spent that will be added to the user's stats
    * @return message indicating errors, or that time was added successfully
    */
-  public String addTime(String className, String usrName, float t) {
+  public Stats addTime(String className, String usrName, float t) {
 
+    Stats usrStats = new Stats();
     if (!userService.checkUserExists(usrName)) {
-      return "User with name " + usrName + " does not exist";
+      usrStats.setUsername("User with name " + usrName + " does not exist");
+      return usrStats;
     }
 
     if (!classService.checkClassExists(className)) {
-      return "Class with name " + className + " does not exist";
+      usrStats.setUsername("Class with name " + className + " does not exist");
+      return usrStats;
     }
 
     if (!usrClassServ.checkUserInClass(usrName, className)) {
-      return "User " + usrName + " is not in class " + className;
+      usrStats.setUsername("User " + usrName + " is not in class " + className);
+      return usrStats;
     }
 
-    Stats usrStats = statsRepo.getStatsByUsernameAndClassName(usrName, className);
+    usrStats = statsRepo.getStatsByUsernameAndClassName(usrName, className);
     usrStats.addTime(t);
     statsRepo.save(usrStats);
-    return "Time added successfully";
+    return usrStats;
   }
 
-  public void gameAdd(int correct, String username){
+  public void gameAdd(int correct, String username) {
 
     Stats s = statsRepo.getStatsByUsernameAndClassName(username, "COMS309");
     s.addTotal();
@@ -51,11 +53,11 @@ public class StatsService {
     statsRepo.save(s);
   }
 
-  public Stats getUsersStats(String username, String className){
+  public Stats getUsersStats(String username, String className) {
     return statsRepo.getStatsByUsernameAndClassName(username, className);
   }
 
-  public void save(String username, String className){
+  public void save(String username, String className) {
 
     Stats s = new Stats();
     s.setUsername(username);
