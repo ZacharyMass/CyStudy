@@ -9,7 +9,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@NamedQuery(name = "Stats.getStatsByUsernameAndClassName", query = "SELECT s FROM Stats s WHERE s.username = ?1 AND s.className =?2")
+@NamedQuery(
+    name = "Stats.getStatsByUsernameAndClassName",
+    query = "SELECT s FROM Stats s WHERE s.username = ?1 AND s.className =?2")
 @Table(name = "stats")
 public class Stats {
 
@@ -28,11 +30,11 @@ public class Stats {
   private String className;
 
   /** Total number of questions attempted in a game. */
-  @Column(name = "total")
+  @Column(name = "total", columnDefinition = "int default 0")
   private int totalQs;
 
   /** number of questions answered correctly. */
-  @Column(name = "correct")
+  @Column(name = "correct", columnDefinition = "int default 0")
   private int correctQs;
 
   /** total time spent studying for a class. */
