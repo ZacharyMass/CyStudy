@@ -11,12 +11,13 @@ public class StatsController {
   @Autowired private StatsService statsServ;
 
   @GetMapping(path = "/get-users-stats")
-  public Stats getUsersStats(@RequestParam String usrname, @RequestParam String className) {
-    return statsServ.getUsersStats(usrname, className);
+  public Stats getUsersStats(@RequestParam String username, @RequestParam String className) {
+    return statsServ.getUsersStats(username, className);
   }
 
-  @PostMapping(path = "/add-time")
-  public String addTime(@RequestBody String username, @RequestBody String className, @RequestBody float t){
+  @PostMapping(path = "/add-time", produces = "application/json", consumes = "application/json")
+  public @ResponseBody String addTime(
+      @RequestBody String username, @RequestBody String className, @RequestBody float t) {
     return statsServ.addTime(className, username, t);
   }
 }
