@@ -13,6 +13,8 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
+
+import com.jr7.cystudy.service.StatsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,7 @@ public class Server {
 
   private Game game = new Game();
   @Autowired GameService gameService;
+  @Autowired StatsService statsServ;
 
   private static final Logger logger = LoggerFactory.getLogger(Server.class);
 
@@ -257,10 +260,7 @@ public class Server {
     usernameSessionMap.remove(username);
 
     game.round = 0;
-
-    /*TODO
-     * Send stats here
-     */
+    statsServ.gameAdd(game.p1Correct, username);
 
     String message = username + " disconnected";
     broadcast(message);
