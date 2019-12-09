@@ -20,10 +20,9 @@ import org.springframework.web.bind.annotation.*;
 public class UserClassController {
 
   @Autowired private UserClassService UserClassService;
-
   @Autowired private UserService UserService;
-
   @Autowired private ClassesService ClassesService;
+  @Autowired private StatsService statsServ;
 
   private final Logger logger = LoggerFactory.getLogger(ClassesController.class);
 
@@ -61,6 +60,7 @@ public class UserClassController {
       return "User " + uC.getUsername() + " is already in " + uC.getClassName();
     }
     UserClassService.save(uC);
+    statsServ.save(uC.getUsername(), uC.getClassName());
     return uC.getUsername() + " added to " + uC.getClassName();
   }
 }
