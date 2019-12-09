@@ -16,8 +16,7 @@ public class StatsController {
   }
 
   @PostMapping(path = "/add-time", produces = "application/json", consumes = "application/json")
-  public @ResponseBody String addTime(
-      @RequestBody String username, @RequestBody String className, @RequestBody float time) {
-    return statsServ.addTime(className, username, time);
+  public @ResponseBody String addTime(@RequestBody Stats s) {
+    return statsServ.addTime(s.getClassName(), s.getUsername(), s.getTimeSpent());
   }
 }
