@@ -5,6 +5,8 @@ import com.jr7.cystudy.repository.StatsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StatsService {
 
@@ -38,5 +40,9 @@ public class StatsService {
     Stats usrStats = statsRepo.getStatsByUsernameAndClassName(usrName, className);
     usrStats.addTime(t);
     return "Time added successfully";
+  }
+
+  public Stats getUsersStats(String username, String className){
+    return statsRepo.getStatsByUsernameAndClassName(username, className);
   }
 }
