@@ -45,4 +45,12 @@ public class StatsService {
   public Stats getUsersStats(String username, String className){
     return statsRepo.getStatsByUsernameAndClassName(username, className);
   }
+
+  public void save(String username, String className){
+
+    Stats s = new Stats();
+    s.setUsername(username);
+    s.setClassName(className);
+    statsRepo.save(s);
+  }
 }
