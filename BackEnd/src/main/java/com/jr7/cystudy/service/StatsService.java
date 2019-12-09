@@ -39,6 +39,7 @@ public class StatsService {
 
     Stats usrStats = statsRepo.getStatsByUsernameAndClassName(usrName, className);
     usrStats.addTime(t);
+    statsRepo.save(usrStats);
     return "Time added successfully";
   }
 
@@ -47,6 +48,7 @@ public class StatsService {
     Stats s = statsRepo.getStatsByUsernameAndClassName(username, "COMS309");
     s.addTotal();
     s.addCorrect(correct);
+    statsRepo.save(s);
   }
 
   public Stats getUsersStats(String username, String className){
