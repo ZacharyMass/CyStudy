@@ -56,6 +56,7 @@ public class RecyclerViewAdapterTest {
     Context mockContext = mock(Context.class);
     StudentSettingsFragment sf = mock(StudentSettingsFragment.class);
     LoginActivity login = mock(LoginActivity.class);
+    MainActivity mainActivity = mock(MainActivity.class);
 
     // Written by Zach M
     @Test
@@ -92,5 +93,12 @@ public class RecyclerViewAdapterTest {
         // This should be null because the parameter inside is not actually instantiated until MainActivity
         // This is a necessary test to make sure we have correct role verification and the user can access their appropriate set of pages
         assertNull(login.role);
+    }
+
+    // Written by Brad
+    @Test
+    public void testVariableIsNull() {
+        // Make sure the userRole variable is null if user not logged in
+        assertNull(MainActivity.userRole);
     }
 }
