@@ -42,7 +42,7 @@
                 app:destination="@id/studentHomeFragment" />
             <action
                 android:id="@+id/action_classFragment_to_settingsFragment"
-                app:destination="@id/teacherSettingsFragment" />
+                app:destination="@id/settingsFragment" />
         </fragment>
         <fragment
             android:id="@+id/studentHomeFragment"
@@ -66,13 +66,13 @@
             tools:layout="@layout/fragment_student_stats">
             <action
                 android:id="@+id/action_studentStatsFragment_to_settingsFragment"
-                app:destination="@id/teacherSettingsFragment" />
+                app:destination="@id/settingsFragment" />
             <action
                 android:id="@+id/action_studentStatsFragment_to_studentHomeFragment"
                 app:destination="@id/studentHomeFragment" />
         </fragment>
         <fragment
-            android:id="@+id/teacherSettingsFragment"
+            android:id="@+id/settingsFragment"
             android:name="com.example.cystudy.ui.fragments.StudentFragments.SettingsFragment"
             android:label="fragment_settings"
             tools:layout="@layout/fragment_settings">
@@ -105,7 +105,7 @@
                 app:destination="@id/studentStatsFragment" />
             <action
                 android:id="@+id/action_gameFragment_to_settingsFragment"
-                app:destination="@id/teacherSettingsFragment" />
+                app:destination="@id/settingsFragment" />
         </fragment>
         <fragment
             android:id="@+id/studentClassHomeFragment"
@@ -138,7 +138,7 @@
                 app:destination="@id/teacherHomeFragment" />
             <action
                 android:id="@+id/action_teacherStatsFragment_to_teacherSettingsFragment"
-                app:destination="@id/teacherSettingsFragment" />
+                app:destination="@id/settingsFragment" />
         </fragment>
         <fragment
             android:id="@+id/teacherHomeFragment"
@@ -150,13 +150,13 @@
                 app:destination="@id/teacherStatsFragment" />
             <action
                 android:id="@+id/action_teacherHomeFragment_to_teacherSettingsFragment"
-                app:destination="@id/teacherSettingsFragment" />
+                app:destination="@id/settingsFragment" />
             <action
                 android:id="@+id/action_teacherHomeFragment_to_teacherClassFragment"
                 app:destination="@id/teacherClassFragment" />
             <action
                 android:id="@+id/action_teacherHomeFragment_to_teacherSettingsFragment2"
-                app:destination="@id/teacherSettingsFragment" />
+                app:destination="@id/settingsFragment" />
         </fragment>
         <fragment
             android:id="@+id/teacherClassFragment"
@@ -171,7 +171,7 @@
                 app:destination="@id/teacherStatsFragment" />
             <action
                 android:id="@+id/action_teacherClassFragment_to_teacherSettingsFragment"
-                app:destination="@id/teacherSettingsFragment" />
+                app:destination="@id/settingsFragment" />
             <action
                 android:id="@+id/action_teacherClassFragment_to_teacherSetsFragment"
                 app:destination="@id/teacherSetsFragment" />
@@ -180,7 +180,7 @@
                 app:destination="@id/teacherFlashcardFragment" />
         </fragment>
         <fragment
-            android:id="@+id/teacherSettingsFragment"
+            android:id="@+id/settingsFragment"
             android:name="com.example.cystudy.ui.fragments.StudentFragments.SettingsFragment"
             android:label="fragment_teacher_settings"
             tools:layout="@layout/fragment_settings">
@@ -222,7 +222,7 @@
                 app:destination="@id/teacherStatsFragment" />
             <action
                 android:id="@+id/action_teacherSetsFragment_to_teacherSettingsFragment"
-                app:destination="@id/teacherSettingsFragment" />
+                app:destination="@id/settingsFragment" />
             <action
                 android:id="@+id/action_teacherSetsFragment_to_teacherFlashcardFragment"
                 app:destination="@id/teacherFlashcardFragment" />

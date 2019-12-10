@@ -72,7 +72,7 @@ public class StudentClassHomeFragment extends Fragment {
         return v;
     }
 
-    private void pullFlashcards() {
+    public void pullFlashcards() {
         // JSONArray Request
         RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(getContext()));
 

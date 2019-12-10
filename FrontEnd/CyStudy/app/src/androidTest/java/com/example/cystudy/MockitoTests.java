@@ -6,6 +6,7 @@ import androidx.test.runner.AndroidJUnit4;
 
 import com.example.cystudy.RecyclerViewAdapaters.RecyclerViewAdapter;
 import com.example.cystudy.ui.fragments.StudentFragments.SettingsFragment;
+import com.example.cystudy.ui.fragments.StudentFragments.StudentHomeFragment;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,11 +16,9 @@ import java.util.ArrayList;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
-import static net.bytebuddy.matcher.ElementMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -27,7 +26,7 @@ import static org.mockito.Mockito.verify;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
-public class RecyclerViewAdapterTest {
+public class MockitoTests {
     // Written by Zach M
 //    @Test
 //    public void navigateBetweenFragments() {
@@ -48,6 +47,7 @@ public class RecyclerViewAdapterTest {
     Context mockContext = mock(Context.class);
     SettingsFragment sf = mock(SettingsFragment.class);
     LoginActivity login = mock(LoginActivity.class);
+    StudentHomeFragment sh = mock(StudentHomeFragment.class);
     MainActivity mainActivity = mock(MainActivity.class);
 
     // Written by Zach M
@@ -66,16 +66,6 @@ public class RecyclerViewAdapterTest {
         assertEquals(result, 1);
     }
 
-    // Written by Zach M
-    @Test
-    public void testLogout() {
-        // Given a mocked Student Settings Fragment...
-        sf.logout();
-
-        // ...then the result should be the expected one.
-        assertEquals(MainActivity.user, null);
-    }
-
     // Written by Brad
     @Test
     public void testLoginRole() {
@@ -85,6 +75,24 @@ public class RecyclerViewAdapterTest {
         // This should be null because the parameter inside is not actually instantiated until MainActivity
         // This is a necessary test to make sure we have correct role verification and the user can access their appropriate set of pages
         assertNull(login.role);
+    }
+
+    // Written by Zach M
+    @Test
+    public void testClearList() {
+        //Ensures that pull classes is clearing the list before pulling the classes again
+        sh.pullClasses();
+        assertFalse(sh.unformattedStudentClasses.contains("COMS309"));
+    }
+
+    // Written by Zach M
+    @Test
+    public void testLogout() {
+        // Given a mocked Student Settings Fragment...
+        sf.logout();
+
+        // ...then the result should be the expected one.
+        assertEquals(null, MainActivity.user);
     }
 
     // Written by Brad

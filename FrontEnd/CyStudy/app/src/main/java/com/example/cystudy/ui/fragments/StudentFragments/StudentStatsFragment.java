@@ -2,7 +2,6 @@ package com.example.cystudy.ui.fragments.StudentFragments;
 
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,21 +11,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.cystudy.MainActivity;
 import com.example.cystudy.R;
-import com.example.cystudy.RecyclerViewAdapaters.RecyclerViewAdapter;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -60,6 +54,8 @@ public class StudentStatsFragment extends Fragment {
         // Populate Spinner for classes
         // Will be pulled from database
         final View v = inflater.inflate(R.layout.fragment_student_stats, container, false);
+        String[] classes = {"COM S 309"};
+
         final Spinner spinner = v.findViewById(R.id.classesDropdown);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getContext(), android.R.layout.simple_spinner_item, StudentHomeFragment.unformattedStudentClasses);
