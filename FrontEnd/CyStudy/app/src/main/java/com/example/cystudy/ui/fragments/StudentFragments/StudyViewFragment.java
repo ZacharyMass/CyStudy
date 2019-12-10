@@ -179,6 +179,7 @@ public class StudyViewFragment extends Fragment {
                 public void onErrorResponse(VolleyError error) {
                     error.printStackTrace();
                     Log.d("addTime Error", error.toString());
+                    Log.d("New Time", totalTime + "");
                 }
             });
 
