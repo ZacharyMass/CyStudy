@@ -48,6 +48,7 @@ public class MockitoTests {
     SettingsFragment sf = mock(SettingsFragment.class);
     LoginActivity login = mock(LoginActivity.class);
     StudentHomeFragment sh = mock(StudentHomeFragment.class);
+    MainActivity mainActivity = mock(MainActivity.class);
 
     // Written by Zach M
     @Test
@@ -92,5 +93,12 @@ public class MockitoTests {
 
         // ...then the result should be the expected one.
         assertEquals(null, MainActivity.user);
+    }
+
+    // Written by Brad
+    @Test
+    public void testVariableIsNull() {
+        // Make sure the userRole variable is null if user not logged in
+        assertNull(MainActivity.userRole);
     }
 }
