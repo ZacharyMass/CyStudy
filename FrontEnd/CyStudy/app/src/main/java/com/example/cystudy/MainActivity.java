@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                                     navController.navigate(R.id.action_studentHomeFragment_to_settingsFragment);
                                     break;
                             }
-                        } else if (navController.getCurrentDestination().getId() == R.id.teacherSettingsFragment) {
+                        } else if (navController.getCurrentDestination().getId() == R.id.settingsFragment) {
                             switch (menuItem.getItemId()) {
                                 case R.id.action_stats:
                                     navController.navigate(R.id.action_settingsFragment_to_studentStatsFragment);
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                                     navController.navigate(R.id.action_teacherStatsFragment_to_teacherSettingsFragment);
                                     break;
                             }
-                        } else if (navController.getCurrentDestination().getId() == R.id.teacherSettingsFragment) {
+                        } else if (navController.getCurrentDestination().getId() == R.id.settingsFragment) {
                             switch (menuItem.getItemId()) {
                                 case R.id.action_stats:
                                     navController.navigate(R.id.action_teacherSettingsFragment_to_teacherStatsFragment);

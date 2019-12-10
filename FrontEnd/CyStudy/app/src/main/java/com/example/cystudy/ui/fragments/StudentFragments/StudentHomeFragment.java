@@ -37,7 +37,7 @@ public class StudentHomeFragment extends Fragment {
     String url = "http://coms-309-jr-7.misc.iastate.edu:8080/get-users-classes?username=" + username;
     private View v;
 
-    ArrayList<String> classesL = new ArrayList<>();
+    public ArrayList<String> classesL = new ArrayList<>();
     public static ArrayList<String> unformattedStudentClasses = new ArrayList<>();
 
     /**
@@ -72,6 +72,7 @@ public class StudentHomeFragment extends Fragment {
      */
     public void pullClasses() {
         String url = "http://coms-309-jr-7.misc.iastate.edu:8080/get-users-classes?username=" + LoginActivity.user;
+        unformattedStudentClasses = new ArrayList<>();
 
         RequestQueue studentHomeQueue = Volley.newRequestQueue(Objects.requireNonNull(getContext()));
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {

@@ -16,6 +16,7 @@ import com.example.cystudy.R;
 
 /**
  * This class will be fully implemented after Demo 4.
+ *
  * @author Zach Mass
  */
 public class StudentStatsFragment extends Fragment {
@@ -31,7 +32,7 @@ public class StudentStatsFragment extends Fragment {
         // Populate Spinner for classes
         // Will be pulled from database
         final View v = inflater.inflate(R.layout.fragment_student_stats, container, false);
-        String[] classes = {"CPRE 310", "STAT 330", "COM S 309", "COM S 321"};
+        String[] classes = {"COM S 309"};
         final Spinner spinner = v.findViewById(R.id.classesDropdown);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getContext(), android.R.layout.simple_spinner_item, classes);
@@ -41,10 +42,8 @@ public class StudentStatsFragment extends Fragment {
         spinner.setAdapter(adapter);
 
         // Set values based on spinner
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-        {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-            {
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // Find current value of spinner
                 String selectedClass = spinner.getSelectedItem().toString(); // Figure out which class is selected
 
@@ -132,8 +131,7 @@ public class StudentStatsFragment extends Fragment {
                     term1Percent.setText("0%");
                     term2Percent.setText("0%");
                     term3Percent.setText("0%");
-                }
-                else {
+                } else {
                     String overallPercentString = accuracy + "%";
                     String term1PercentString = term1accuracy + "%";
                     String term2PercentString = term2accuracy + "%";
@@ -152,8 +150,8 @@ public class StudentStatsFragment extends Fragment {
                     term3Percent.setText(term3PercentString);
                 }
             } // to close the onItemSelected
-            public void onNothingSelected(AdapterView<?> parent)
-            {
+
+            public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
@@ -163,9 +161,10 @@ public class StudentStatsFragment extends Fragment {
 
     /**
      * Function to convert time to hours, minutes and return the String
+     *
      * @param minutes the total minutes spent on class
      */
-    public String setTimeSpentStudying ( int minutes) {
+    public String setTimeSpentStudying(int minutes) {
         int hours = minutes / 60; // Get hours
         minutes = minutes - (hours * 60); // Get remainder of minutes
         return hours + "h" + " " + minutes + "m";
