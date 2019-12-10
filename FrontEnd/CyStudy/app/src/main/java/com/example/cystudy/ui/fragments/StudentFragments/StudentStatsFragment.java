@@ -179,10 +179,10 @@ public class StudentStatsFragment extends Fragment {
 
         seconds = remainder;
 
-        if (dividedValue < 10) {
-            ss = "0" + dividedValue;
+        if (seconds < 10) {
+            ss = "0" + seconds;
         } else {
-            ss = dividedValue + "";
+            ss = seconds + "";
         }
 
         time = hh + "h " + mm + "m " + ss + "s";
